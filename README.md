@@ -1,2 +1,2 @@
 # waddle
-Group 5 | SSW 332 Design Project: Exchange4Students
+Group 5 | SSW 322 Design Project: Exchange4Students
