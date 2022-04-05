@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Searchbar.css";
-//import SearchIcon from "@material-ui/icons/Search";
-//import CloseIcon from "@material-ui/icons/Close";
+import { FaSearch } from "react-icons/fa";
+import { FaTimes } from "react-icons/fa";
 
 function Searchbar({ placeholder, data }) {
   const [filteredData, setFilteredData] = useState([]);
@@ -38,6 +38,14 @@ function Searchbar({ placeholder, data }) {
           value={wordEntered}
           onChange={handleFilter}
         />
+
+        <div className="searchIcon">
+          {filteredData.length === 0 ? (
+            <FaSearch />
+          ) : (
+            <FaTimes id="clearBtn" onClick={clearInput} />
+          )}
+        </div>
 
       </div>  {/* end of input */}
 
