@@ -13,6 +13,7 @@ const NewListing = () => {
                 <br/>
                 <br/>
                 <br/>
+
                 <h1 className="header-box"><b>Create New Listing</b></h1>
 
                 <br/>
@@ -24,45 +25,61 @@ const NewListing = () => {
 
                     {/* Item Name */}
                     <form className="box" >
-                        <label  >
 
-                            <b>Item Name:&nbsp;&nbsp;&nbsp;</b>
+                        <label>
+
+                            <b>
+                                Item Name:
+                            </b>
+
                             <br/>
                             <br/>
+
                             <input
+
                                 placeholder="Type Item Name"
+                                name="category"
                                 type="text"
-                                id="inputText"
+                                className="inputText"
+                                
                             />
 
                         </label>
+
                     </form>
 
                     <br/>
                     <br/>
                     <br/>
 
+
                     {/* Category */}
                     <form >
 
-
-
-                            {/* start of checklist */}
+                            {/* start of checkbox */}
                             <div  className="box" >
 
-                                <b >Category:&nbsp;&nbsp;&nbsp;</b>
-                                <br/>
+                            <b>
+                                Category:
+                            </b>
 
 
                             {/* books */}
                             <br/>
+                            <br/>
+
                             <input
 
                                 type="checkbox"
-                                id="inputCheckbox"
+                                name="category"
+                                className="inputCheckbox"
+                                id="books"
+                                value="books"
 
                             />
-                            <label class="container">
+
+                            <label >
+
                                 &nbsp;
                                 Book
                                 &nbsp;&nbsp;
@@ -74,9 +91,14 @@ const NewListing = () => {
                             <input
 
                                type="checkbox"
+                               name="category"
+                               value="clothing"
                                id="clothing"
+
                             />
-                            <label htmlFor="clothing">
+
+                            <label>
+
                                 &nbsp;
                                 Clothing
                                 &nbsp;&nbsp;
@@ -89,11 +111,14 @@ const NewListing = () => {
                             <input
 
                                type="checkbox"
+                               name="category"
+                               value="furniture"
                                id="furniture"
+
                                 />
 
 
-                            <label htmlFor="furniture">
+                            <label >
                                Furniture
                                 &nbsp;&nbsp;
                             </label>
@@ -103,9 +128,13 @@ const NewListing = () => {
                             <input
 
                                 type="checkbox"
+                                name="category"
+                                value="electronics"
                                 id="electronics"
+
                             />
-                            <label htmlFor="electronics">
+
+                            <label >
                                 Electronics
                                 &nbsp;&nbsp;
                             </label>
@@ -115,9 +144,13 @@ const NewListing = () => {
                             <input
 
                                 type="checkbox"
+                                name="category"
+                                value="sportsGear"
                                 id="sportsGear"
+
                             />
-                            <label htmlFor="sportsGear">
+
+                            <label >
                                 Sports Gear
                                 &nbsp;&nbsp;
                             </label>
@@ -128,6 +161,9 @@ const NewListing = () => {
 
                                 <input
                                     type="checkbox"
+                                    name="category"
+                                    value="other"
+                                    id="other"
                                 />
                                 <label htmlFor="other" >
                                     Other
@@ -157,7 +193,7 @@ const NewListing = () => {
                             <input
                                 placeholder="Type Price in Dollars"
                                 type="text"
-                                id="inputText"
+                                className="inputText"
                             />
 
                         </label>
@@ -182,7 +218,7 @@ const NewListing = () => {
                             <input
                                 placeholder="Type Keywords for Item"
                                 type="text"
-                                id="inputText"
+                                className="inputText"
                             />
 
                         </label>
@@ -205,7 +241,8 @@ const NewListing = () => {
                             <input
                                 placeholder="Type Preferred Delivery Process"
                                 type="text"
-                                id="inputText"
+                                className="inputText"
+
                             />
 
                         </label>
@@ -228,7 +265,7 @@ const NewListing = () => {
                             <input
                                 placeholder="Type Description"
                                 type="text"
-                                id="inputText"
+                                className="inputText"
 
                             />
 
@@ -251,7 +288,7 @@ const NewListing = () => {
                             <input
                                 placeholder="Select Image"
                                 type="file"
-                                id="inputPhoto"
+                                className="inputPhoto"
 
                             />
 
@@ -303,8 +340,6 @@ const NewListing = () => {
 
         )
     }
-
-
 
 
 export default NewListing;
