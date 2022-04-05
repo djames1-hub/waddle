@@ -48,22 +48,21 @@
 }
 
 
-#inputText{
+.inputText{
     width: 700px;
     height: 35px;
     margin-bottom: 15px;
     font-size: large;
 }
 
-#inputPhoto {
+.inputPhoto {
     margin-left: 80px;
     margin-bottom: 15px;
 
 }
 
-#inputCheckbox {
+.inputCheckbox {
     margin-bottom: 20px;
     margin-top: 10px;
 
 }
-
