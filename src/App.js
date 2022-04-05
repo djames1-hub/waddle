@@ -1,25 +1,53 @@
-import logo from './logo.svg';
+import React from 'react';
+import { Header } from './components/common';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import Home from './components/pages/home/Home';
+import Wishlist from './components/pages/wishlist/Wishlist';
+import Cart from './components/pages/cart/Cart';
+import Settings from './components/pages/settings/Settings';
+import NewListing from './components/pages/newListing/NewListing';
+import NotFound from './components/pages/notFound/NotFound';
+
 import './App.css';
 
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+
+            <Header />
+
+            {/* ROUTING */}
+            <div>
+            <Router>
+
+                <Routes>
+
+                    <Route path="/" element={<Home />} />
+
+                    <Route path="/wishlist" element={<Wishlist />} />
+
+                    <Route path="/cart" element={<Cart />} />
+
+                    <Route path="/settings" element={<Settings />} />
+
+                    <Route path="/newListing" element={<NewListing />} />
+
+                    <Route path="/notfound" element={ <NotFound />} />
+
+                    <Route path="/*" element={ <NotFound />} />
+
+                </Routes>
+
+            </Router>
+
+            </div>
+
+
+
+        </div>
+    );
 }
 
 export default App;
