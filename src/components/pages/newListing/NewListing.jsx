@@ -1,10 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./NewListing.css";
 import { FaCheck } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 
+const boxCategories = ["books", "clothing", "furniture", "electronics", "sports gear", "other"]
+
 const NewListing = () => {
 
+    var categories = new Map();
+    
+    const checkBoxes = boxCategories.map((cat) => (
+        <div>
+            <input type="checkbox" name="category" className="inputCheckbox" id={cat} value={cat} onChange={() => checkCategory(cat)}/>
+            <label >{cat} </label>
+        </div>  
+    ))
+
+    const checkCategory = (category) => {
+        if(categories.has(category)){
+            categories.delete(category);
+        }else{
+            categories.set(category, "MEOW");
+        }
+    }
+
+    const submitItem = () => {
+        //TODO: display error message, add create new item function once Dylan's finished up
+        let cats = Array.from( categories.keys());
+        let validate = validateFields(item);
+            if(validate === ""){
+                //createNewItem function
+            }else{
+                //display error
+            }
+    }
+
+    // create hooks to monitor input changes
+    //TODO: add hooks for other text inputs
+    const [itemName, setItemName] = useState("");
+    
+    //
+
+    const validateFields = (all the fields to check) => {
+        if(itemName.length === 0 || cats.length === 0){
+
+        }
+        //TODO: check if fields are empty, check if cats array has a lenght of 0 
+        //if any are exmpty, return a string that tells the user to input data in all fields
+        //else return empty string
+    }
 
         return (
             <div className="background">
@@ -36,18 +80,15 @@ const NewListing = () => {
                             <br/>
 
                             <input
-
                                 placeholder="Type Item Name"
                                 name="category"
                                 type="text"
-                                className="inputText"
-                                
+                                className="inputText"  
+                                onChange={event => setItemName(event.target.value)}                     
                             />
-
                         </label>
 
                     </form>
-
                     <br/>
                     <br/>
                     <br/>
@@ -62,114 +103,7 @@ const NewListing = () => {
                             <b>
                                 Category:
                             </b>
-
-
-                            {/* books */}
-                            <br/>
-                            <br/>
-
-                            <input
-
-                                type="checkbox"
-                                name="category"
-                                className="inputCheckbox"
-                                id="books"
-                                value="books"
-
-                            />
-
-                            <label >
-
-                                &nbsp;
-                                Book
-                                &nbsp;&nbsp;
-
-                            </label>
-
-
-                            {/* clothing */}
-                            <input
-
-                               type="checkbox"
-                               name="category"
-                               value="clothing"
-                               id="clothing"
-
-                            />
-
-                            <label>
-
-                                &nbsp;
-                                Clothing
-                                &nbsp;&nbsp;
-
-                            </label>
-
-
-
-                            {/* furniture */}
-                            <input
-
-                               type="checkbox"
-                               name="category"
-                               value="furniture"
-                               id="furniture"
-
-                                />
-
-
-                            <label >
-                               Furniture
-                                &nbsp;&nbsp;
-                            </label>
-
-
-                            {/* electronics */}
-                            <input
-
-                                type="checkbox"
-                                name="category"
-                                value="electronics"
-                                id="electronics"
-
-                            />
-
-                            <label >
-                                Electronics
-                                &nbsp;&nbsp;
-                            </label>
-
-
-                            {/* sports gear */}
-                            <input
-
-                                type="checkbox"
-                                name="category"
-                                value="sportsGear"
-                                id="sportsGear"
-
-                            />
-
-                            <label >
-                                Sports Gear
-                                &nbsp;&nbsp;
-                            </label>
-
-
-
-                            {/* other */}
-
-                                <input
-                                    type="checkbox"
-                                    name="category"
-                                    value="other"
-                                    id="other"
-                                />
-                                <label htmlFor="other" >
-                                    Other
-                                </label>
-
-                                <br/>
+                            {checkBoxes}
                             {/* end of category checkbox */}
                             </div>
 
@@ -268,7 +202,6 @@ const NewListing = () => {
                                 className="inputText"
 
                             />
-
                         </label>
                     </form>
 
@@ -294,12 +227,8 @@ const NewListing = () => {
 
                         </label>
                     </form>
-
-
                 {/* end of all data input */}
                 </div>
-
-
             {/* end of first div */}
                 <br/>
                 <br/>
@@ -309,18 +238,10 @@ const NewListing = () => {
                 <div className="icons">
                     {/* icons */}
                     <div >
-
-
-
                         <FaCheck />
-
-                        &nbsp;&nbsp;&nbsp;
-
+                        <input name="submit" className="submit-button" type="button" value="Submit" onClick={() => submitItem()}/>
                         <FaTimes />
-
                     </div>
-
-
                 {/* end of icon box*/}
                 </div>
                 </body>
@@ -335,11 +256,8 @@ const NewListing = () => {
                 <br/>
                 <br/>
                 <br/>
-
             </div>
-
         )
     }
-
 
 export default NewListing;
