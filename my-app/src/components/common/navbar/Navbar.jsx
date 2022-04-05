@@ -1,5 +1,5 @@
 import React from 'react';
-import { Searchbar } from '../../common';
+import { Searchbar } from '..';
 import ItemData from "./itemData.json";
 
 import './Navbar.css';
