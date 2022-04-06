@@ -1,9 +1,19 @@
 .navbar {
     display: flex;
     flex-direction: row;
-    margin-right: 40px;
-    margin-left: 40px;
+    justify-content: end;
+    margin-right: 0;
+    margin-left: auto;
 
+}
+
+.header-left {
+    float: left
+}
+
+.header-right {
+    float: right;
+    margin-right: 0;
 }
 
 .navbar-item {
@@ -17,5 +27,4 @@
     outline: none;
     color:white;
     font-size: 20px;
-
 }
