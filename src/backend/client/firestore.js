@@ -1,5 +1,5 @@
 import { auth, db, storage } from "../server/init-firebase";
-import { doc, collection, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { doc, collection, getDoc, getDocs, setDoc, query, orderBy,startAt, endAt } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
 import Listing from './../../objects/item';
@@ -76,11 +76,18 @@ const createListing = (listing, image) => {
     });
 }
 
-const getListings = async () => {
+const getListings = async (qStr) => {
     return new Promise((resolve, reject) => {
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                const querySnapshot = await getDocs(collection(db, "listings").withConverter(listingConverter));
+                const q = query(collection(db, "listings")
+                    .withConverter(listingConverter)
+                    .orderBy('title')
+                    .startAt(qStr)
+                    .endAt(qStr + '\uf8ff')
+                );
+
+                const querySnapshot = await getDocs(q);
                 
                 resolve(querySnapshot);
                 
