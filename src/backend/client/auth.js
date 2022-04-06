@@ -3,7 +3,9 @@ import { auth, firestore } from "../server/init-firebase";
 //Get firebase functions
 import { createUserWithEmailAndPassword , onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
-import User from "../../objects/user";
+import User from "./../../objects/user";
+import CreditCard from "./../../objects/credit-card";
+import Address from "./../../objects/address"
 
 const userConverter = {
     toFirestore: (user) => {
@@ -11,9 +13,24 @@ const userConverter = {
             name: user.name,
             username: user.username,
             email: user.email,
-            creditCards: [],
+            creditCards: user.creditCards.map(creditCard => {
+                return {
+                    name: creditCard.name,
+                    number: creditCard.number,
+                    CVV: creditCard.CVV,
+                    expiration: creditCard.expiration,
+                    zipCode: creditCard.zipCode
+                }
+            }),
             listedItems: [],
-            address: "",
+            address: {
+                street: listing.address.street,
+                town: listing.address.town,
+                apartment: listing.address.apartment,
+                houseNumber: listing.address.houseNumber,
+                state: listing.address.state,
+                country: listing.address.country
+            },
             wishList: [],
             purchasedItems: []
         }
@@ -24,9 +41,24 @@ const userConverter = {
             data.name,
             data.username,
             data.email,
-            data.creditCards,
+            data.creditCards.map(creditCard => {
+                return new CreditCard(
+                    creditCard.name,
+                    creditCard.number,
+                    creditCard.CVV,
+                    creditCard.expiration,
+                    creditCard.zipCode
+                );
+            }),
             data.listedItems,
-            data.address,
+            new Address(
+                data.address.street,
+                data.address.town,
+                data.address.apartment,
+                data.address.houseNumber,
+                data.address.state,
+                data.address.country
+            ),
             data.cart,
             data.wishList,
             data.purchasedItems    
@@ -64,14 +96,20 @@ const createUser = (name, username, email, password) => {
  */
 const getCurrentUser = () => {
     return new Promise((resolve, reject) => {
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if(user){
                 //TODO: Get user data from firestore and create user object
-                const userRef = firestore.collection('users').doc(user.uid);
-                const userData = userRef.get();
-                resolve();
+                const userRef = firestore.collection('users').withConverter(userConverter).doc(user.uid);
+                const doc = await userRef.get();
+                if (doc.exists) {
+                    let user = doc.data();
+                    resolve(user);
+                } else {
+                    reject(new Error('User does not exist!'));
+                }
+                
             } else {
-                reject(null);
+                reject(new Error('User not signed in!'));
             }
         })
     })

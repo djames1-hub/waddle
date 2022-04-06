@@ -1,46 +1,71 @@
-import { auth, firestore as db } from "../server/init-firebase";
-import Item from './../../objects/item';
+import { auth, firestore as db, storage } from "../server/init-firebase";
+import Listing from './../../objects/item';
 import Property from './../../objects/property';
+import Item from './../../objects/item'
 
-const itemConverter = {
-    toFirestore: (item) => {
-        return {
-           title: item.title,
-           price: item.price,
-           description: item.description,
-           category: item.category,
-           keywords: item.keywords,
-           images: item.images,
-           physicalProperties: {
-                height: item.physicalProperties.height,
-                width: item.physicalProperties.width,
-                depth: item.physicalProperties.depth,
-                weight: item.physicalProperties.weight,
-           }
-        };
+const listingConverter = {
+    toFirestore: (listing) => {
+            return {
+                seller: listing.seller,
+                buyer: listing.buyer,
+                dateBought: db.Timestamp.fromDate(listing.dateBought),
+                quantity: listing.quantity,
+                isPurchased: listing.isPurchased,
+                shippingCost: listing.shippingCost,
+                shippingFrom: listing.shippingFrom,
+                item: {
+                    title: listing.item.title,
+                    price: listing.item.price,
+                    description: listing.item.description,
+                    category: listing.item.category,
+                    keywords:listing.item.keywords,
+                    images: listing.item.images,
+                    physicalProperties: {
+                         height: listing.item.physicalProperties.height,
+                         width: listing.item.physicalProperties.width,
+                         depth: listing.item.physicalProperties.depth,
+                         weight: listing.item.physicalProperties.weight,
+                    }
+                }
+    
+            }
     },
     fromFirestore: () => {
         const data = snapshot.data(options);
-        return new Item(
-            data.title,
-            data.price,
-            data.description,
-            data.category,
-            data.keywords,
-            data.images,
-            new Property(data.height, data.width, data.depth, data.weight)
+        return new Listing(
+            data.seller,
+            data.buyer,
+            data.dateBought,
+            data.quantity,
+            data.isPurchased,
+            data.shippingCost,
+            data.shippingFrom,
+            new Item(
+                data.item.title,
+                data.item.price,
+                data.item.description,
+                data.item.category,
+                data.item.keywords,
+                data.item.images,
+                new Property(data.item.height, data.item.width, data.item.depth, data.item.weight)
+            )
         );
     }
-}
+};
 
 
-
-export const createItem = (item) => {
+const createListing = (listing, image) => {
     return new Promise((resolve, reject) => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                const itemRef = db.collection('items').doc();
-                await itemRef.withConverter(itemConverter).set(new Item()); 
+                const storageRef = storage.ref().child("images/" + image.name);
+                storageRef.put(image).then((snapshot) => {
+                    snapshot.ref.getDownloadURL().then((downloadURL) => {
+                        listing.item.push(downloadURL);
+                        const listingRef = db.collection('items').doc();
+                        await listingRef.withConverter(listingConverter).set(listing); 
+                    })
+                })
             } else {
                 reject(new Error('User not signed in!'));
             }
@@ -48,18 +73,20 @@ export const createItem = (item) => {
     });
 }
 
-export const getItems = async (itemId) => {
+const getListings = async () => {
     return new Promise((resolve, reject) => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                const itemRef = db.collection('items');
-                const snapshot = await itemRef.withConverter(itemConverter).get(); 
-                const items = snapshot.data();
-                resolve(items);
+                const listingRef = db.collection('items');
+                const snapshot = await listingRef.withConverter(listingConverter).get(); 
+                const listings = snapshot.data();
+                resolve(listings);
             } else {
                 reject(new Error('User not signed in!'));
             }
         });
     });
 }
+
+export {createListing, getListings}
 
