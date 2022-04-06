@@ -1,5 +1,5 @@
 import { auth, db, storage } from "../server/init-firebase";
-import { doc, collection, getDoc, getDocs, addDoc, query, orderBy,startAt, endAt } from "firebase/firestore";
+import { doc, collection, getDoc, getDocs, addDoc, query, orderBy,startAt, endAt, Timestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
 import Listing from './../../objects/item';
@@ -11,7 +11,7 @@ const listingConverter = {
             return {
                 seller: listing.seller,
                 buyer: listing.buyer,
-                dateBought: db.Timestamp.fromDate(listing.dateBought),
+                dateBought: Timestamp.fromDate(listing.dateBought),
                 quantity: listing.quantity,
                 isPurchased: listing.isPurchased,
                 shippingCost: listing.shippingCost,
@@ -87,10 +87,10 @@ const getListings = async (qStr) => {
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const q = query(collection(db, "listings")
-                    .withConverter(listingConverter)
-                    .orderBy('title')
-                    .startAt(qStr)
-                    .endAt(qStr + '\uf8ff')
+                    .withConverter(listingConverter),
+                    orderBy('title'),
+                    startAt(qStr),
+                    endAt(qStr + '\uf8ff')
                 );
 
                 const querySnapshot = await getDocs(q);
