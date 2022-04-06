@@ -3,6 +3,7 @@ import Address from "./address";
 import Property from "./property";
 
 class Listing{
+    id="";
     seller = "";
     buyer = "";
     dateBought = new Date();
@@ -12,7 +13,8 @@ class Listing{
     item = new Item("", 0, "", "", [], [], new Property(0, 0, 0, 0));
     shippingFrom = new Address("", "", 0, 0, "", "");
 
-    constructor(seller, buyer, dateBought, quantity, isPurchased, shippingCost, shippingFrom, item){
+    constructor(id, seller, buyer, dateBought, quantity, isPurchased, shippingCost, shippingFrom, item){
+        this.id = id;
         this.seller = seller;
         this.buyer = buyer;
         this.dateBought = dateBought;

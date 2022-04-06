@@ -30,6 +30,10 @@
   margin-left: 20px;
 }
 
+.header-logo:hover{
+  background-color: transparent;
+}
+
 .header-top__navbar {
   display: flex;
   flex: 1;

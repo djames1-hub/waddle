@@ -2,6 +2,15 @@
     font-family: RobotoRegular;
 }
 
-.background {
-    background-color: lightblue;
+.background{
+    background-color: white;
+}
+
+.previews-container {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    max-width: 70%;
 }
