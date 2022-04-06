@@ -16,6 +16,7 @@ const listingConverter = {
                 isPurchased: listing.isPurchased,
                 shippingCost: listing.shippingCost,
                 shippingFrom: listing.shippingFrom,
+                listingTitle: listing.item.title,
                 item: {
                     title: listing.item.title,
                     price: listing.item.price,
@@ -86,7 +87,7 @@ const getListings = async (qStr) => {
             if (user) {
                 const q = query(collection(db, "listings")
                     .withConverter(listingConverter),
-                    orderBy('title'),
+                    orderBy('listingTitle'),
                     startAt(qStr),
                     endAt(qStr + '\uf8ff')
                 );
@@ -128,4 +129,3 @@ const getListing = async (listingId) => {
 }
 
 export {createListing, getListings, getListing}
-

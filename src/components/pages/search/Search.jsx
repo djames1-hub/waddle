@@ -19,16 +19,17 @@ const Search = () => {
         currency: 'usd'
     })
 
-    var previewElements = <div></div>
+    var previewElements = <div></div>;
 
-    const setUpElements = async () => {
+    (async function() {
         let products = await getListings(searchParam);
+        console.log(products);
         previewElements = products.map((product) => (
             <div className="previews-container">
                 <PreviewProducts title={ product.item.title } img= { product.item.images[0] } price={ formatter.format(product.item.price)} id={products.id} />
             </div>
         ))
-    }
+    }());
 
     return (
         <div className="home-container">
