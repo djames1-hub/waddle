@@ -23,9 +23,10 @@ const Home = () => {
                 <PreviewProducts title={ product.item.title } img= { product.item.images[0] } price={ formatter.format(product.item.price)} id={product.id} />
             </div>
             ))
+            setPreviewComps(previewElements)
+
         }
         
-        setPreviewComps(previewElements)
     }());
 
     var formatter = new Intl.NumberFormat('en-US', {
