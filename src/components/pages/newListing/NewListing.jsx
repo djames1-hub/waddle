@@ -25,15 +25,6 @@ const NewListing = () => {
 
     const submitItem = () => {
         //TODO: display error message, add create new item function once Dylan's finished up
-<<<<<<< HEAD
-        /*let cats = Array.from(categories.keys());
-        let validate = validateFields(item);
-            if(validate === ""){
-                //createNewItem function
-            }else{
-                //display error
-            }*/
-=======
         let cats = Array.from( categories.keys());
         let validate = validateFields(itemName,cats,price,keyWords,description,delivery,photo);
         if(validate === ""){
@@ -43,7 +34,6 @@ const NewListing = () => {
         else{
 
         }
->>>>>>> 795dafa7d43c7de4db8ccaabc929e137f594bcd7
     }
 
     // create hooks to monitor input changes
@@ -59,224 +49,69 @@ const NewListing = () => {
     const validateFields = (itemName,cats,price,keyWords,delivery,description,photo) => {
         if(itemName.length === 0  || cats.length === 0 ||price.length === 0 || keyWords.length ===  0 | delivery.length === 0 | description.length === 0 | photo.length === 0){
             alert("Please fill out all forms");
-
-<<<<<<< HEAD
-    const validateFields = () => {
-       /* if(itemName.length === 0 || cats.length === 0){
-
-        }*/
-        //TODO: check if fields are empty, check if cats array has a lenght of 0 
-=======
-
         }
         else{
             return "";
         }
-
-        //TODO: check if fields are empty, check if cats array has a lenght of 0
->>>>>>> 795dafa7d43c7de4db8ccaabc929e137f594bcd7
-        //if any are exmpty, return a string that tells the user to input data in all fields
-        //else return empty string
     }
 
     return (
         <div className="background">
             <body>
-
-            <br/>
-            <br/>
-            <br/>
-
             <h1 className="header-box"><b>Create New Listing</b></h1>
-
-            <br/>
-            <br/>
-            <br/>
-
-            {/* Start of Input  */}
             <div>
-
-                {/* Item Name */}
                 <form className="box" >
-
-                    <label>
-
-                        <b>
-                            Item Name:
-                        </b>
-
-                        <br/>
-                        <br/>
-
-                        <input
-                            placeholder="Type Item Name"
-                            type="text"
-                            className="inputText"
-
-                            onChange={event => setItemName(event.target.value)}
-                        />
-                    </label>
-
-                </form>
-                <br/>
-
-
-
-                {/* Category */}
-                <form >
-
-                    {/* start of checkbox */}
-                    <div  className="box" >
-
-                        <b>
-                            Category:
-                        </b>
-                        {checkBoxes}
-                        {/* end of category checkbox */}
+                    <div className="form-input">
+                        <b>Item Name:</b>
+                        <input placeholder="Type Item Name" type="text" className="inputText" onChange={event => setItemName(event.target.value)}/>
                     </div>
-
-
-                    {/* end of category section */}
                 </form>
-
-
-                <br/>
-
-
-                {/* Price */}
+                <form >
+                    <div  className="box" >
+                        <b>Category:</b>
+                        {checkBoxes}
+                    </div>
+                </form>
                 <form className="box">
-                    <label >
-
+                    <div className="form-input">
                         <b>Price:</b>
-                        &nbsp;&nbsp;&nbsp;
-                        <br/>
-                        <br/>
-                        <input
-                            placeholder="Type Price in Dollars"
-                            type="text"
-                            className="inputText"
-                            onChange={event => setPrice(event.target.value)}
-                        />
-
-                    </label>
-
+                        <input placeholder="Type Price in Dollars" type="text" className="inputText" onChange={event => setPrice(event.target.value)} />
+                    </div>
                 </form>
-
-                <br/>
-
-
-                {/* KeyWords */}
-
                 <form className="box">
-                    <label>
+                    <div className="form-input">
 
                         <b>Key Words:</b>
-                        &nbsp;&nbsp;&nbsp;
-                        <br/>
-                        <br/>
-
-                        <input
-                            placeholder="Type Keywords for Item"
-                            type="text"
-                            className="inputText"
-                            onChange={event => setKeyWords(event.target.value)}
-                        />
-
-                    </label>
+                        <input placeholder="Type Keywords for Item" type="text" className="inputText" onChange={event => setKeyWords(event.target.value)} />
+                    </div>
                 </form>
-
-                <br/>
-
-
-                {/* Preferred Delivery Process */}
-
                 <form className="box">
-                    <label>
-
+                    <div className="form-input">
                         <b>Preferred Delivery Process:</b>
-                        &nbsp;&nbsp;&nbsp;
-                        <br/>
-                        <br/>
-
-                        <input
-                            placeholder="Type Preferred Delivery Process"
-                            type="text"
-                            className="inputText"
-                            onChange={event => setDelivery(event.target.value)}
-
-                        />
-
-                    </label>
+                        <input placeholder="Type Preferred Delivery Process" type="text" className="inputText" onChange={event => setDelivery(event.target.value)}/>
+                    </div>
                 </form>
-
-                <br/>
-
-
-                {/* Description*/}
-
                 <form className="box">
-                    <label>
+                    <div className="form-input">
 
                         <b>Description:</b>
-                        &nbsp;&nbsp;&nbsp;
-                        <br/>
-                        <br/>
-
-                        <input
-                            placeholder="Type Description"
-                            type="text"
-                            className="inputText"
-                            onChange={event => setDescription(event.target.value)}
-
-                        />
-                    </label>
+                        <input placeholder="Type Description" type="text" className="inputText" onChange={event => setDescription(event.target.value)} />
+                    </div>
                 </form>
-
-                <br/>
-
-
-                {/* Image / Save url  */}
                 <form className="box">
-                    <label>
-
+                    <div className="form-input">
                         <b>Photo:</b>
-                        &nbsp;&nbsp;&nbsp;
-                        <br/>
-                        <br/>
-
                         <input
-                            placeholder="Select Image"
-                            type="file"
-                            className="inputPhoto"
-                            onChange={event => setPhoto(event.target.value)}
-
-                        />
-
-                    </label>
+                            placeholder="Select Image" type="file" className="inputPhoto" onChange={event => setPhoto(event.target.value)} />
+                    </div>
                 </form>
-                {/* end of all data input */}
             </div>
-            {/* end of first div */}
-            <br/>
-
-
             <div >
-                {/* icons */}
                 <div >
                     < input name="submit" className="submit-button" type="button" value="Submit" onClick={() => submitItem()} />
-
                 </div>
-                {/* end of icon box*/}
             </div>
             </body>
-
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-
         </div>
     )
 }

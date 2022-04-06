@@ -13,10 +13,8 @@ function Navbar () {
                       <a href="/cart" className="navbar-item">Cart</a>
                       <a href="/wishlist" className="navbar-item">Wishlist</a>
                       <a href="/settings" className="navbar-item">Settings</a>
-
-
+                      <a href="/sign-up" className="navbar-item">Account</a>
          < Searchbar placeholder="Search for an item..." data={ItemData} />
-
     </section>
     )
 }

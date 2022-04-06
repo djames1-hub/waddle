@@ -1,13 +1,10 @@
 
 .header {
-
   display: flex;
   flex: 1;
   flex-direction: column;
   padding: 20px;
   background-image: linear-gradient(to bottom right,#858987, lightgrey);
-
-
 }
 
 .header-top {
@@ -23,8 +20,6 @@
   align-items: center;
   margin-right: 2px;
   color:lightblue;
-
-
 }
 
 .header-logo {
@@ -41,7 +36,6 @@
   flex-direction: column;
   margin-top: 14px;
   font-family: RobotoRegular;
-
 }
 
 .header-top__seperator {
@@ -67,7 +61,6 @@
   align-items: center;
   margin-top: 2px;
   color:white;
-
 }
 
 
