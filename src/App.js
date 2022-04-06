@@ -28,10 +28,10 @@ function App() {
                     <Route path="/wishlist" element={<Wishlist />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/settings" element={<Settings />} />
-                    <Route path="/newListing" element={<NewListing />} />
-                    <Route path="/notfound" element={ <NotFound />} />
+                    <Route path="/new-listing" element={<NewListing />} />
+                    <Route path="/not-found" element={ <NotFound />} />
                     <Route path="/sign-up" element={ <SignUp />} />
-                    <Route path="login" element={ <Login />} />
+                    <Route path="/login" element={ <Login />} />
                     <Route path="/view-item/*" element={ <ViewItem />} />
                     <Route path="/search/*" element={ <Search />} />
                     <Route path="/*" element={ <NotFound />} />

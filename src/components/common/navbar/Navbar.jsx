@@ -7,19 +7,18 @@ import './Navbar.css';
 function Navbar () {
 
     return (
-    <div className="navbar">
-        <div className="header-left">
-            <a href="/" className="navbar-item">Home</a>
-        </div>
-            <div className="header-right">
-                    <a href="/newListing" className="navbar-item">New Listing</a>
-                    <a href="/cart" className="navbar-item">Cart</a>
-                    <a href="/wishlist" className="navbar-item">Wishlist</a>
-                    <a href="/settings" className="navbar-item">Settings</a>
-                    <a href="/sign-up" className="navbar-item">Account</a>
-                    < Searchbar placeholder="Search for an item..." data={ItemData} />
-            </div>      
-    </div>
+    <section className="navbar">
+         <a href="/" className="navbar-item">Home</a>
+                      <a href="/new-listing" className="navbar-item">New Listing</a>
+                      <a href="/cart" className="navbar-item">Cart</a>
+                      <a href="/wishlist" className="navbar-item">Wishlist</a>
+                      <a href="/settings" className="navbar-item">Settings</a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+         < Searchbar placeholder="Search for an item..." data={ItemData} />
+
+    </section>
     )
 }
 
