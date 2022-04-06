@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./Home.css";
 import '../../common/searchbar/Searchbar.css';
 import Listing from '../../../objects/listing';
@@ -11,24 +11,23 @@ import PreviewProducts from '../PrevProduct/PreviewProducts';
 
 const Home = () => {
 
-    let products = getListings("");
+    const [previewComps, setPreviewComps] = useState(<div />);
+
+    (async function() {
+        let products = await getListings("");
+        console.log(products[0].id);
+        let previewElements = products.map((product) => (
+            <div className="previews-container">
+                <PreviewProducts title={ product.item.title } img= { product.item.images[0] } price={ formatter.format(product.item.price)} id={product.id} />
+            </div>
+        ))
+        setPreviewComps(previewElements)
+    }());
 
     var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'usd'
     })
-
-    var previewElements = <div></div>;
-
-    (async function() {
-        let products = await getListings("");
-        console.log(products);
-        previewElements = products.map((product) => (
-            <div className="previews-container">
-                <PreviewProducts title={ product.item.title } img= { product.item.images[0] } price={ formatter.format(product.item.price)} id={products.id} />
-            </div>
-        ))
-    }());
     
     return (
         <div className="home-container">
@@ -48,7 +47,7 @@ const Home = () => {
             <br/>
 
             <div className='previews-container'>
-                { previewElements }
+                { previewComps }
             </div>
 
 

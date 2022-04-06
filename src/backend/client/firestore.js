@@ -2,13 +2,14 @@ import { auth, db, storage } from "../server/init-firebase";
 import { doc, collection, getDoc, getDocs, addDoc, query, orderBy,startAt, endAt, Timestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
-import Listing from './../../objects/item';
+import Listing from './../../objects/listing';
 import Property from './../../objects/property';
 import Item from './../../objects/item';
 
 const listingConverter = {
     toFirestore: (listing) => {
             return {
+                listingTitle: listing.item.title,
                 seller: listing.seller,
                 buyer: listing.buyer,
                 dateBought: Timestamp.fromDate(listing.dateBought),
@@ -16,7 +17,7 @@ const listingConverter = {
                 isPurchased: listing.isPurchased,
                 shippingCost: listing.shippingCost,
                 shippingFrom: listing.shippingFrom,
-                listingTitle: listing.item.title,
+                id: listing.id,
                 item: {
                     title: listing.item.title,
                     price: listing.item.price,
@@ -37,6 +38,7 @@ const listingConverter = {
     fromFirestore: (snapshot, options) => {
         const data = snapshot.data(options);
         return new Listing(
+            data.id,
             data.seller,
             data.buyer,
             data.dateBought,
@@ -128,9 +130,6 @@ const getListing = async (listingId) => {
     });
 }
 
-<<<<<<< HEAD
-export {createListing, getListings, getListing}
-=======
 const getAllListings = () => {
     return new Promise((resolve, reject) => {
         onAuthStateChanged(auth, async (user) => {
@@ -153,4 +152,3 @@ const getAllListings = () => {
 
 export {createListing, getListings, getListing, getAllListings}
 
->>>>>>> 90b8060f632eefa4d850cb384a99d5ec9ae585d2

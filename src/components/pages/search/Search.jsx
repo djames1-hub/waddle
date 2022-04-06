@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "./Search.css";
 import '../../common/searchbar/Searchbar.css';
 import Listing from '../../../objects/listing';
@@ -10,6 +10,8 @@ import { getListings } from '../../../backend/client/firestore';
 import PreviewProducts from '../PrevProduct/PreviewProducts';
 
 const Search = () => {
+
+    const [previewComps, setPreviewComps] = useState(<div />);
 
     let searchParam = window.location.href.slice(29);
     console.log(searchParam);
@@ -26,9 +28,10 @@ const Search = () => {
         console.log(products);
         previewElements = products.map((product) => (
             <div className="previews-container">
-                <PreviewProducts title={ product.item.title } img= { product.item.images[0] } price={ formatter.format(product.item.price)} id={products.id} />
+                <PreviewProducts title={ product.item.title } img= { product.item.images[0] } price={ formatter.format(product.item.price)} id={product.id} />
             </div>
         ))
+        setPreviewComps(previewElements)
     }());
 
     return (
@@ -37,7 +40,7 @@ const Search = () => {
             <div className="category-display">
             </div>
             <div className='previews-container'>
-                { previewElements }
+                { previewComps }
             </div>
         </div>
     )
