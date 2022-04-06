@@ -11,18 +11,23 @@ import PreviewProducts from '../PrevProduct/PreviewProducts';
 
 const Home = () => {
 
-    let products = getListings();
+    let products = getListings("");
 
     var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'usd'
     })
 
-    const previewElements = products.map((product) => (
-        <div className="previews-container">
-            <PreviewProducts title={ product.item.title } img= { product.item.images[0] } price={ formatter.format(product.item.price)} id={products.id} />
-        </div>
+    var previewElements = <div></div>
+
+    const setUpElements = async () => {
+        let products = await getListings("");
+        previewElements = products.map((product) => (
+            <div className="previews-container">
+                <PreviewProducts title={ product.item.title } img= { product.item.images[0] } price={ formatter.format(product.item.price)} id={products.id} />
+            </div>
         ))
+    }
 
     return (
         <div className="home-container">

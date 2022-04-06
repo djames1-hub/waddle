@@ -11,22 +11,28 @@ import PreviewProducts from '../PrevProduct/PreviewProducts';
 
 const Search = () => {
 
-    let products = getListings();
+    let searchParam = window.location.href.slice(29);
+    console.log(searchParam);
 
     var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'usd'
     })
 
-    const previewElements = products.map((product) => (
-        <div className="previews-container">
-            <PreviewProducts title={ product.item.title } img= { product.item.images[0] } price={ formatter.format(product.item.price)} id={products.id} />
-        </div>
+    var previewElements = <div></div>
+
+    const setUpElements = async () => {
+        let products = await getListings(searchParam);
+        previewElements = products.map((product) => (
+            <div className="previews-container">
+                <PreviewProducts title={ product.item.title } img= { product.item.images[0] } price={ formatter.format(product.item.price)} id={products.id} />
+            </div>
         ))
+    }
 
     return (
         <div className="home-container">
-            <h1 className="header-container">Welcome to Waddle!</h1>
+            <h1 className="header-container">{"Result for "+searchParam}</h1>
             <div className="category-display">
             </div>
             <div className='previews-container'>

@@ -13,6 +13,7 @@ function Navbar () {
                       <a href="/cart" className="navbar-item">Cart</a>
                       <a href="/wishlist" className="navbar-item">Wishlist</a>
                       <a href="/settings" className="navbar-item">Settings</a>
+                      <a href="/sign-up" classname="navbar-item">Account</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 

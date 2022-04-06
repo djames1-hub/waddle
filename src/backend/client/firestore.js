@@ -70,11 +70,9 @@ const createListing = (listing, image) => {
                             await addDoc(collection(db, "listings").withConverter(listingConverter), listing);
                         } catch(error) {
                             reject(error);
-                        }
-                        
+                        }          
                     });
-                });
-                
+                });  
             } else {
                 reject(new Error('User not signed in!'));
             }
