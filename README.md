@@ -29,13 +29,15 @@ Frameworks & Libraries:
 Packages installed 
 
 **use suffix  - -force (with dashes together) if any issue
+
 React-router-dom
 - npm install react-router-dom
+
 React-icons
 - npm install react-icons
-@material-ui/icons
-- npm install @material-ui/icons
-@material-ui/core
-- npm install @material-ui/core
+
 react-scripts
 - npm i react-scripts
+
+Google Firebase
+- npm install --save firebase
