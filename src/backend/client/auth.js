@@ -3,39 +3,34 @@ import { auth, firestore } from "../server/init-firebase";
 //Get firebase functions
 import { createUserWithEmailAndPassword , onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
-class User {
-    static name = "";
-    static username = "";
-    static email = "";
-    static creditCards = [];
-    static listedItems = "";
-    static address = new Address();
-    static card = [];
-    static wishList = [];
-    static purchasedItems = [];
-
-    constructor(name, username, email, creditCards, listedItems, address, cards, wishList, purchasedItems){
-        this.name = name;
-        this.email = email;
-        this.creditCards  = creditCards;
-        this.username = username;
-        this.listedItems = listedItems;
-        this.address = address;
-        this.creditCards = cards;
-        this.wishList = wishList;
-        this.purchasedItems = purchasedItems;
-    }
-}
+import User from "../../objects/user";
 
 const userConverter = {
     toFirestore: (user) => {
         return {
-            email: user.email
+            name: user.name,
+            username: user.username,
+            email: user.email,
+            creditCards: [],
+            listedItems: [],
+            address: "",
+            wishList: [],
+            purchasedItems: []
         }
     },
-    fromFireStore: (snapshot, options) => {
+    fromFirestore: (snapshot, options) => {
         const data = snapshot.data(options);
-        return new User();
+        return new User(
+            data.name,
+            data.username,
+            data.email,
+            data.creditCards,
+            data.listedItems,
+            data.address,
+            data.cart,
+            data.wishList,
+            data.purchasedItems    
+        );
     }
 }
 
@@ -56,11 +51,7 @@ const createUser = (name, username, email, password) => {
             //TODO: create new user in firestore with specific UID
             const userRef = firestore.collection('users').doc(uID);
 
-            await userRef.set({
-                name,
-                username,
-                email,   
-            });
+            await userRef.withConverter(userConverter).set(new User());
             resolve("");
         }).catch((error) => {
             //TODO: display error to user
@@ -72,16 +63,18 @@ const createUser = (name, username, email, password) => {
  * Gets the current user signed in. If no user is signed in, returns null.
  */
 const getCurrentUser = () => {
-    onAuthStateChanged(auth, (user) => {
-        if(user){
-            //TODO: Get user data from firestore and create user object
-            const userRef = firestore.collection('users').doc(user.uid);
-            const userData = userRef.get();
-        } else {
-            return null;
-        }
+    return new Promise((resolve, reject) => {
+        onAuthStateChanged(auth, (user) => {
+            if(user){
+                //TODO: Get user data from firestore and create user object
+                const userRef = firestore.collection('users').doc(user.uid);
+                const userData = userRef.get();
+                resolve();
+            } else {
+                reject(null);
+            }
+        })
     })
-
 }
 /**
  * Signs user in with entered email and password
