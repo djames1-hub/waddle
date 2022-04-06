@@ -118,7 +118,6 @@ const getListing = async (listingId) => {
 const getAllListings = () => {
     return new Promise(async (resolve, reject) => {
                 const listingSnap = await getDocs(collection(db, "listings"));
-
                 let listings = [];
                 listingSnap.forEach(doc => {
                     listings.push(doc.data());

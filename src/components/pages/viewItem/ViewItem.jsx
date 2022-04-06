@@ -4,6 +4,8 @@ import Item from "../../../objects/item";
 import Listing from '../../../objects/listing';
 import Property from '../../../objects/property';
 
+import "./ViewItem.css"
+
 import {getListing} from "../../../backend/client/firestore"
 
 function ViewItem(){
@@ -31,9 +33,9 @@ function ViewItem(){
         style: 'currency',
         currency: 'usd'
     })
-    return <div>
+    return <div className="item-container">
         <h1 className="item-title">{title}</h1>
-        <img src={image} />
+        <img src={image} className="item-image"/>
         <h3 className="price">{formatter.format(price)}</h3>
         <h3 classname="description" >{description}</h3>
     </div>
