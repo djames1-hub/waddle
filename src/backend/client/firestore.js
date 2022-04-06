@@ -92,7 +92,7 @@ const getListings = async (qStr) => {
                 );
 
                 const querySnapshot = await getDocs(q);
-                
+
                 let listings = [];
                 querySnapshot.forEach(doc => {
                     listings.push(doc);
@@ -127,5 +127,25 @@ const getListing = async (listingId) => {
     });
 }
 
-export {createListing, getListings, getListing}
+const getAllListings = () => {
+    return new Promise((resolve, reject) => {
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                const listingSnap = await getDocs(collection(db, "listings"));
+
+                let listings = [];
+                listingSnap.forEach(doc => {
+                    listings.push(doc);
+                })
+                
+                resolve(listings);
+                
+            } else {
+                reject(new Error('User not signed in!'));
+            }
+        });
+    });
+}
+
+export {createListing, getListings, getListing, getAllListings}
 
