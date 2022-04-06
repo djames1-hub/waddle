@@ -1,5 +1,5 @@
 import { auth, db, storage } from "../server/init-firebase";
-import { doc, collection, getDoc, getDocs, setDoc, query, orderBy,startAt, endAt } from "firebase/firestore";
+import { doc, collection, getDoc, getDocs, addDoc, query, orderBy,startAt, endAt } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
 import Listing from './../../objects/item';
@@ -66,7 +66,12 @@ const createListing = (listing, image) => {
                 uploadBytes(storageRef, image).then(snapshot => {
                     getDownloadURL(snapshot.ref).then(async downloadURL => {
                         listing.item.images = [downloadURL];
-                        await setDoc(doc(db, "listings").withConverter(listingConverter));
+                        try {
+                            await addDoc(collection(db, "listings").withConverter(listingConverter), listing);
+                        } catch(error) {
+                            reject(error);
+                        }
+                        
                     });
                 });
                 
