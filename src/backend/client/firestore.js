@@ -1,8 +1,10 @@
-import { auth, firestore as db, storage } from "../server/init-firebase";
+import { auth, db, storage } from "../server/init-firebase";
+import { doc, collection, getDoc, getDocs, setDoc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
 import Listing from './../../objects/item';
 import Property from './../../objects/property';
-import Item from './../../objects/item'
+import Item from './../../objects/item';
 
 const listingConverter = {
     toFirestore: (listing) => {
@@ -59,14 +61,14 @@ const createListing = (listing, image) => {
     return new Promise((resolve, reject) => {
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                const storageRef = storage.ref().child("images/" + image.name);
-                storageRef.put(image).then((snapshot) => {
-                    snapshot.ref.getDownloadURL().then( async (downloadURL) => {
-                        listing.item.push(downloadURL);
-                        const listingRef = db.collection('items').doc();
-                        await listingRef.withConverter(listingConverter).set(listing); 
-                    })
-                })
+                const storageRef = ref(storage, `images/${image.name}`);
+                uploadBytes(storageRef, image).then(snapshot => {
+                    getDownloadURL(snapshot.ref).then(downloadURL => {
+                        listing.item.images.push(downloadURL);
+                        await setDoc(doc(db, "listings").withConverter(listingConverter));
+                    });
+                });
+                
             } else {
                 reject(new Error('User not signed in!'));
             }
@@ -78,10 +80,10 @@ const getListings = async () => {
     return new Promise((resolve, reject) => {
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                const listingRef = db.collection('items');
-                const snapshot = await listingRef.withConverter(listingConverter).get(); 
-                const listings = snapshot.data();
-                resolve(listings);
+                const querySnapshot = await getDocs(collection(db, "listings").withConverter(listingConverter));
+                
+                resolve(querySnapshot);
+                
             } else {
                 reject(new Error('User not signed in!'));
             }
@@ -93,11 +95,11 @@ const getListing = async (listingId) => {
     return new Promise((resolve, reject) => {
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                const listingRef = db.collection('items').doc(listingId);
-                const doc = await listingRef.withConverter(listingConverter).get(); 
-                if (doc.exists) {
-                    const listing = doc.data();
-                    resolve(listing);
+                const listingRef = doc(db, "listings", listingId);
+                const listingSnap = await getDoc(listingRef);
+
+                if (listingSnap.exists()) {
+                    resolve(listingSnap.data());
                 } else {
                     reject(new Error('Listing with this id does not exist!'));
                 }
