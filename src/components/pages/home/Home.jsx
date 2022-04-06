@@ -15,12 +15,16 @@ const Home = () => {
 
     (async function() {
         let products = await getListings("");
-        console.log(products[0].id);
-        let previewElements = products.map((product) => (
+        
+        let previewElements = <></>;
+        if (products) {
+            let previewElements = products.map((product) => (
             <div className="previews-container">
                 <PreviewProducts title={ product.item.title } img= { product.item.images[0] } price={ formatter.format(product.item.price)} id={product.id} />
             </div>
-        ))
+            ))
+        }
+        
         setPreviewComps(previewElements)
     }());
 
