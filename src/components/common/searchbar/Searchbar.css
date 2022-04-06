@@ -26,7 +26,6 @@
   width: 50px;
   display: grid;
   place-items: center;
-  background: transparent;
 }
 
 input:focus {
