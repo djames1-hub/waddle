@@ -24,24 +24,30 @@ function SignIn(){
         let validate = validateFields(email, password);
         if(validate === ""){
             signIn(email, password).then((res)=>{
-                // Account created successfully
+                // Account logged in successfully
+                window.location.href ="/";
+
             }).catch((error)=>{
                 // Error with account creation, display error
                 console.log(error);
                 setError(error);
+                alert (error);
+
+
             })
         }else{
             setError(validate);
-        }  
+
+        }
     }
 
     return <div className="container">
-    <h1 id="title">Login</h1>
-    <input name="email" type="text" className="text-input" placeholder="Email" onChange={event => setEmail(event.target.value)} />
-    <input name="password" type="text" className="text-input" placeholder="Password" onChange={event => setPassword(event.target.value)} />
-    <input name="submit" className="submit-button" type="button" value="Submit" onClick={() => signInUser()}/>
-    <h3 id="error-label" >{error}</h3>
-</div>
+        <h1 id="title">Login</h1>
+        <input name="email" type="text" className="text-input" placeholder="Email" onChange={event => setEmail(event.target.value)} />
+        <input name="password" type="text" className="text-input" placeholder="Password" onChange={event => setPassword(event.target.value)} />
+        <input name="submit" className="submit-button" type="button" value="Submit" onClick={() => signInUser()}/>
+        <h3 id="error-label" >{error}</h3>
+    </div>
 }
 
-export default SignIn
+export default SignIn;
