@@ -24,7 +24,7 @@ function SignUp(){
                // check if user inputs meet the minimum requirements
                let validate = validateFields(email, password);
                if(validate === ""){
-                   createUser(email, password).then((res)=>{
+                   createUser("name", username, email, password).then((res)=>{
                        // Account created successfully
                    }).catch((error)=>{
                        // Error with account creation, display error

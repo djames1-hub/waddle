@@ -1,4 +1,5 @@
 import { auth, firestore as db, storage } from "../server/init-firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import Listing from './../../objects/item';
 import Property from './../../objects/property';
 import Item from './../../objects/item'
@@ -30,7 +31,7 @@ const listingConverter = {
     
             }
     },
-    fromFirestore: () => {
+    fromFirestore: (snapshot, options) => {
         const data = snapshot.data(options);
         return new Listing(
             data.seller,
@@ -56,11 +57,11 @@ const listingConverter = {
 
 const createListing = (listing, image) => {
     return new Promise((resolve, reject) => {
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const storageRef = storage.ref().child("images/" + image.name);
                 storageRef.put(image).then((snapshot) => {
-                    snapshot.ref.getDownloadURL().then((downloadURL) => {
+                    snapshot.ref.getDownloadURL().then( async (downloadURL) => {
                         listing.item.push(downloadURL);
                         const listingRef = db.collection('items').doc();
                         await listingRef.withConverter(listingConverter).set(listing); 
@@ -75,7 +76,7 @@ const createListing = (listing, image) => {
 
 const getListings = async () => {
     return new Promise((resolve, reject) => {
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const listingRef = db.collection('items');
                 const snapshot = await listingRef.withConverter(listingConverter).get(); 
@@ -90,7 +91,7 @@ const getListings = async () => {
 
 const getListing = async (listingId) => {
     return new Promise((resolve, reject) => {
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const listingRef = db.collection('items').doc(listingId);
                 const doc = await listingRef.withConverter(listingConverter).get(); 
@@ -108,5 +109,5 @@ const getListing = async (listingId) => {
     });
 }
 
-export {createListing, getListings}
+export {createListing, getListings, getListing}
 

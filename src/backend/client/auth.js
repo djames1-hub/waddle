@@ -1,5 +1,5 @@
 //Get Firebase authentication object from firebase initializer
-import { auth, firestore } from "../server/init-firebase";
+import { auth, firestore, db } from "../server/init-firebase";
 //Get firebase functions
 import { createUserWithEmailAndPassword , onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
@@ -24,12 +24,12 @@ const userConverter = {
             }),
             listedItems: [],
             address: {
-                street: listing.address.street,
-                town: listing.address.town,
-                apartment: listing.address.apartment,
-                houseNumber: listing.address.houseNumber,
-                state: listing.address.state,
-                country: listing.address.country
+                street: user.address.street,
+                town: user.address.town,
+                apartment: user.address.apartment,
+                houseNumber: user.address.houseNumber,
+                state: user.address.state,
+                country: user.address.country
             },
             wishList: [],
             purchasedItems: []
@@ -81,7 +81,7 @@ const createUser = (name, username, email, password) => {
             const user = userCredential.user;
             const uID = user.uid;
             //TODO: create new user in firestore with specific UID
-            const userRef = firestore.collection('users').doc(uID);
+            const userRef = db.collection('users').doc(uID);
 
             await userRef.withConverter(userConverter).set(new User());
             resolve("");
@@ -114,6 +114,19 @@ const getCurrentUser = () => {
         })
     })
 }
+
+const getUserID = () => {
+    new Promise((resolve, reject) => {
+        onAuthStateChanged(auth, async (user) => {
+            if(user){
+                resolve(user.uid);
+            }else {
+                reject(new Error('User does not exist!'));
+            }
+        })
+    })
+}
+
 /**
  * Signs user in with entered email and password
  * @param {email}
@@ -134,4 +147,4 @@ function signIn(email, password){
     })
 }
 
-export {signIn, createUser, getCurrentUser};
+export {signIn, createUser, getCurrentUser, getUserID};

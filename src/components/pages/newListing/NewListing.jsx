@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
 import "./NewListing.css";
 
+import { createListing } from '../../../backend/client/firestore';
+import { getUserID } from '../../../backend/client/auth';
+import Listing from '../../../objects/listing';
+import Item from '../../../objects/item';
+import { title } from 'process';
+import Property from '../../../objects/property';
 
 const boxCategories = ["books", "clothing", "furniture", "electronics", "sports gear", "other"]
 
 const NewListing = () => {
 
     var categories = new Map();
+    var userID = getUserID();
 
     const checkBoxes = boxCategories.map((cat) => (
         <div>
@@ -29,7 +36,7 @@ const NewListing = () => {
         let validate = validateFields(itemName,cats,price,keyWords,description,delivery,photo);
         if(validate === ""){
             //createNewItem function
-            alert("Success!")
+            createListing(new Listing("", userID, "", new Date(), 1, false, 0.0, "", new Item(itemName, price, description, "", keyWords, "", new Property(0, 0, 0, 0))));
         }
         else{
 
