@@ -63,7 +63,7 @@ const createListing = (listing, image) => {
             if (user) {
                 const storageRef = ref(storage, `images/${image.name}`);
                 uploadBytes(storageRef, image).then(snapshot => {
-                    getDownloadURL(snapshot.ref).then(downloadURL => {
+                    getDownloadURL(snapshot.ref).then(async downloadURL => {
                         listing.item.images.push(downloadURL);
                         await setDoc(doc(db, "listings").withConverter(listingConverter));
                     });

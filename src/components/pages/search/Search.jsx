@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Home.css";
+import "./Search.css";
 import '../../common/searchbar/Searchbar.css';
 import Listing from '../../../objects/listing';
 import Property from '../../../objects/property';
@@ -9,7 +9,7 @@ import { getListings } from '../../../backend/client/firestore';
 
 import PreviewProducts from '../PrevProduct/PreviewProducts';
 
-const Home = () => {
+const Search = () => {
 
     let products = getListings();
 
@@ -36,4 +36,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Search

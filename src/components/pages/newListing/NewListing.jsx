@@ -7,6 +7,7 @@ import Listing from '../../../objects/listing';
 import Item from '../../../objects/item';
 import { title } from 'process';
 import Property from '../../../objects/property';
+import User from '../../../objects/user';
 
 const boxCategories = ["books", "clothing", "furniture", "electronics", "sports gear", "other"]
 
@@ -36,7 +37,8 @@ const NewListing = () => {
         let validate = validateFields(itemName,cats,price,keyWords,description,delivery,photo);
         if(validate === ""){
             //createNewItem function
-            createListing(new Listing("", userID, "", new Date(), 1, false, 0.0, "", new Item(itemName, price, description, "", keyWords, "", new Property(0, 0, 0, 0))));
+            var image = document.getElementById("imageUpload").files[0]
+            createListing(new Listing("", userID, "", new Date(), 1, false, 0.0, "", new Item(itemName, price, description, "", keyWords, "", new Property(0, 0, 0, 0))), image);
         }
         else{
 
@@ -109,7 +111,7 @@ const NewListing = () => {
                     <div className="form-input">
                         <b>Photo:</b>
                         <input
-                            placeholder="Select Image" type="file" className="inputPhoto" onChange={event => setPhoto(event.target.value)} />
+                            placeholder="Select Image" type="file" id="imageUpload" className="inputPhoto" onChange={event => setPhoto(event.target.value)} />
                     </div>
                 </form>
             </div>

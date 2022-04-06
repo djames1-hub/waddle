@@ -1,5 +1,6 @@
 //Get Firebase authentication object from firebase initializer
 import { auth, firestore, db } from "../server/init-firebase";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 //Get firebase functions
 import { createUserWithEmailAndPassword , onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
@@ -81,9 +82,8 @@ const createUser = (name, username, email, password) => {
             const user = userCredential.user;
             const uID = user.uid;
             //TODO: create new user in firestore with specific UID
-            const userRef = db.collection('users').doc(uID);
-
-            await userRef.withConverter(userConverter).set(new User());
+            const userRef = doc(db, "users", uID).withConverter(userConverter);
+            await setDoc(userRef, new User(name, username, email, [], [], new Address("", "", 0, 0, "", ""), [], [], []))
             resolve("");
         }).catch((error) => {
             //TODO: display error to user
@@ -93,14 +93,15 @@ const createUser = (name, username, email, password) => {
 }
 /**
  * Gets the current user signed in. If no user is signed in, returns null.
+ * @returns {Promimse<string>} User?
  */
 const getCurrentUser = () => {
     return new Promise((resolve, reject) => {
         onAuthStateChanged(auth, async (user) => {
             if(user){
                 //TODO: Get user data from firestore and create user object
-                const userRef = firestore.collection('users').withConverter(userConverter).doc(user.uid);
-                const doc = await userRef.get();
+                const userRef = doc(db, "users", user.uid).withConverter(userConverter);
+                const doc = await getDoc(userRef)
                 if (doc.exists) {
                     let user = doc.data();
                     resolve(user);
@@ -114,6 +115,10 @@ const getCurrentUser = () => {
         })
     })
 }
+/**
+ * Grabs the firebase ID for the current user
+ * @returns {Promimse<string>} String
+ */
 
 const getUserID = () => {
     new Promise((resolve, reject) => {
@@ -121,7 +126,7 @@ const getUserID = () => {
             if(user){
                 resolve(user.uid);
             }else {
-                reject(new Error('User does not exist!'));
+                reject("No user signed in");
             }
         })
     })
