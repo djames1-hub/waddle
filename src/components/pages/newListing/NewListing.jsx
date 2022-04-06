@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../../../backend/server/init-firebase';
 import "./NewListing.css";
 
 import { createListing } from '../../../backend/client/firestore';
@@ -14,7 +16,13 @@ const boxCategories = ["books", "clothing", "furniture", "electronics", "sports 
 const NewListing = () => {
 
     var categories = new Map();
-    var userID = getUserID();
+    var userID = "";
+    onAuthStateChanged(auth, async (user) => {
+        if(user){
+            userID = user.uid;
+        }
+    })
+    
 
     const checkBoxes = boxCategories.map((cat) => (
         <div>
@@ -56,7 +64,7 @@ const NewListing = () => {
 
 
     const validateFields = (itemName,cats,price,keyWords,delivery,description,photo) => {
-        if(itemName.length === 0  || cats.length === 0 ||price.length === 0 || keyWords.length ===  0 | delivery.length === 0 | description.length === 0 | photo.length === 0){
+        if(itemName.length === 0){
             alert("Please fill out all forms");
         }
         else{
