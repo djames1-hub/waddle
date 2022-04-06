@@ -2,12 +2,12 @@
 Holds onto address details
 */
 class Address{
-    static street = "";
-    static town = "";
-    static apartment = 0;
-    static houseNumber = 0;
-    static state = "";
-    static country = "";
+    street = "";
+    town = "";
+    apartment = 0;
+    houseNumber = 0;
+    state = "";
+    country = "";
 
     constructor(street, town, apartment, houseNumber, state, country){
         this.street = street;

@@ -1,10 +1,10 @@
 
 class CreditCard{
-    static name = "";
-    static number = 0;
-    static CVV = 0;
-    static expiration = new Date();
-    static zipCode = 0;
+    name = "";
+    number = 0;
+    CVV = 0;
+    expiration = new Date();
+    zipCode = 0;
 
     constructor(name, number, CVV, expiration, zipCode){
         this.name = name;

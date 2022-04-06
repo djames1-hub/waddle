@@ -2,10 +2,10 @@
 Property holds onto the pysical properties of an item
 */
 export class Property{
-    static height = 0.0;
-    static width = 0.0;
-    static depth = 0.0;
-    static weight = 0.0;
+    height = 0.0;
+    width = 0.0;
+    depth = 0.0;
+    weight = 0.0;
 
     constructor(height, width, depth, weight){
         this.height = height;

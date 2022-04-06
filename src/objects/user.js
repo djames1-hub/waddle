@@ -1,16 +1,15 @@
-import CreditCard from "./credit-card";
 import Address from "./address";
 
 export class User{
-    static name = "";
-    static username = "";
-    static email = "";
-    static creditCards = [];
-    static listedItems = "";
-    static address = new Address();
-    static cart = [];
-    static wishList = [];
-    static purchasedItems = [];
+    name = "";
+    username = "";
+    email = "";
+    creditCards = [];
+    listedItems = "";
+    address = new Address();
+    cart = [];
+    wishList = [];
+    purchasedItems = [];
 
     constructor(name, username, email, creditCards, listedItems, address, cards, wishList, purchasedItems){
         this.name = name;
@@ -24,8 +23,5 @@ export class User{
         this.purchasedItems = purchasedItems;
     }
 }
-<<<<<<< HEAD
 
-export default user;
-=======
->>>>>>> 73aa6dc5ab7f6a30b8bcf70987aad5374e04ca0a
+export default User;

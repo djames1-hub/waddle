@@ -2,13 +2,13 @@ import Property from "./property";
 
 export class Item{
     //class that holds onto properties of the item
-    static title = "";
-    static price = 0.0;
-    static description = "";
-    static category = "";
-    static keywords = [];
-    static images = [];
-    static physicalProperties = new Property(0, 0, 0, 0);
+    title = "";
+    price = 0.0;
+    description = "";
+    category = "";
+    keywords = [];
+    images = [];
+    physicalProperties = new Property(0, 0, 0, 0);
 
     constructor(title, price, description, category, keywords, images, physicalProperties){
         this.title = title;
@@ -21,4 +21,4 @@ export class Item{
     }
 }
 
-export default Item
+export default Item;
