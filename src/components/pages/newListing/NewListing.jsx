@@ -26,13 +26,13 @@ const NewListing = () => {
 
     const submitItem = () => {
         //TODO: display error message, add create new item function once Dylan's finished up
-        let cats = Array.from( categories.keys());
+        /*let cats = Array.from(categories.keys());
         let validate = validateFields(item);
             if(validate === ""){
                 //createNewItem function
             }else{
                 //display error
-            }
+            }*/
     }
 
     // create hooks to monitor input changes
@@ -41,10 +41,10 @@ const NewListing = () => {
     
     //
 
-    const validateFields = (all the fields to check) => {
-        if(itemName.length === 0 || cats.length === 0){
+    const validateFields = () => {
+       /* if(itemName.length === 0 || cats.length === 0){
 
-        }
+        }*/
         //TODO: check if fields are empty, check if cats array has a lenght of 0 
         //if any are exmpty, return a string that tells the user to input data in all fields
         //else return empty string

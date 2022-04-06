@@ -42,16 +42,19 @@ function getCurrentUser(){
  * Signs user in with entered email and password
  * @param {email}
  * @param {password}
+ * @returns {Promimse<string>} String
  */
 function signIn(email, password){
-    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-        //Signed in
-        const user = userCredential.user;
-        //TODO: send user to account screen or home screen
-    }).catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        //TODO: display error message
+    return new Promise((resolve, reject) =>{
+        signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+            //Signed in
+            const user = userCredential.user;
+            window.location = "http://localhost:3000/home";
+            resolve("");
+        }).catch((error) => {
+            const errorMessage = error.message;
+            reject(errorMessage);
+        })
     })
 }
 

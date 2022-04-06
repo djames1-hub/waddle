@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import "./Auth.css";
 
-import {createUser, getCurrentUser, signIn} from "../../../backend/client/auth";
+import {createUser} from "../../../backend/client/auth";
 
-function Auth(){
-
-    // check if there is a user signed in
-    let user = getCurrentUser();
-
+function SignUp(){
     // create hooks to change form inputs
     const [error, setError] = useState("");
 
@@ -17,28 +13,27 @@ function Auth(){
     const [username, setUsername] = useState("");
 
     const validateFields = (email, password) => {
-        if(email !== "" && password !== ""){
+        if(email !== "" && password !== "" && username != ""){
             return "";
         }else{
             return "Please fill in all fields";
         }
     }
 
-    const createAccount = () => {
-        // check if user inputs meet the minimum requirements
-        let validate = validateFields(email, password);
-        if(validate === ""){
-            createUser(email, password).then((res)=>{
-                // Account created successfully
-            }).catch((error)=>{
-                // Error with account creation, display error
-                console.log(error);
-                setError(error);
-            })
-        }else{
-            setError(validate);
-        }
-        
+    const createAccount = async () => {
+               // check if user inputs meet the minimum requirements
+               let validate = validateFields(email, password);
+               if(validate === ""){
+                   createUser(email, password).then((res)=>{
+                       // Account created successfully
+                   }).catch((error)=>{
+                       // Error with account creation, display error
+                       console.log(error);
+                       setError(error);
+                   })
+               }else{
+                   setError(validate);
+               }   
     }
 
     return <div className="container">
@@ -51,4 +46,4 @@ function Auth(){
     </div>
 }
 
-export default Auth;
+export default SignUp;

@@ -8,7 +8,8 @@ import Cart from './components/pages/cart/Cart';
 import Settings from './components/pages/settings/Settings';
 import NewListing from './components/pages/newListing/NewListing';
 import NotFound from './components/pages/notFound/NotFound';
-import Auth from "./components/pages/auth/auth";
+import SignUp from "./components/pages/auth/SignUp";
+import Login from "./components/pages/auth/SignIn";
 
 import './App.css';
 
@@ -27,7 +28,8 @@ function App() {
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/newListing" element={<NewListing />} />
                     <Route path="/notfound" element={ <NotFound />} />
-                    <Route path="/auth" element={ <Auth />} />
+                    <Route path="/sign-up" element={ <SignUp />} />
+                    <Route path="login" element={ <Login />} />
                     <Route path="/*" element={ <NotFound />} />
                 </Routes>
             </Router>
