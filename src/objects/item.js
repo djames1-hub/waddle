@@ -1,6 +1,6 @@
 import Property from "./property";
 
-class Item{
+export class Item{
     //class that holds onto properties of the item
     static title = "";
     static price = 0.0;

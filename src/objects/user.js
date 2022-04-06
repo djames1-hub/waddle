@@ -1,14 +1,14 @@
 import CreditCard from "./credit-card";
 import Address from "./address";
 
-class User{
+export class User{
     static name = "";
     static username = "";
     static email = "";
     static creditCards = [];
     static listedItems = "";
     static address = new Address();
-    static card = [];
+    static cart = [];
     static wishList = [];
     static purchasedItems = [];
 
