@@ -95,7 +95,7 @@ const getListings = async (qStr) => {
 
                 let listings = [];
                 querySnapshot.forEach(doc => {
-                    listings.push(doc);
+                    listings.push(doc.data());
                 })
                 
                 resolve(listings);
@@ -135,7 +135,7 @@ const getAllListings = () => {
 
                 let listings = [];
                 listingSnap.forEach(doc => {
-                    listings.push(doc);
+                    listings.push(doc.data());
                 })
                 
                 resolve(listings);
