@@ -47,6 +47,7 @@ function SignIn(){
         <input name="password" type="text" className="text-input" placeholder="Password" onChange={event => setPassword(event.target.value)} />
         <input name="submit" className="submit-button" type="button" value="Submit" onClick={() => signInUser()}/>
         <h3 id="error-label" >{error}</h3>
+        <a href="/sign-up" className="switch-page">Sign Up</a>
     </div>
 }
 

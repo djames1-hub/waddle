@@ -2,7 +2,7 @@
 import { auth, firestore, db } from "../server/init-firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 //Get firebase functions
-import { createUserWithEmailAndPassword , onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { signOut,createUserWithEmailAndPassword , onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
 import User from "./../../objects/user";
 import CreditCard from "./../../objects/credit-card";
@@ -152,4 +152,15 @@ function signIn(email, password){
     })
 }
 
-export {signIn, createUser, getCurrentUser, getUserID};
+function signOutUser(){
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      console.log("sign out successful");
+      window.location.ref="/";
+    }).catch((error) => {
+      // An error happened.
+      console.log(error.message);
+    });
+}
+
+export {signIn, createUser, getCurrentUser, getUserID, signOutUser};

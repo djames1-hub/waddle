@@ -36,3 +36,12 @@
     margin-right: auto;
     font-size: 1.5vh;
 }
+
+.switch-page{
+    text-decoration: none;
+}
+
+.switch-page:hover{
+    background-color: transparent;
+    text-decoration: underline;
+}

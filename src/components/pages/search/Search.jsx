@@ -6,7 +6,6 @@ import Property from '../../../objects/property';
 import Item from '../../../objects/item';
 import { getListings } from '../../../backend/client/firestore';
 
-
 import PreviewProducts from '../PrevProduct/PreviewProducts';
 
 const Search = () => {
@@ -32,6 +31,7 @@ const Search = () => {
             </div>
         ))
         setPreviewComps(previewElements)
+
     }());
 
     return (

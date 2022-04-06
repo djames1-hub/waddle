@@ -77,7 +77,8 @@ const createListing = (listing, image) => {
                     });
                 });  
             } else {
-                reject(new Error('User not signed in!'));
+                alert("Please sign in to create a listing");
+                reject("User not signed in!");
             }
         });
     });

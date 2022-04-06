@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Searchbar } from '../../common';
 import ItemData from "./itemData.json";
 
@@ -16,7 +16,7 @@ function Navbar () {
                       <a href="/sign-up" className="navbar-item">Account</a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-
+        
          < Searchbar placeholder="Search for an item..." data={ItemData} />
 
     </section>
