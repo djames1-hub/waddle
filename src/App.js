@@ -31,7 +31,7 @@ function App() {
                     <Route path="/notfound" element={ <NotFound />} />
                     <Route path="/sign-up" element={ <SignUp />} />
                     <Route path="login" element={ <Login />} />
-                    <Route path="/view-item" element={ <ViewItem />} />
+                    <Route path="/view-item/*" element={ <ViewItem />} />
                     <Route path="/*" element={ <NotFound />} />
                 </Routes>
             </Router>
