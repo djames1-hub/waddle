@@ -20,9 +20,6 @@ In order to start the code to view the project
 - Amazon EC2
 - Amazon S3
 
-<h3>Development Tools:</h3>
-
-- ESLint - linter
 
 <h3>Frameworks & Libraries:</h3>
 
