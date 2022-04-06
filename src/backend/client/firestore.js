@@ -84,9 +84,7 @@ const createListing = (listing, image) => {
 }
 
 const getListings = async (qStr) => {
-    return new Promise((resolve, reject) => {
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
+    return new Promise(async (resolve, reject) => {
                 const q = query(collection(db, "listings")
                     .withConverter(listingConverter),
                     orderBy('listingTitle'),
@@ -99,21 +97,13 @@ const getListings = async (qStr) => {
                 let listings = [];
                 querySnapshot.forEach(doc => {
                     listings.push(doc.data());
-                })
-                
+                })          
                 resolve(listings);
-                
-            } else {
-                reject(new Error('User not signed in!'));
-            }
-        });
     });
 }
 
 const getListing = async (listingId) => {
-    return new Promise((resolve, reject) => {
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
+    return new Promise(async (resolve, reject) => {
                 const listingRef = doc(db, "listings", listingId);
                 const listingSnap = await getDoc(listingRef);
 
@@ -122,32 +112,19 @@ const getListing = async (listingId) => {
                 } else {
                     reject(new Error('Listing with this id does not exist!'));
                 }
-                
-            } else {
-                reject(new Error('User not signed in!'));
-            }
         });
-    });
 }
 
 const getAllListings = () => {
-    return new Promise((resolve, reject) => {
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
+    return new Promise(async (resolve, reject) => {
                 const listingSnap = await getDocs(collection(db, "listings"));
 
                 let listings = [];
                 listingSnap.forEach(doc => {
                     listings.push(doc.data());
                 })
-                
                 resolve(listings);
-                
-            } else {
-                reject(new Error('User not signed in!'));
-            }
         });
-    });
 }
 
 export {createListing, getListings, getListing, getAllListings}
