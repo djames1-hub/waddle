@@ -93,7 +93,12 @@ const getListings = async (qStr) => {
 
                 const querySnapshot = await getDocs(q);
                 
-                resolve(querySnapshot);
+                let listings = [];
+                querySnapshot.forEach(doc => {
+                    listings.push(doc);
+                })
+                
+                resolve(listings);
                 
             } else {
                 reject(new Error('User not signed in!'));
