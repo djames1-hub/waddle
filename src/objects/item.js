@@ -19,5 +19,6 @@ class Item{
         this.images = images;
         this.physicalProperties = physicalProperties;
     }
-
 }
+
+export default Item

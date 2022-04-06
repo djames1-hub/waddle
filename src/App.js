@@ -10,6 +10,7 @@ import NewListing from './components/pages/newListing/NewListing';
 import NotFound from './components/pages/notFound/NotFound';
 import SignUp from "./components/pages/auth/SignUp";
 import Login from "./components/pages/auth/SignIn";
+import ViewItem from './components/pages/viewItem/ViewItem';
 
 import './App.css';
 
@@ -30,6 +31,7 @@ function App() {
                     <Route path="/notfound" element={ <NotFound />} />
                     <Route path="/sign-up" element={ <SignUp />} />
                     <Route path="login" element={ <Login />} />
+                    <Route path="/view-item" element={ <ViewItem />} />
                     <Route path="/*" element={ <NotFound />} />
                 </Routes>
             </Router>

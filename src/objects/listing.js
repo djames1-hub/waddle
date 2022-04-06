@@ -1,4 +1,5 @@
 import item from "./item";
+import Address from "./address";
 
 class Listing{
     static seller = "";
@@ -10,7 +11,7 @@ class Listing{
     static shippingFrom = new Address();
     static item = new item();
 
-    constructor(seller, buyer, dateBought, quantity, isPurchased, shippingCost, shippingFrom){
+    constructor(seller, buyer, dateBought, quantity, isPurchased, shippingCost, shippingFrom, item){
         this.seller = seller;
         this.buyer = buyer;
         this.dateBought = dateBought;
@@ -20,5 +21,6 @@ class Listing{
         this.shippingFrom = shippingFrom;
         this.item = item;
     }
-
 }
+
+export default Listing;

@@ -24,3 +24,5 @@ class User{
         this.purchasedItems = purchasedItems;
     }
 }
+
+export default user;
