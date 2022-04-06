@@ -58,13 +58,14 @@ const listingConverter = {
 
 
 const createListing = (listing, image) => {
+    console.log(listing.item.physicalProperties.height, listing.item.description);
     return new Promise((resolve, reject) => {
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const storageRef = ref(storage, `images/${image.name}`);
                 uploadBytes(storageRef, image).then(snapshot => {
                     getDownloadURL(snapshot.ref).then(async downloadURL => {
-                        listing.item.images.push(downloadURL);
+                        listing.item.images = [downloadURL];
                         await setDoc(doc(db, "listings").withConverter(listingConverter));
                     });
                 });

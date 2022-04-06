@@ -126,7 +126,7 @@ const getUserID = () => {
             if(user){
                 resolve(user.uid);
             }else {
-                reject("No user signed in");
+                reject("");
             }
         })
     })
