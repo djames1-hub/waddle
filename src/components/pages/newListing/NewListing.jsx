@@ -46,7 +46,7 @@ const NewListing = () => {
         if(validate === ""){
             //createNewItem function
             var image = document.getElementById("imageUpload").files[0]
-            createListing(new Listing("", userID, "", new Date(), 1, false, 0.0, "", new Item(itemName, price, description, "", keyWords, "", [], new Property(0, 0, 0, 0))), image);
+            createListing(new Listing("", userID, "", new Date(), 1, false, 0.0, "", new Item(itemName, price, description, "", keyWords, [], new Property(0, 0, 0, 0))), image);
         }
         else{
 
