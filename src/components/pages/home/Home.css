@@ -1,9 +1,10 @@
 * {
     font-family: RobotoRegular;
+
 }
 
 .background{
-    background-color: white;
+
 }
 
 .previews-container {
@@ -13,4 +14,39 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     max-width: 70%;
+    background-color: lightblue;
+    font-size: medium;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+
+}
+
+.home-container{
+    width: available;
+    block-size: fit-content;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    background-color: lightblue;
+    border-radius: 2px;
+    font-size: x-large;
+    font-family: RobotoRegular;
+
+
+}
+
+.h1{
+
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.category-display{
+    margin-left: auto;
+    margin-right: auto;
+    height: available;
+    padding: 20px;
+    max-width: 67%;
+    background-color: lightgrey;
+    font-size: medium;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+
 }
