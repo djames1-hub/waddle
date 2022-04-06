@@ -88,5 +88,25 @@ const getListings = async () => {
     });
 }
 
+const getListing = async (listingId) => {
+    return new Promise((resolve, reject) => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const listingRef = db.collection('items').doc(listingId);
+                const doc = await listingRef.withConverter(listingConverter).get(); 
+                if (doc.exists) {
+                    const listing = doc.data();
+                    resolve(listing);
+                } else {
+                    reject(new Error('Listing with this id does not exist!'));
+                }
+                
+            } else {
+                reject(new Error('User not signed in!'));
+            }
+        });
+    });
+}
+
 export {createListing, getListings}
 
