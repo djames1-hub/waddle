@@ -59,9 +59,7 @@ const listingConverter = {
     }
 };
 
-
 const createListing = (listing, image) => {
-    console.log(listing.item.physicalProperties.height, listing.item.description);
     return new Promise((resolve, reject) => {
         onAuthStateChanged(auth, async (user) => {
             if (user) {
@@ -85,22 +83,27 @@ const createListing = (listing, image) => {
 }
 
 const getListings = async (qStr) => {
-    return new Promise(async (resolve, reject) => {
-                const q = query(collection(db, "listings")
-                    .withConverter(listingConverter),
-                    orderBy('listingTitle'),
-                    startAt(qStr),
-                    endAt(qStr + '\uf8ff')
-                );
+    try {
+        const q = query(collection(db, "listings")
+        .withConverter(listingConverter),
+        orderBy('listingTitle'),
+        startAt(qStr),
+        endAt(qStr + '\uf8ff')
+        );
 
-                const querySnapshot = await getDocs(q);
+        const querySnapshot = await getDocs(q);
 
-                let listings = [];
-                querySnapshot.forEach(doc => {
-                    listings.push(doc.data());
-                })          
-                resolve(listings);
-    });
+        let listings = [];
+        querySnapshot.forEach(doc => {
+            listings.push(doc.data());
+        });         
+        
+        return listings;
+    } catch (error) {
+        return error;
+    }
+    
+    
 }
 
 const getListing = async (listingId) => {
