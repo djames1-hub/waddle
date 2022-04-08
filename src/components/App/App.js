@@ -1,17 +1,17 @@
 import React from 'react';
-import { Header } from './components/common';
+import { Header } from '../common';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Home from './components/pages/home/Home';
-import Wishlist from './components/pages/wishlist/Wishlist';
-import Cart from './components/pages/cart/Cart';
-import Settings from './components/pages/settings/Settings';
-import NewListing from './components/pages/newListing/NewListing';
-import NotFound from './components/pages/notFound/NotFound';
-import SignUp from "./components/pages/auth/SignUp";
-import Login from "./components/pages/auth/SignIn";
-import ViewItem from './components/pages/viewItem/ViewItem';
-import Search from './components/pages/search/Search';
+import Home from '../../domain/pages/home/Home';
+import Wishlist from '../../domain/pages/wishlist/Wishlist';
+import Cart from '../../domain/pages/cart/Cart';
+import Settings from '../../domain/pages/settings/Settings';
+import NewListing from '../../domain/pages/newListing/NewListing';
+import NotFound from '../../domain/pages/notFound/NotFound';
+import SignUp from "../../domain/auth/SignUp";
+import Login from "../../domain/auth/SignIn";
+import ViewItem from '../../domain/pages/viewItem/ViewItem';
+import Search from '../../domain/pages/search/Search';
 
 import './App.css';
 
@@ -22,7 +22,6 @@ function App() {
             {/* ROUTING */}
             <div>
             <Router>
-
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/wishlist" element={<Wishlist />} />
