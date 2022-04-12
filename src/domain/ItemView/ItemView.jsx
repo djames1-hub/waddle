@@ -4,7 +4,7 @@ import Item from "../../../objects/item";
 import Listing from '../../../objects/listing';
 import Property from '../../../objects/property';
 
-import "./ViewItem.css"
+import "./ItemView.css"
 
 import {getListing} from "../../../backend/client/firestore"
 

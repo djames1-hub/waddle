@@ -4,6 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { FaTimes } from "react-icons/fa";
 
 function Searchbar({ placeholder, data }) {
+  
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
 

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../../../backend/server/init-firebase';
-import "./NewListing.css";
 
+import { auth } from '../../../backend/server/init-firebase';
+import './ListingForm.css';
 import { createListing } from '../../../backend/client/firestore';
-import { getUserID } from '../../../backend/client/auth';
 import Listing from '../../../objects/listing';
 import Item from '../../../objects/item';
 import { title } from 'process';
@@ -13,23 +12,23 @@ import User from '../../../objects/user';
 
 const boxCategories = ["books", "clothing", "furniture", "electronics", "sports gear", "other"]
 
-const NewListing = () => {
+const ListingForm = () => {
 
-    var categories = new Map();
-    var userID = "";
+    let categories = new Map();
+    let userID = "";
     onAuthStateChanged(auth, async (user) => {
-        if(user){
+        if(user) {
             userID = user.uid;
-        }
+        } 
     })
     
 
-    const checkBoxes = boxCategories.map((cat) => (
+    const checkBoxes = boxCategories.map(category => (
         <div>
-            <input type="checkbox" name="category" className="inputCheckbox" id={cat} value={cat} onChange={() => checkCategory(cat)}/>
-            <label >{cat} </label>
+            <input type="checkbox" name="category" className="inputCheckbox" id={cat} value={category} onChange={() => checkCategory(cat)}/>
+            <label >{category} </label>
         </div>
-    ))
+    ));
 
     const checkCategory = (category) => {
         if(categories.has(category)){
@@ -133,4 +132,4 @@ const NewListing = () => {
     )
 }
 
-export default NewListing;
+export default ListingForm;

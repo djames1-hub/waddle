@@ -1,11 +1,10 @@
 import React from 'react';
 
 import './Header.css';
-import {} from './../Navbar';
+import NavBar from './../NavBar'
 
 
-function Header () {
-
+const Header = () => {
     return (
         <section className="header">
             <section className="header-top">
@@ -13,7 +12,7 @@ function Header () {
                     <a href="/" className="header-logo"> waddle </a>
                 </section>
                 <section className="header-top__navbar">
-                    <Navbar />
+                    <NavBar />
                 </section>
             </section>
             <section className="header-bottom">
