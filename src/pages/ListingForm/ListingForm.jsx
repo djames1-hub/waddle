@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 
-import { auth } from '../../../backend/server/init-firebase';
+import { auth } from './../../services/firebase/firebase-config';
 import './ListingForm.css';
-import { createListing } from '../../../backend/client/firestore';
-import Listing from '../../../objects/listing';
-import Item from '../../../objects/item';
-import { title } from 'process';
-import Property from '../../../objects/property';
-import User from '../../../objects/user';
+import { createListing, Listing, Item, Property } from './../../services/firebase/listings';
+
+
 
 const boxCategories = ["books", "clothing", "furniture", "electronics", "sports gear", "other"]
 
@@ -25,7 +22,7 @@ const ListingForm = () => {
 
     const checkBoxes = boxCategories.map(category => (
         <div>
-            <input type="checkbox" name="category" className="inputCheckbox" id={cat} value={category} onChange={() => checkCategory(cat)}/>
+            <input type="checkbox" name="category" className="inputCheckbox" id={category} value={category} onChange={() => checkCategory(category)}/>
             <label >{category} </label>
         </div>
     ));

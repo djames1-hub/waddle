@@ -5,6 +5,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, db, storage } from "./../firebase-config";
 import Property from './property';
 import Item from './item';
+import Address from "../users/address";
 
 class Listing{
     id="";
@@ -155,4 +156,4 @@ const getAllListings = () => {
         });
 }
 
-export {createListing, getListings, getListing, getAllListings}
+export {createListing, getListings, getListing, getAllListings, Listing}

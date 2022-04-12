@@ -1,12 +1,9 @@
 import React, {useState} from 'react';
-import "./Search.css";
-import '../../common/searchbar/Searchbar.css';
-import Listing from '../../../objects/listing';
-import Property from '../../../objects/property';
-import Item from '../../../objects/item';
-import { getListings } from '../../../backend/client/firestore';
 
-import PreviewProducts from '../PrevProduct/PreviewProducts';
+import './Search.css';
+import { ListingView } from './../../components'
+import { getListings } from './../../services/firebase/listings';
+
 
 const Search = () => {
 
@@ -27,7 +24,7 @@ const Search = () => {
         console.log(products);
         previewElements = products.map((product) => (
             <div className="previews-container">
-                <PreviewProducts title={ product.item.title } img= { product.item.images[0] } price={ formatter.format(product.item.price)} id={product.id} />
+                <ListingView title={ product.item.title } img= { product.item.images[0] } price={ formatter.format(product.item.price)} id={product.id} />
             </div>
         ))
         setPreviewComps(previewElements)
@@ -46,4 +43,4 @@ const Search = () => {
     )
 }
 
-export default Search
+export default Search;

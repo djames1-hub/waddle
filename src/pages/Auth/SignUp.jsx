@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./Auth.css";
 
-import {createUser} from "../../backend/client/auth";
+import { createUser } from "./../../services/firebase/users";
 
 function SignUp(){
     // create hooks to change form inputs

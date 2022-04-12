@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "./Auth.css";
-import { signIn } from "../../../backend/client/auth";
+import { signIn } from "./../../services/firebase/users";
 
 function SignIn(){
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { signOutUser } from '../../../backend/client/auth';
+import { signOutUser } from './../../services/firebase/users';
 import "./Settings.css"
 
 const Settings = () => {

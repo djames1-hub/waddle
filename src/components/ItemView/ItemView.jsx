@@ -1,12 +1,7 @@
 import React, {useState} from 'react';
-
-import Item from "../../../objects/item";
-import Listing from '../../../objects/listing';
-import Property from '../../../objects/property';
-
 import "./ItemView.css"
 
-import {getListing} from "../../../backend/client/firestore"
+import { getListing } from "./../../services/firebase/listings"
 
 function ViewItem(){
     

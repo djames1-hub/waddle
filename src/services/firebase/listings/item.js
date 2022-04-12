@@ -1,6 +1,6 @@
-import Property from "../property";
+import Property from "./property";
 
-export class Item{
+export class Item {
     //class that holds onto properties of the item
     title = "";
     price = 0.0;

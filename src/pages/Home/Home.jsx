@@ -1,13 +1,9 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import "./Home.css";
-import '../../common/searchbar/Searchbar.css';
-import Listing from '../../../objects/listing';
-import Property from '../../../objects/property';
-import Item from '../../../objects/item';
 
-import { getListings } from '../../../backend/client/firestore';
+import { getListings } from './../../services/firebase/listings';
 
-import PreviewProducts from '../PrevProduct/PreviewProducts';
+import { ListingView } from '../../components';
 
 const Home = () => {
 
@@ -18,9 +14,9 @@ const Home = () => {
         
         let previewElements = <></>;
         if (products) {
-            let previewElements = products.map((product) => (
+            previewElements = products.map((product) => (
             <div className="previews-container">
-                <PreviewProducts title={ product.item.title } img= { product.item.images[0] } price={ formatter.format(product.item.price)} id={product.id} />
+                <ListingView title={ product.item.title } imageURL= { product.item.images[0] } price={ formatter.format(product.item.price)} id={product.id} />
             </div>
             ))
             setPreviewComps(previewElements)

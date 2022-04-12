@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import { Searchbar } from '../../common';
-import ItemData from "./itemData.json";
+import Searchbar  from './../SearchBar';
 
 import './Navbar.css';
 
@@ -17,7 +16,7 @@ const Navbar = () => {
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
         
-         < Searchbar placeholder="Search for an item..." data={ItemData} />
+         < Searchbar placeholder="Search for an item..." data={""} />
 
     </section>
     )

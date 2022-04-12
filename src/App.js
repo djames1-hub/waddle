@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { Cart, NotFound, ItemView } from './components';
+import { Cart, NotFound, ItemView, Header } from './components';
 import { Home, Wishlist, Settings, ListingForm, SignUp, SignIn, Search } from './pages';
 import './App.css';
 
