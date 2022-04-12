@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import "./Home.css";
 import '../../common/searchbar/Searchbar.css';
 import Listing from '../../../objects/listing';
@@ -61,4 +61,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Home;

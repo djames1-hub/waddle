@@ -1,12 +1,33 @@
-//Get Firebase authentication object from firebase initializer
-import { auth, firestore, db } from "../server/init-firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-//Get firebase functions
 import { signOut,createUserWithEmailAndPassword , onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
-import User from "./../../objects/user";
-import CreditCard from "./../../objects/credit-card";
-import Address from "./../../objects/address"
+import { auth, db } from "./../firebase-config";
+import CreditCard from "./credit-card";
+import Address from "./address"
+
+export class User {
+    name = "";
+    username = "";
+    email = "";
+    creditCards = [];
+    listedItems = "";
+    address = new Address();
+    cart = [];
+    wishList = [];
+    purchasedItems = [];
+
+    constructor(name, username, email, creditCards, listedItems, address, cards, wishList, purchasedItems){
+        this.name = name;
+        this.email = email;
+        this.creditCards  = creditCards;
+        this.username = username;
+        this.listedItems = listedItems;
+        this.address = address;
+        this.creditCards = cards;
+        this.wishList = wishList;
+        this.purchasedItems = purchasedItems;
+    }
+}
 
 const userConverter = {
     toFirestore: (user) => {

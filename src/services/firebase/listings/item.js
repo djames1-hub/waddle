@@ -1,4 +1,4 @@
-import Property from "./property";
+import Property from "../property";
 
 export class Item{
     //class that holds onto properties of the item

@@ -4,7 +4,7 @@ import ItemData from "./itemData.json";
 
 import './Navbar.css';
 
-function Navbar () {
+const Navbar = () => {
 
     return (
     <section className="navbar">
