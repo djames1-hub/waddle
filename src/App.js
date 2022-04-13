@@ -1,18 +1,8 @@
 import React from 'react';
-import { Header } from './components/common';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Home from './components/pages/home/Home';
-import Wishlist from './components/pages/wishlist/Wishlist';
-import Cart from './components/pages/cart/Cart';
-import Settings from './components/pages/settings/Settings';
-import NewListing from './components/pages/newListing/NewListing';
-import NotFound from './components/pages/notFound/NotFound';
-import SignUp from "./components/pages/auth/SignUp";
-import Login from "./components/pages/auth/SignIn";
-import ViewItem from './components/pages/viewItem/ViewItem';
-import Search from './components/pages/search/Search';
-
+import { Cart, NotFound, ItemView, Header } from './components';
+import { Home, Wishlist, Settings, ListingForm, SignUp, SignIn, Search } from './pages';
 import './App.css';
 
 function App() {
@@ -22,17 +12,16 @@ function App() {
             {/* ROUTING */}
             <div>
             <Router>
-
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/wishlist" element={<Wishlist />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/settings" element={<Settings />} />
-                    <Route path="/new-listing" element={<NewListing />} />
+                    <Route path="/new-listing" element={<ListingForm />} />
                     <Route path="/not-found" element={ <NotFound />} />
                     <Route path="/sign-up" element={ <SignUp />} />
-                    <Route path="/login" element={ <Login />} />
-                    <Route path="/view-item/*" element={ <ViewItem />} />
+                    <Route path="/login" element={ <SignIn />} />
+                    <Route path="/view-item/*" element={ <ItemView />} />
                     <Route path="/search/*" element={ <Search />} />
                     <Route path="/*" element={ <NotFound />} />
                 </Routes>
