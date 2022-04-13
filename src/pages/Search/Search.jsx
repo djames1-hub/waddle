@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import './Search.css';
 import { ListingView } from './../../components'
@@ -18,18 +18,23 @@ const Search = () => {
     })
 
     var previewElements = <div></div>;
-
-    (async function() {
+    async function getItems() {
         let products = await getListings(searchParam);
-        console.log(products);
+        console.log("products");
         previewElements = products.map((product) => (
             <div className="previews-container">
                 <ListingView title={ product.item.title } img= { product.item.images[0] } price={ formatter.format(product.item.price)} id={product.id} />
             </div>
         ))
         setPreviewComps(previewElements)
+    }
 
-    }());
+    useEffect(() => {
+        getItems()
+        .then(data =>
+          setPreviewComps(data)
+        );
+    }, [])
 
     return (
         <div className="home-container">

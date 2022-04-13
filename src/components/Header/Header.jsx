@@ -8,16 +8,6 @@ import { getCurrentUser, getUser } from '../../services/firebase/users/user';
 import { onAuthStateChanged } from 'firebase/auth';
 
 const Header = () => {
-
-    var welcomeTitle = "";
-
-    onAuthStateChanged(auth, async (user) => {
-        if(user) {
-            //let u = await getCurrentUser();
-            //welcomeTitle = "Welcome, " + u.username;
-        }
-    });
-
     return (
         <section className="header">
             <section className="header-top">
@@ -29,7 +19,15 @@ const Header = () => {
                 </section>
             </section>
             <section className="header-bottom">
-                <section className= "header-bottom__welcome">{"Welcome! "}</section>
+                <div className="cat-display">
+                    <div className="category-buttons">
+                        <button className="category-title">Books</button>
+                        <button className="category-title">Clothing</button>
+                        <button className="category-title">Furniture</button>
+                        <button className="category-title">Electronics</button>
+                        <button className="category-title">Sports&nbsp;Gear</button>
+                    </div>
+                </div>            
             </section>
         </section>
     )
