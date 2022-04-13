@@ -9,8 +9,9 @@ export class Item {
     keywords = [];
     images = [];
     physicalProperties = new Property(0, 0, 0, 0);
+    properties = {};
 
-    constructor(title, price, description, category, keywords, images, physicalProperties){
+    constructor(title, price, description, category, keywords, images, physicalProperties, properties){
         this.title = title;
         this.price = price;
         this.description = description;
@@ -18,6 +19,7 @@ export class Item {
         this.keywords = keywords;
         this.images = images;
         this.physicalProperties = physicalProperties;
+        this.prroperties = properties;
     }
 }
 

@@ -7,6 +7,7 @@ import './ListingForm.css';
 import ItemPropertiesForm from './ItemPropertiesForm';
 
 
+
 const boxCategories = ["books", "clothing", "furniture", "electronics", "sports gear"];
 
 const ListingForm = () => {
@@ -16,18 +17,8 @@ const ListingForm = () => {
     onAuthStateChanged(auth, async (user) => {
         if(user) {
             userID = user.uid;
-        }else{
-            window.location.href = "/login";
         } 
     });
-    
-
-    const checkBoxes = boxCategories.map(category => (
-        <div>
-            <input type="checkbox" name="category" className="inputCheckbox" id={category} value={category} onChange={() => checkCategory(category)}/>
-            <label >{category} </label>
-        </div>
-    ));
 
     const checkCategory = (category) => {
         if(categories.has(category)){
@@ -45,7 +36,7 @@ const ListingForm = () => {
         if(validate === ""){
             //createNewItem function
             var image = document.getElementById("imageUpload").files[0]
-            createListing(new Listing("", userID, "", new Date(), 1, false, 0.0, "", new Item(itemName, price, description, "", keyWords, [], properties)), image);
+            createListing(new Listing("", userID, "", new Date(), 1, false, 0.0, "", new Item(itemName, price, description, "", keyWords, [], new Property(0, 0, 0, 0)), properties), image);
         }
         else{
 

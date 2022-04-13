@@ -17,7 +17,7 @@ function Home() {
         if (products) {
             previewElements = products.map((product) => (
             <div className="previews-container">
-                <ListingView title={ product.item.title } imageURL= { product.item.images[0] } price={ formatter.format(product.item.price)} id={product.id} />
+                <ListingView title={ product.item.title } imageURL= { product.item.images[0] } price={ formatter.format(product.item.price)} id={product.id} properties={product.properties} />
             </div>
             ))
             setPreviewComps(previewElements)

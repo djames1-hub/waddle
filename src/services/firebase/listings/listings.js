@@ -55,7 +55,8 @@ const listingConverter = {
                          width: listing.item.physicalProperties.width,
                          depth: listing.item.physicalProperties.depth,
                          weight: listing.item.physicalProperties.weight,
-                    }
+                    },
+                    properties: listing.properties
                 }
     
             }
@@ -78,7 +79,8 @@ const listingConverter = {
                 data.item.category,
                 data.item.keywords,
                 data.item.images,
-                new Property(data.item.height, data.item.width, data.item.depth, data.item.weight)
+                new Property(data.item.height, data.item.width, data.item.depth, data.item.weight),
+                data.item.properties
             )
         );
     }
