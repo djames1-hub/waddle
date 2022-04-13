@@ -25,6 +25,10 @@
     font-size: 1.5vh;
 }
 
+.sub-button:hover{
+    background-color: rgb(150, 208, 228);
+}
+
 .text-input{
     border-radius: 1vh;
     width: 80%;

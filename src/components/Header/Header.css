@@ -28,6 +28,13 @@
   font-family: RobotoRegular;
   font-size: 70px;
   margin-left: 20px;
+  border: 0.35vh solid transparent;
+  border-radius: 1vh;
+}
+
+.header-logo:hover{
+  border: 0.35vh solid lightblue;
+  border-radius: 1vh;
 }
 
 .header-logo:hover{
