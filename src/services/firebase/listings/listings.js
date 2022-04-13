@@ -3,7 +3,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
 
 import { auth, db, storage } from "./../firebase-config";
-import Property from './property';
+import { Property} from './property';
 import Item from './item';
 import Address from "../users/address";
 
