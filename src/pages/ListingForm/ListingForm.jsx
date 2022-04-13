@@ -7,7 +7,7 @@ import { createListing, Listing, Item, Property } from './../../services/firebas
 
 
 
-const boxCategories = ["books", "clothing", "furniture", "electronics", "sports gear", "other"]
+const boxCategories = ["books", "clothing", "furniture", "electronics", "sports gear"];
 
 const ListingForm = () => {
 
@@ -17,7 +17,7 @@ const ListingForm = () => {
         if(user) {
             userID = user.uid;
         } 
-    })
+    });
     
 
     const checkBoxes = boxCategories.map(category => (

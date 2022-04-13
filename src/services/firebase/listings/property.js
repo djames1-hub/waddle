@@ -1,7 +1,7 @@
 /*
 Property holds onto the pysical properties of an item
 */
-export class Property{
+class Property {
     height = 0.0;
     width = 0.0;
     depth = 0.0;
@@ -15,5 +15,6 @@ export class Property{
     }
 
 }
+
 
 export default Property;
