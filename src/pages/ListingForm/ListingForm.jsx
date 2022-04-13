@@ -7,7 +7,6 @@ import './ListingForm.css';
 import ItemPropertiesForm from './ItemPropertiesForm';
 
 
-
 const boxCategories = ["books", "clothing", "furniture", "electronics", "sports gear"];
 
 const ListingForm = () => {
@@ -17,6 +16,8 @@ const ListingForm = () => {
     onAuthStateChanged(auth, async (user) => {
         if(user) {
             userID = user.uid;
+        }else{
+            window.location.href = "/login";
         } 
     });
     

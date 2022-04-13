@@ -116,13 +116,13 @@ const createUser = (name, username, email, password) => {
  * Gets the current user signed in. If no user is signed in, returns null.
  * @returns {Promimse<string>} User?
  */
-const getCurrentUser = () => {
+const getCurrentUser = async () => {
     return new Promise((resolve, reject) => {
         onAuthStateChanged(auth, async (user) => {
             if(user){
                 //TODO: Get user data from firestore and create user object
                 const userRef = doc(db, "users", user.uid).withConverter(userConverter);
-                const doc = await getDoc(userRef)
+                const doc = await getDoc(userRef);
                 if (doc.exists) {
                     let user = doc.data();
                     resolve(user);
@@ -131,11 +131,29 @@ const getCurrentUser = () => {
                 }
                 
             } else {
-                reject(new Error('User not signed in!'));
+                resolve(null);
             }
         })
     })
 }
+/**
+ * Gets user data corresponding to a specifc id from firebase. Then converts it to a user object.
+ * @param {*} id 
+ * @returns User of id as a user object
+ */
+const getUser = async (id) => {
+    return new Promise(async (resolve, reject) => {
+        const userRef = doc(db, "users", id).withConverter(userConverter);
+        const doc = await getDoc(userRef)
+        if (doc.exists) {
+            let user = doc.data();
+            resolve(user);
+        } else {
+            reject(new Error('User does not exist!'));
+        }
+    })
+}
+
 /**
  * Grabs the firebase ID for the current user
  * @returns {Promimse<string>} String
@@ -184,4 +202,4 @@ function signOutUser(){
     });
 }
 
-export {signIn, createUser, getCurrentUser, getUserID, signOutUser};
+export {signIn, createUser, getCurrentUser, getUserID, signOutUser, getUser};
