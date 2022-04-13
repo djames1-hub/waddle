@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 
 import { auth } from './../../services/firebase/firebase-config';
-import './ListingForm.css';
 import { createListing, Listing, Item, Property } from './../../services/firebase/listings';
+import './ListingForm.css';
+import ItemPropertiesForm from './ItemPropertiesForm';
 
 
 
@@ -38,11 +39,12 @@ const ListingForm = () => {
     const submitItem = () => {
         //TODO: display error message, add create new item function once Dylan's finished up
         let cats = Array.from( categories.keys());
+        console.log(properties);
         let validate = validateFields(itemName,cats,price,keyWords,description,delivery,photo);
         if(validate === ""){
             //createNewItem function
             var image = document.getElementById("imageUpload").files[0]
-            createListing(new Listing("", userID, "", new Date(), 1, false, 0.0, "", new Item(itemName, price, description, "", keyWords, [], new Property(0, 0, 0, 0))), image);
+            createListing(new Listing("", userID, "", new Date(), 1, false, 0.0, "", new Item(itemName, price, description, "", keyWords, [], properties)), image);
         }
         else{
 
@@ -68,6 +70,9 @@ const ListingForm = () => {
         }
     }
 
+    const [properties, setProperties] = useState({});
+
+
     return (
         <div className="background">
             <body>
@@ -80,9 +85,9 @@ const ListingForm = () => {
                     </div>
                 </form>
                 <form >
-                    <div  className="box" >
+                    <div className="box" >
                         <b>Category:</b>
-                        {checkBoxes}
+                        {<ItemPropertiesForm key={setProperties.toString()} onChange={(properties) => { setProperties(properties)}}/>}
                     </div>
                 </form>
                 <form className="box">
