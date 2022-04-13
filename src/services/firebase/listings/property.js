@@ -5,7 +5,7 @@ class Property {
     height = 0.0;
     width = 0.0;
     depth = 0.0;
-    weight = 0.0;
+    weight = 0.0; 
 
     constructor(height, width, depth, weight){
         this.height = height;
@@ -16,5 +16,40 @@ class Property {
 
 }
 
+const propertyFactory = (category) => {
+    if (category === "books") {
+        return {
+            author: "",
+            isbn: "",
+            edition: "",
+            isDigital: "",
+            condition: "",
+        }
+    } else if (category === "clothes") {
+        return {
+            size: "",
+            condition: ""
+        }
+    } else if (category === "clothes") {
+        return {
+            width: "",
+            length: "",
+            height: "",
+            condition: ""
+        }
+    } else if (category === "electronics") {
+        return {
+            model: "",
+            condition: ""
+        }
+    } else if  (category === "sports gear") {
+        return {
+            size: "",
+            model: "",
+            condition: ""
+        }
+    }
+}
 
-export default Property;
+
+export { Property, propertyFactory};
