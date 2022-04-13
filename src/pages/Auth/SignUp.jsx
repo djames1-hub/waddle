@@ -44,7 +44,7 @@ function SignUp(){
         <input name="email" type="text" className="text-input" placeholder="Email" onChange={event => setEmail(event.target.value)} />
         <input name="username" type="text" className="text-input" placeholder="Username" onChange={event => setUsername(event.target.value)} />
         <input name="password" type="text" className="text-input" placeholder="Password" onChange={event => setPassword(event.target.value)} />
-        <input name="submit" className="submit-button" type="button" value="Submit" onClick={() => createAccount()}/>
+        <input name="submit" className="sub-button" type="button" value="Submit" onClick={() => createAccount()}/>
         <h3 id="error-label" >{error}</h3>
         <a href="/login" className="switch-page">Login</a>
     </div>
