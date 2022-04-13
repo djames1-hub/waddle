@@ -3,7 +3,7 @@ import "./ItemView.css"
 
 import { getListing } from "./../../services/firebase/listings"
 
-function ViewItem(){
+const ViewItem = () => {
     
     const [title, setTitle] = useState("");
     const [image, setImage] = useState("");
@@ -12,11 +12,10 @@ function ViewItem(){
 
     var id = window.location.href.slice(-20);
     console.log(id);
-    var listing = getListing(id);
-    var item = listing.item;
 
     (async function() {
         let listing = await getListing(id);
+        console.log(listing);
         let item = listing.item;
         setTitle(item.title);
         setDescription(item.description);

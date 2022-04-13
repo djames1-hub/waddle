@@ -15,7 +15,7 @@ class Listing{
     quantity = 0;
     isPurchased = false;
     shippingCost = 0.0;
-    item = new Item("", 0, "", "", [], [], new Property(0, 0, 0, 0));
+    item = new Item("", 0, "", "", [], [], new Property(0, 0, 0, 0), {});
     shippingFrom = new Address("", "", 0, 0, "", "");
 
     constructor(id, seller, buyer, dateBought, quantity, isPurchased, shippingCost, shippingFrom, item){
@@ -56,7 +56,7 @@ const listingConverter = {
                          depth: listing.item.physicalProperties.depth,
                          weight: listing.item.physicalProperties.weight,
                     },
-                    properties: listing.properties
+                    properties: listing.item.properties
                 }
     
             }

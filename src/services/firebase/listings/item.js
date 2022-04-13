@@ -19,7 +19,7 @@ export class Item {
         this.keywords = keywords;
         this.images = images;
         this.physicalProperties = physicalProperties;
-        this.prroperties = properties;
+        this.properties = properties;
     }
 }
 
