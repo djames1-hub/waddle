@@ -3,8 +3,9 @@ import './ListingView.css';
 
 
 // TODO: add getListing to get all listing information
-const ListingView = ({ listingId, title, imageURL, price }) => {
-    return (<a className="link" href={"/view-item/" + listingId}>
+const ListingView = ({ id, title, imageURL, price }) => {
+    console.log(id);
+    return (<a className="link" href={"/view-item/" + id}>
             <div className='preview-container'>
                 <h2 className='preview-title'>{ title }</h2>
                 <img className='preview-image' src={imageURL}/>
