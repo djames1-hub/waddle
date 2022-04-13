@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect } from 'react';
 import "./ItemView.css"
 
-import { getListing } from "./../../services/firebase/listings"
+import { getListing } from "./../../services/firebase/listings";
 
 const ViewItem = () => {
     
@@ -10,18 +10,20 @@ const ViewItem = () => {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(0);
 
-    var id = window.location.href.slice(-20);
-    console.log(id);
 
-    (async function() {
-        let listing = await getListing(id);
-        console.log(listing);
-        let item = listing.item;
-        setTitle(item.title);
-        setDescription(item.description);
-        setImage(item.images[0]);
-        setPrice(item.price);
-    }());
+    useEffect(() => {
+        const fetchData = async () => {
+            let id = window.location.href.slice(-20);
+            let listing = await getListing(id);
+            console.log(listing);
+            let item = listing.item;
+            setTitle(item.title);
+            setDescription(item.description);
+            setImage(item.images[0]);
+            setPrice(item.price);
+        }
+        fetchData();
+    }, []);
 
     var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
