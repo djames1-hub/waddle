@@ -4,11 +4,15 @@ import "./Home.css";
 import { getListings } from './../../services/firebase/listings';
 
 import { ListingView } from '../../components';
+import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
 
 function Home() {
 
     //Hook to get items
     const [previewComps, setPreviewComps] = useState(<div></div>);
+
+    const user = useFirebaseAuth();
+    console.log(user);
 
     async function getItems() {
         let products = await getListings("");

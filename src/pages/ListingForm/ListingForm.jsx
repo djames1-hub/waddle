@@ -11,21 +11,11 @@ import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
 
 
 
-const boxCategories = ["books", "clothing", "furniture", "electronics", "sports gear"];
+const categories = ["books", "clothing", "furniture", "electronics", "sports gear"];
 
 const ListingForm = () => {
 
-    let categories = new Map();
     const user = useFirebaseAuth();
-    const userId = user.uid;
-
-    const checkCategory = (category) => {
-        if(categories.has(category)){
-            categories.delete(category);
-        }else{
-            categories.set(category, "MEOW");
-        }
-    }
 
     const submitItem = () => {
         //TODO: display error message, add create new item function once Dylan's finished up
@@ -37,7 +27,7 @@ const ListingForm = () => {
             let image = document.getElementById("imageUpload").files[0];
             let listing = {
                 listingId: uuidv4(),
-                seller: userId,
+                seller: "",
                 buyer: "",
                 dateBought: new Timestamp.fromDate(new Date()),
                 quantity: 1,
@@ -74,8 +64,11 @@ const ListingForm = () => {
     const [delivery, setDelivery] = useState("");
     const [description, setDescription] = useState("");
     const [photo, setPhoto] = useState("");
-    const cats = Array.from( categories.keys());
+    const [category, setCategory] = useState("");
 
+    const handleCategoryChange = (category) => {
+        setCategory(category);
+    }
 
     const validateFields = (itemName,cats,price,keyWords,delivery,description,photo) => {
         if(itemName.length === 0){
@@ -88,7 +81,9 @@ const ListingForm = () => {
 
     const [properties, setProperties] = useState({});
 
-
+    const handlePropertiesChange = (properties) => {
+        setProperties(properties);
+    };
     return (
         <div className="background">
             <body>
@@ -103,7 +98,7 @@ const ListingForm = () => {
                 <form >
                     <div className="box" >
                         <b>Category:</b>
-                        {<ItemPropertiesForm key={setProperties.toString()} onChange={(properties) => { setProperties(properties)}}/>}
+                        {<ItemPropertiesForm key={setProperties.toString()} onPropertiesChange={handlePropertiesChange} onCategoryChange={handleCategoryChange}/>}
                     </div>
                 </form>
                 <form className="box">

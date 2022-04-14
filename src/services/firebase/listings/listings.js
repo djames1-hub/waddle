@@ -75,4 +75,4 @@ const getAllListings = () => {
         });
 }
 
-export {createListing, getListings, getListing, getAllListings, Listing}
+export {createListing, getListings, getListing, getAllListings}

@@ -7,7 +7,8 @@ const useFirebaseAuth = () => {
     if (context === undefined) {
         throw new Error("useFirebaseAuth must be used within a FirebaseAuthProvider");
     }
-    return context.user;
+
+    return (context.user) ? context.user : {};
 };
 
 export { useFirebaseAuth };
