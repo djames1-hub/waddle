@@ -12,11 +12,10 @@ function Home() {
 
     async function getItems() {
         let products = await getListings("");
-        
         let previewElements = <></>;
         if (products) {
             previewElements = products.map((product) => (
-            <div className="previews-container">
+            <div key={product.item.title + product.id} className="previews-container">
                 <ListingView title={ product.item.title } imageURL= { product.item.images[0] } price={ formatter.format(product.item.price)} id={product.id} />
             </div>
             ))

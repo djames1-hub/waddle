@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
+import { v4 as uuidv4 } from 'uuid';
 
 import { auth } from './../../services/firebase/firebase-config';
 import { createListing, Listing, Item, Property } from './../../services/firebase/listings';
 import './ListingForm.css';
 import ItemPropertiesForm from './ItemPropertiesForm';
+import { Timestamp } from 'firebase/firestore';
+import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
 
 
 
@@ -13,12 +16,8 @@ const boxCategories = ["books", "clothing", "furniture", "electronics", "sports 
 const ListingForm = () => {
 
     let categories = new Map();
-    let userID = "";
-    onAuthStateChanged(auth, async (user) => {
-        if(user) {
-            userID = user.uid;
-        } 
-    });
+    const user = useFirebaseAuth();
+    const userId = user.uid;
 
     const checkCategory = (category) => {
         if(categories.has(category)){
@@ -35,8 +34,33 @@ const ListingForm = () => {
         let validate = validateFields(itemName,cats,price,keyWords,description,delivery,photo);
         if(validate === ""){
             //createNewItem function
-            var image = document.getElementById("imageUpload").files[0]
-            createListing(new Listing("", userID, "", new Date(), 1, false, 0.0, "", new Item(itemName, price, description, "", keyWords, [], new Property(0, 0, 0, 0)), properties), image);
+            let image = document.getElementById("imageUpload").files[0];
+            let listing = {
+                listingId: uuidv4(),
+                seller: userId,
+                buyer: "",
+                dateBought: new Timestamp.fromDate(new Date()),
+                quantity: 1,
+                isPurchased: false,
+                shippingCost: 0.0,
+                item: {
+                    title: "",
+                    price,
+                    description,
+                    category: "",
+                    keyWords,
+                    images: [],
+                    properties
+                },
+                shippingFrom: {
+                    street: "",
+                    city: "",
+                    apartmentNumber: 0,
+                    houseNumber: 0,
+                    country: ""
+                },
+            }
+            createListing(listing, image);
         }
         else{
 
