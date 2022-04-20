@@ -1,38 +1,46 @@
 import React, { useState } from 'react';
+import Form from 'react-bootstrap/Form';
 import './ItemPropertiesForm.css';
 
 import { BookPropertiesForm, ClothingPropertiesForm, ElectronicsPropertiesForm, FurniturePropertiesForm, SportsGearPropertiesForm } from './Forms';
 
-const ItemPropertiesForm = ({ onPropertiesChange, onCategoryChange } ) => {
+const ItemPropertiesForm = ({ onCategoryChange, register } ) => {
 
-    const [propertiesForm,setPropertiesForm] = useState(); 
-
-    const itemCategories = ["books", "clothing", "furniture", "electronics", "sports gear"];
+    const [propertiesForm,setPropertiesForm] = useState(<></>); 
 
     const choseCategoryForm = (category) => {
         if (category === "books") {
-            setPropertiesForm(<BookPropertiesForm key={"books"} onChange={onPropertiesChange}/>);
+            setPropertiesForm(<BookPropertiesForm register={register} />);
         } else if (category === "clothing") {
-            setPropertiesForm(<ClothingPropertiesForm key={"clothing"} onChange={onPropertiesChange}/>);
+            setPropertiesForm(<ClothingPropertiesForm register={register} />);
         } else if (category === "furniture") {
-            setPropertiesForm(<FurniturePropertiesForm key={"furniture"} onChange={onPropertiesChange}/>)
+            setPropertiesForm(<FurniturePropertiesForm register={register} />)
         } else if (category === "electronics") {
-            setPropertiesForm(<ElectronicsPropertiesForm key={"electronics"} onChange={onPropertiesChange}/>)
-        } else if (category === "sports gear") {
-            setPropertiesForm(<SportsGearPropertiesForm key={"sports gear"} onChange={onPropertiesChange}/>)
+            setPropertiesForm(<ElectronicsPropertiesForm register={register}/>)
+        } else if (category === "sports-gear") {
+            setPropertiesForm(<SportsGearPropertiesForm register={register} />)
         }
 
         onCategoryChange(category);
     };
 
-    const radios = itemCategories.map(category => (
-        <div>
-            <input type="radio" name="category" className="inputCheckbox" id={category} value={category} onChange={(e) => choseCategoryForm(e.target.value)}/>
-            <label >{category} </label>
-        </div>
-    ));
-
-    return [...radios, propertiesForm];
+    return (
+        <>
+            <Form.Group className="mb-3 mx-5" controlId="categories">
+                <Form.Label>Categories</Form.Label>
+                <Form.Select onChange={(e) => choseCategoryForm(e.target.value)}>
+                    <option>Choose category</option>
+                    <option value="books">Books</option>
+                    <option value="clothing">Clothing</option>
+                    <option value="furniture">Furniture</option>
+                    <option value="electronics">Electronics</option>
+                    <option value="sports-gear">Sports Gear</option>
+                </Form.Select>
+            </Form.Group>
+            {propertiesForm}
+        </>
+        
+    );
 };
 
 export default ItemPropertiesForm;

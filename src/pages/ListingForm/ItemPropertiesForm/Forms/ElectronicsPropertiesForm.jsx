@@ -1,26 +1,27 @@
-import React, { useState } from "react";
-import { createTextInput } from "./util"
+import React from "react";
+import Form from "react-bootstrap/Form";
 
-export const ElectronicsPropertiesForm = ({ onChange: onSet }) => {
 
-    const [condition, setCondition] = useState("");
-    const [model, setModel] = useState("");
+export const ElectronicsPropertiesForm = ({ register }) => {
 
-    const inputs = [
-        {label: "Model", name: "model", setter: setModel}
-    ];
     return (
-        <div>
-            <hr />
-            <div>{inputs.map(e => createTextInput(e.label, e.name, e.setter))}</div>
-            <div>
-                <label><b>Condition:</b></label>
-                <input type="radio" name="condition" className="inputCheckbox" id="condition" value="new" onChange={event => { setCondition(event.target.value);}} />
-                <label >New</label>
-                <input type="radio" name="condition" className="inputCheckbox" id="condition" value="used" onChange={event => { setCondition(event.target.value);}}/>
-                <label >Used</label>
-            </div>
-            <div><button className="submit-button" type="button" onClick={() => onSet({ model, condition })}>Save</button></div>
-        </div>
+        <>
+            <Form.Group className="mb-3 mx-5 mt-5">
+                <Form.Label>Model</Form.Label>
+                <Form.Control type="text" placeholder="Enter model name" {...register("itemData.props.model")}/>
+            </Form.Group>
+            <Form.Group>
+                <Form.Group className="mb-3 mx-5 mt-5" controlId="condition">
+                    <Form.Label>Condition</Form.Label>
+                    <Form.Select {...register("itemData.props.condition")}>
+                        <option>Choose a condition</option>
+                        <option value="new">New</option>
+                        <option value="openBox">Open box</option>
+                        <option value="used">Used</option>
+                        <option value="nw">Not Working</option>
+                    </Form.Select>
+                </Form.Group>
+            </Form.Group>
+        </>
     )
 }

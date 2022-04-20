@@ -1,31 +1,31 @@
-import React, { useState } from "react";
-import { createTextInput } from "./util";
+import React from "react";
+import Form from "react-bootstrap/Form";
 
-export const FurniturePropertiesForm = ({ onChange: onSet}) => {
+export const FurniturePropertiesForm = ({ register }) => {
 
-    const [width, setWidth] = useState("");
-    const [length, setLength] = useState("");
-    const [height, setHeight] = useState("");
-    const [condition, setCondition ] = useState("");
-
-    const inputs = [
-        {label: "Width", name: "width", setter: setWidth},
-        {label: "Length", name: "length", setter: setLength},
-        {label: "Height", name: "height", setter: setHeight}
-    ];
+    
     return (
-        <div>
-            <hr />
-            <div>{inputs.map(e => createTextInput(e.label, e.name, e.setter))}</div>
-            <div>
-                <label><b>Condition:</b></label>
-                <input type="radio" name="condition" className="inputCheckbox" id="condition" value="new"  onChange={event => { setCondition(event.target.value);}}/>
-                <label >New</label>
-                <input type="radio" name="condition" className="inputCheckbox" id="condition" value="used"  onChange={event => { setCondition(event.target.value);}}/>
-                <label >Used</label>
-            </div> 
-        
-        <div><button className="submit-button" type="button" onClick={() => onSet({ width, length, height, condition })}>Save</button></div>
-        </div>
+        <>
+            <Form.Group className="mb-3 mx-5 mt-5" controlId="length">
+                <Form.Label>Length</Form.Label>
+                <Form.Control type="number" placeholder="Enter length" {...register("itemData.props.length")} />
+            </Form.Group>
+            <Form.Group className="mb-3 mx-5 mt-5" controlId="width">
+                <Form.Label>Width</Form.Label>
+                <Form.Control type="number" placeholder="Enter width" {...register("itemData.props.width")} />
+            </Form.Group>
+            <Form.Group className="mb-3 mx-5 mt-5" controlId="height">
+                <Form.Label>Height</Form.Label>
+                <Form.Control type="number" placeholder="Enter height" {...register("itemData.props.height")} />
+            </Form.Group>
+            <Form.Group className="mb-3 mx-5 mt-5" controlId="condition">
+                <Form.Label>Condition</Form.Label>
+                <Form.Select {...register("itemData.props.condition")}>
+                    <option>Choose a condition</option>
+                    <option value="new">New Condition</option>
+                    <option value="used">Used Condition</option>
+                </Form.Select>
+            </Form.Group>
+        </>
     );
 }

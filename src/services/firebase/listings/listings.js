@@ -1,19 +1,19 @@
-import { doc, collection, getDoc, getDocs, addDoc, query, orderBy,startAt, endAt, Timestamp } from "firebase/firestore";
+import { doc, collection, getDoc, getDocs, setDoc, query, orderBy,startAt, endAt, Timestamp } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
 
 import { auth, db, storage } from "./../firebase-config";
 
-const createListing = (listing, image) => {
+const createListing = (listing) => {
     return new Promise((resolve, reject) => {
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                const storageRef = ref(storage, `images/${image.name}`);
-                uploadBytes(storageRef, image).then(snapshot => {
+                const storageRef = ref(storage, `images/${listing.photo[0].name}`);
+                uploadBytes(storageRef, listing.photo[0]).then(snapshot => {
                     getDownloadURL(snapshot.ref).then(async downloadURL => {
-                        listing.item.images = [downloadURL];
+                        listing.photo = [downloadURL];
                         try {
-                            await addDoc(collection(db, "listings"), listing);
+                            await setDoc(doc(collection(db, "listings"), listing.listingId), listing);
                         } catch(error) {
                             reject(error);
                         }          

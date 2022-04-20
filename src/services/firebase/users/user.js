@@ -122,9 +122,9 @@ const getCurrentUser = async () => {
             if(user){
                 //TODO: Get user data from firestore and create user object
                 const userRef = doc(db, "users", user.uid).withConverter(userConverter);
-                const doc = await getDoc(userRef);
-                if (doc.exists) {
-                    let user = doc.data();
+                const docSnap = await getDoc(userRef);
+                if (docSnap.exists) {
+                    let user = docSnap.data();
                     resolve(user);
                 } else {
                     reject(new Error('User does not exist!'));

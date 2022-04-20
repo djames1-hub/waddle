@@ -1,36 +1,35 @@
-import React, { useState } from "react";
-import { createTextInput } from "./util";
-export const SportsGearPropertiesForm = ({ onChange: onSet }) => {
-    const [size, setSize] = useState("");
-    const [condition, setCondition] = useState("");
-    const [model, setModel] = useState("");
-
-    const inputs = [
-        {label: "Model", name: "model", setter: setModel}
-    ];
+import React from "react";
+import Form from 'react-bootstrap/Form';
+export const SportsGearPropertiesForm = ({ register }) => {
+    
     return (
-        <div>
-            <hr />
-            <div>{inputs.map(e => createTextInput(e.label, e.name, e.setter))}</div>
-            <div>
-                <label><b>Size:</b></label>
-                <input type="radio" name="small" className="inputCheckbox" id="small" value="small" onChange={event => { setSize(event.target.value);}} />
-                <label>Small</label>
-                <input type="radio" name="medium" className="inputCheckbox" id="medium" value="medium" onChange={event => { setSize(event.target.value);}}/>
-                <label>Medium</label>
-                <input type="radio" name="large" className="inputCheckbox" id="large" value="large" onChange={event => { setSize(event.target.value);}}/>
-                <label>Large</label>
-                <input type="radio" name="xl" className="inputCheckbox" id="xl" value="xl" onChange={event => { setSize(event.target.value);}}/>
-                <label>Extra Large</label>
-            </div>
-            <div>
-                <label><b>Condition:</b></label>
-                <input type="radio" name="condition" className="inputCheckbox" id="condition" value="new" onChange={event => { setCondition(event.target.value);}}/>
-                <label >New</label>
-                <input type="radio" name="condition" className="inputCheckbox" id="condition" value="used" onChange={event => { setCondition(event.target.value);}}/>
-                <label >Used</label>
-            </div> 
-            <div><button className="submit-button" type="button" onClick={() => onSet({ model, size, condition })}>Save</button></div>
-        </div>
+        <>
+            <Form.Group className="mb-3 mx-5 mt-5" controlId="model">
+                <Form.Label>Model</Form.Label>
+                <Form.Control type="text" placeholder="Enter model name" {...register("itemData.props.model")}/>
+            </Form.Group>
+            <Form.Group className="mb-3 mx-5 mt-5" controlId="size">
+                <Form.Label>Size</Form.Label>
+                <Form.Select {...register("itemData.props.size")}>
+                    <option>Choose size</option>
+                    <option value="xs">Extra Small</option>
+                    <option value="s">Small</option>
+                    <option value="m">Medium</option>
+                    <option value="l">Large</option>
+                    <option value="xl">Extra Large</option>
+                </Form.Select>
+            </Form.Group>
+            <Form.Group className="mb-3 mx-5 mt-5" controlId="itemData.props.condition">
+                <Form.Label>Condition</Form.Label>
+                <Form.Select {...register("condition")}>
+                    <option>Choose condition</option>
+                    <option value="nwt">New With Tags (NWT)</option>
+                    <option value="euc">Excellent Used Condition (EUC)</option>
+                    <option value="guc">Good Used Condition</option>
+                    <option value="vuc">Very Used Condition</option>
+                    <option value="pre-owned">Pre-owned</option>
+                </Form.Select>
+            </Form.Group>
+        </>
     );
 }

@@ -1,10 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { Cart, NotFound, ItemView, Header } from './components';
-import { Home, Wishlist, Settings, ListingForm, SignUp, SignIn, Search } from './pages';
+import { Cart, NotFound, Header } from './components';
+import { Home, Wishlist, Settings, ListingForm, SignUp, SignIn, Search, ItemView } from './pages';
 import './App.css';
 import { FirebaseAuthProvider } from './contexts';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     return (

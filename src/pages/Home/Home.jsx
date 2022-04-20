@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import "./Home.css";
 
-import { getListings } from './../../services/firebase/listings';
+import { getAllListings } from './../../services/firebase/listings';
 
 import { ListingView } from '../../components';
 import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
@@ -12,15 +12,15 @@ function Home() {
     const [previewComps, setPreviewComps] = useState(<div></div>);
 
     const user = useFirebaseAuth();
-    console.log(user);
 
     async function getItems() {
-        let products = await getListings("");
+        let products = await getAllListings();
         let previewElements = <></>;
+        console.log(products);
         if (products) {
             previewElements = products.map((product) => (
             <div key={product.item.title + product.id} className="previews-container">
-                <ListingView title={ product.item.title } imageURL= { product.item.images[0] } price={ formatter.format(product.item.price)} id={product.id} />
+                <ListingView title={ product.item.itemName } imageURL= { product.photo[0] } price={ formatter.format(product.price)} id={product.listingId} />
             </div>
             ))
             return previewElements;

@@ -4,6 +4,7 @@ import ListingForm from './ListingForm';
 import Search  from './Search';
 import Settings from './Settings';
 import Wishlist from './WishList';
+import ItemView from './ItemView';
 
 export {
     SignIn,
@@ -12,5 +13,6 @@ export {
     ListingForm,
     Search,
     Settings,
-    Wishlist
+    Wishlist,
+    ItemView
 }
