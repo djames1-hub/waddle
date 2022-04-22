@@ -1,0 +1,12 @@
+.full-width {
+    min-height: 100vh;
+}
+
+.spinner-size {
+    width: 6rem !important;
+    height: 6rem !important;
+}
+
+.spinner-color {
+    color: rgb(25, 184, 184)
+}

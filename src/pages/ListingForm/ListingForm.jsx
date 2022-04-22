@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import React, { useEffect, useState } from 'react';
+import ButtonGroup  from 'react-bootstrap/ButtonGroup';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import { useForm } from 'react-hook-form';
 import { Timestamp } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
@@ -8,16 +10,33 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { createListing } from './../../services/firebase/listings';
 // import './ListingForm.css';
-import ItemPropertiesForm from './ItemPropertiesForm';
+
 import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
+import { LoadingScreen } from '../../components';
+import SingleListingForm from './SingleListingForm';
+import BulkListingForm from './BulkListingForm';
 
 
 
 const ListingForm = () => {
 
-    const { id, address} = useFirebaseAuth();
+    const { id, address } = useFirebaseAuth();
+    const [form, setForm] = useState(<LoadingScreen />);
+    const { register, handleSubmit, reset } = useForm();
+    const [radioValue, setRadioValue] = useState(true);
 
-    const { register, handleSubmit } = useForm();
+    const handlers = { handleCategoryChange, submitListing, register, handleSubmit }
+
+    useEffect(() => {
+        if (id) {
+            setForm(<SingleListingForm { ...handlers }/>);
+        }
+    }, [id]);
+
+    useEffect(() => {
+        (radioValue === 1) ? setForm(<SingleListingForm { ...handlers }/>) : setForm(<BulkListingForm { ...handlers }/>);
+    }, [radioValue]);
+
 
     const submitListing = ({ listingData, itemData }) => {
   
@@ -31,6 +50,7 @@ const ListingForm = () => {
             shippingCost: 0.0,
             item: { itemId: uuidv4(), itemName: itemData.itemName, props: itemData.props },
             shippingFrom: {...address },
+            category,
             ...listingData
         };
         
@@ -44,32 +64,26 @@ const ListingForm = () => {
         setCategory(category);
     }
 
+    const handleChange = (r) => {
+        setRadioValue(r[1]);
+        reset({});
+    }
+
     return (
-        <Form onSubmit={handleSubmit(submitListing)} className="w-50 mx-auto">
-            <Form.Group className="mb-3 mx-5 mt-5" controlId="listingTitle">
-                <Form.Label>Listing title</Form.Label>
-                <Form.Control type="text" placeholder="Enter listing title" {...register("listingData.listingTitle")} />
-            </Form.Group>
-            <Form.Group className="mb-3 mx-5" controlId="itemName">
-                <Form.Label>Item Name</Form.Label>
-                <Form.Control type="text" placeholder="Enter item name" {...register("itemData.itemName")}/>
-            </Form.Group>
-            <Form.Group className="mb-3 mx-5" controlId="price">
-                <Form.Label>Price</Form.Label>
-                <Form.Control type="number" placeholder="Enter price" {...register("listingData.price")} />
-            </Form.Group>
-            <Form.Group className="mb-3 mx-5" controlId="description">
-                <Form.Label>Description</Form.Label>
-                <Form.Control as="textarea" rows={3} {...register("listingData.description")}/>
-            </Form.Group>
-            <Form.Group className="mb-3 mx-5" controlId="photo">
-                <Form.Label>Add Photo</Form.Label>
-                <Form.Control type="file" {...register("listingData.photo")} />
-            </Form.Group>
-            <ItemPropertiesForm onCategoryChange={handleCategoryChange} register={register} />
-            <Button className='mx-5' type='submit'>Submit</Button>
-        </Form>
-    )
+        <>
+            <ButtonToolbar className="w-50 mx-auto">
+                <ToggleButtonGroup  type="checkbox" value={radioValue} onChange={handleChange} className="mb-3 ms-5 mt-5">
+                    <ToggleButton id="tbg-btn-1" value={1}>
+                        Single Listing
+                    </ToggleButton>
+                    <ToggleButton id="tbg-btn-2" value={2}>
+                        Bulk Listing
+                    </ToggleButton>
+                </ToggleButtonGroup>
+            </ButtonToolbar>
+            {form}
+        </>
+    );
 }
 
 export default ListingForm;

@@ -32,7 +32,7 @@ const Header = () => {
                                 <Form.Group controlId='categoryDropdown'>
                                     <Form.Select>
                                         <option value="">Categories</option>
-                                        <option value="books"><Nav.Link href="/search/*">Books</Nav.Link></option>
+                                        <option value="books">Books</option>
                                         <option value="clothing">Clothing</option>
                                         <option value="furniture">Furniture</option>
                                         <option value="electronics">Electronics</option>
