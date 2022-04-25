@@ -52,3 +52,7 @@ button.category-title:hover{
     border: 0.35vh solid black;
     border-radius: 1vh;
 }
+
+.image-size {
+    height: 3rem;
+}

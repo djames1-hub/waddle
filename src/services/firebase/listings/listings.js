@@ -1,4 +1,4 @@
-import { doc, collection, getDoc, getDocs, setDoc, query, orderBy,startAt, endAt, Timestamp } from "firebase/firestore";
+import { doc, collection, getDoc, getDocs, setDoc, query, orderBy,startAt, endAt, Timestamp, startAfter, limit } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -64,15 +64,36 @@ const getListings = async (qStr) => {
 }
 
 
-const getAllListings = () => {
-    return new Promise(async (resolve, reject) => {
-                const listingSnap = await getDocs(collection(db, "listings"));
-                let listings = [];
-                listingSnap.forEach(doc => {
-                    listings.push(doc.data());
-                })
-                resolve(listings);
-        });
+const getAllListings = async () => {
+    
+    const listingSnap = await getDocs(collection(db, "listings"));
+    let listings = [];
+    listingSnap.forEach(doc => {
+        listings.push(doc.data());
+    });
+    return listings;
+      
 }
 
-export {createListing, getListings, getListing, getAllListings}
+const paginateItems = async (maxItemsPerPage) => {
+    try {
+        const listingSnap = await getDocs(collection(db, "listings"), limit(maxItemsPerPage));
+        let listings = [];
+        listingSnap.forEach(doc => {
+            listings.push(doc.data());
+        });
+        return listings;
+    } catch (error) {
+        return error;
+    }
+}
+
+const getNextPage = async (maxItemsPerPage, lastItem) => {
+    try {
+        return await getDocs(collection(db, "listing"), limit(maxItemsPerPage), startAfter(lastItem));
+    } catch (error) {
+        return error;
+    }
+} 
+
+export {createListing, getListings, getListing, getAllListings, paginateItems, getNextPage}

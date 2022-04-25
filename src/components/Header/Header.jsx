@@ -1,7 +1,9 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import './Header.css';
 
 import { Container, Row, Col } from 'react-bootstrap';
@@ -16,38 +18,33 @@ const Header = () => {
             <Container fluid>
                 <Navbar.Brand href="/">waddle</Navbar.Brand>
                 <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+                
                 <Navbar.Collapse>
                     <Nav className='me-auto'>
                         <Nav.Link href={user.id ? '/new-listing': '/login'}>Sell</Nav.Link>
-                        <Nav.Link href='/cart'>Cart</Nav.Link>
-                        <Nav.Link href='/wishlist'>Wishlist</Nav.Link>
+                        <Nav.Link href={user.id ? '/cart': '/login'}>Cart</Nav.Link>
+                        <Nav.Link href={user.id ? '/wish-list': '/login'}>Wishlist</Nav.Link>
                         <Nav.Link href='/sign-up'>Account</Nav.Link>
                         <Nav.Link href='/settings'>Settings</Nav.Link>
-                        
                     </Nav>
-                    <Form>
-                        <Container>
-                            <Row>
-                                <Col>
-                                <Form.Group controlId='categoryDropdown'>
-                                    <Form.Select>
-                                        <option value="">Categories</option>
-                                        <option value="books">Books</option>
-                                        <option value="clothing">Clothing</option>
-                                        <option value="furniture">Furniture</option>
-                                        <option value="electronics">Electronics</option>
-                                        <option value="sports-gear">Sports Gear</option>
-                                    </Form.Select>
-                                </Form.Group>
-                                </Col>
-                                <Col>
-                                <Form.Group controlId='searchbar'>
-                                    <Form.Control type='search'></Form.Control>
-                                </Form.Group>
-                                </Col>
-                            </Row>
-                        </Container>
+                    <Form className='d-flex justify-content-end'>          
+                        <Form.Group controlId='searchbar'>
+                            <Form.Control type='search'></Form.Control>
+                        </Form.Group>
+                        <Button>L</Button> 
                     </Form>
+                    <Nav>
+                        <NavDropdown title="Categories" id="category-nav-dropdown">
+                            <NavDropdown.Item>Books</NavDropdown.Item>
+                            <NavDropdown.Item>Clothing</NavDropdown.Item>
+                            <NavDropdown.Item>Furniture</NavDropdown.Item>
+                            <NavDropdown.Item>Electronics</NavDropdown.Item>
+                            <NavDropdown.Item>Sports Gear</NavDropdown.Item>
+                        </NavDropdown>
+                    </Nav>
+                    <Navbar.Text>{user.name ? `Welcome, ${user.name}` : "Sign In"}</Navbar.Text>
+                        
+                    
                 </Navbar.Collapse>
             </Container>
         </Navbar>
