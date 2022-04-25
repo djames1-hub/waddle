@@ -1,9 +1,6 @@
 # waddle
 <h2>Group 5 | SSW 322 Design Project: Exchange4Students</h2>
 
-#### Project hosted at
-##### https://finance-bot-cae6d.web.app/
-
 In order to start the code to view the project
 1. Create new folder
 2. Clone the repo into the new folder
