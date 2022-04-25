@@ -1,22 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useFirebaseAuth } from '../../hooks/';
+import getListings from "./../../services/firebase/listings/getListings";
 import "./Cart.css";
 
 const Cart = () => {
+
+    const [cartItems, setCartItems] = useState([]);
+    const { cart } = useFirebaseAuth();
+    
+    useEffect(() => {
+        const fetchListings = async () => {
+            const listings = await getListings(cart);
+            setCartItems(listings);
+        };
+        return fetchListings;
+    }, []);
+
     return (
-    <section className="background">
-
-        <div>
-            <h1><b>About pages goes here</b></h1>
-
-            <p>
-            Lorem Ipsum is simply dummy text ...
-            </p>
-
-        </div>
-
-
-    </section>
-    )
+        <>
+            {cartItems.map(items => true)}
+        </>
+    );
 }
 
 
