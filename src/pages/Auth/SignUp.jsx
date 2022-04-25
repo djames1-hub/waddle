@@ -7,8 +7,8 @@ import { createUser } from "./../../services/firebase/users";
 const SignUp = () => {
   const { register, handleSubmit } = useForm();
 
-  const onSubmit = ({ name, email, password }) => {
-    createUser(name, email, password).then((res)=>{
+  const onSubmit = ({ firstName, lastName, email, password }) => {
+    createUser(firstName, lastName, email, password).then((res)=>{
       // Account created successfully
       alert("Account Created Successfully!");
       window.location.href ="/";
@@ -24,9 +24,13 @@ const SignUp = () => {
         <Form.Label>Email</Form.Label>
         <Form.Control type="text" placeholder="Enter email..." {...register("email")} />
       </Form.Group>
-      <Form.Group className="mb-3 mx-5 mt-3" controlId="nameControl">
-        <Form.Label>Name</Form.Label>
-        <Form.Control type="text" placeholder="Enter name..." {...register("name")}/>
+      <Form.Group className="mb-3 mx-5 mt-3" controlId="firstNameControl">
+        <Form.Label>First Name</Form.Label>
+        <Form.Control type="text" placeholder="Enter first name..." {...register("firstName")}/>
+      </Form.Group>
+      <Form.Group className="mb-3 mx-5 mt-3" controlId="lastNameControl">
+        <Form.Label>Last Name</Form.Label>
+        <Form.Control type="text" placeholder="Enter last name..." {...register("lastName")}/>
       </Form.Group>
       <Form.Group className="mb-3 mx-5 mt-3" controlId="passwordControl">
         <Form.Label>Password</Form.Label>

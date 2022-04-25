@@ -1,11 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import Pagination from 'react-bootstrap/Pagination';
 import "./Home.css";
 
-import { getAllListings } from './../../services/firebase/listings';
-
-import { ListingView } from '../../components';
-import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
 import { paginateItems } from '../../services/firebase/listings/listings';
 import { Container } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image';

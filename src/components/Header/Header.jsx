@@ -42,7 +42,7 @@ const Header = () => {
                             <NavDropdown.Item>Sports Gear</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
-                    <Navbar.Text>{user.name ? `Welcome, ${user.name}` : "Sign In"}</Navbar.Text>
+                    <Navbar.Text>{user.firstName ? `Welcome, ${user.firstName}` : "Sign In"}</Navbar.Text>
                         
                     
                 </Navbar.Collapse>

@@ -13,7 +13,7 @@ import { auth, db } from "./../firebase-config";
  * @returns {Promise<Object>} user
  */ 
 
-const createUser = (name, username, email, password) => {
+const createUser = (firstName, lastName, email, password) => {
     return new Promise((resolve, reject) =>{
         createUserWithEmailAndPassword (auth, email, password).then(async (userCredential) => {
             //Signed in
@@ -22,9 +22,8 @@ const createUser = (name, username, email, password) => {
             //TODO: create new user in firestore with specific UID
             const userRef = doc(db, "users", uID)
             await setDoc(userRef, {
-                username,
-                name,
-                email,
+                firstName,
+                lastName,
                 cart: [],
                 listings: [],
                 purchaseHistory: [],
@@ -37,7 +36,6 @@ const createUser = (name, username, email, password) => {
                     apartmentNumber: 0,
                     country: "",
                     houseNumber: 0
-
                 }
             })
             resolve("");
