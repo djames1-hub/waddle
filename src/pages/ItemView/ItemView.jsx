@@ -6,6 +6,7 @@ import Card from 'react-bootstrap/Card';
 
 import "./ItemView.css";
 import { addItemToCart, getListing } from "../../services/firebase/listings";
+import Comments from '../../components/Comments/Comments';
 
 export const ItemView = () => {
 
@@ -44,24 +45,29 @@ export const ItemView = () => {
     };
 
     return (
-        <Card className="w-25">
-            <Container>
-                <Row>
-                    <Col>
-                        <Card.Img variant="bottom" src={image} />      
-                    </Col>
-                    <Col>
-                        <Card.Body>
-                            <Card.Title>{title}</Card.Title>
-                            <Card.Text>{itemName}</Card.Text>
-                        </Card.Body>
-                        <Card.Text>Price: {formatter.format(price)}</Card.Text>
-                        <Button onClick={handleAddItemToCart}>Add to Cart</Button>
-                        <Card.Text>{description}</Card.Text>
-                        { Object.entries(properties).map(entry => (<Card.Text key={entry.toString()}>{`${entry[0]}: ${entry[1]}`}</Card.Text>))}
-                    </Col>
-                </Row>
-            </Container>
-        </Card>
+        <div>
+            <Card className="w-30">
+                <Container>
+                    <Row>
+                        <Col>
+                            <Card.Img variant="bottom" src={image} />      
+                        </Col>
+                        <Col>
+                            <Card.Body>
+                                <Card.Title>{title}</Card.Title>
+                                <Card.Text>{itemName}</Card.Text>
+                            </Card.Body>
+                            <Card.Text>Price: {formatter.format(price)}</Card.Text>
+                            <Button onClick={handleAddItemToCart}>Add to Cart</Button>
+                            <Card.Text>{description}</Card.Text>
+                            { Object.entries(properties).map(entry => (<Card.Text key={entry.toString()}>{`${entry[0]}: ${entry[1]}`}</Card.Text>))}
+                        </Col>
+                    </Row>
+                </Container>
+            </Card>
+            <Comments>
+
+            </Comments>
+        </div>
     );
 };
