@@ -30,3 +30,9 @@
     border: 0.2rem solid rgb(173, 216, 230);
     border-radius: 0.5rem;
 }
+
+.Button {
+    margin-left: 150px;
+    margin-right: 150px;
+    padding: 20px;
+}
