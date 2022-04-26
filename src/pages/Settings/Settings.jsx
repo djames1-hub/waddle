@@ -34,7 +34,7 @@ const Settings = () => {
       <Row>
         <Button
           onClick={() => {
-            window.location.href = "/user";
+            window.location.href = "/account";
           }}
         >
           View User Details
