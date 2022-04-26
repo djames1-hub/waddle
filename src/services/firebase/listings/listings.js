@@ -59,8 +59,6 @@ const getListings = async (qStr) => {
     } catch (error) {
         return error;
     }
-    
-    
 }
 
 

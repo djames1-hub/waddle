@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { Cart, NotFound, Header } from './components';
 import { Home, Wishlist, Settings, ListingForm, SignUp, SignIn, Search, ItemView, BulkListing } from './pages';
@@ -33,7 +33,7 @@ function App() {
                 </div>
             </FirebaseAuthProvider>
         </div>
-    );
+  );
 }
 
 export default App;

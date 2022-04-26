@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import { useFirebaseAuth } from "../../hooks/";
+import getListings from "./../../services/firebase/listings/getListings";
 
 const Wishlist = () => {
-    return (
-        <div className="m-5">
-            <h3><b>About pages goes here</b></h3>
-            <p>
-            Lorem Ipsum is simply dummy text ...
-            </p>
-        </div>
-    )
-}
+    const [wishlistItems, setWishlistItems] = useState([]);
+    const { wishlist } = useFirebaseAuth();
 
-export default Wishlist
+    useEffect(() => {
+        const fetchListings = async() => {
+            const listings = await getListings(wishlist);
+            setWishlistItems(listings);
+        };
+        return fetchListings;
+    }, []);
+
+    return < > { wishlistItems.map((items) => true) } < />;
+};
+
+export default Wishlist;
