@@ -22,17 +22,57 @@ const BulkListing = () => {
             label: "ISBN",
             type: "text",
             placeholder: "Enter ISBN ...",
-            controlId: "authorControl",
+            controlId: "isbnControl",
             value: "isbn"
         }
     ];
 
+
+
     const formGroups = {
         "books": bookFormGroups,
         "clothing": [],
-        "furniture": [],
-        "electronics": [],
-        "sports-gear": []
+        "furniture": [
+            {
+                label: "Length",
+                type: "number",
+                placeholder: "Enter length ...",
+                controlId: "lengthControl",
+                value: "length"
+            },
+            {
+                label: "Width",
+                type: "number",
+                placeholder: "Enter width ...",
+                controlId: "widthControl",
+                value: "width"
+            },
+            {
+                label: "height",
+                type: "number",
+                placeholder: "Enter height ...",
+                controlId: "heightControl",
+                value: "height"
+            }
+        ],
+        "electronics": [
+            {
+                label: "Model",
+                type: "text",
+                placeholder: "Enter model ...",
+                controlId: "modelControl",
+                value: "model"
+            }
+        ],
+        "sports-gear": [
+            {
+                label: "Model",
+                type: "text",
+                placeholder: "Enter model ...",
+                controlId: "modelControl",
+                value: "model"
+            }
+        ]
     }
     const { category } = useParams();
     const { register, handleSubmit } = useForm();
