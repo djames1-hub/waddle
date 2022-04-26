@@ -4,6 +4,12 @@ import { auth } from '../../services/firebase/firebase-config';
 import { onAuthStateChanged } from 'firebase/auth';
 import { signOutUser } from './../../services/firebase/users';
 import "./Settings.css"
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import SettingsButton from './settingsButton';
+
+//import images
+import backArrow from "./icons/backarrow.png"
+
 
 const Settings = () => {
 
@@ -14,11 +20,11 @@ const Settings = () => {
         } 
     });
 
-    return (
-        <div className="m-5">
-            <input type="button" className="log-out-button" value="Log Out" onClick={() => signOutUser()}></input>
-        </div>
-    )
+    return (<Container>
+                <Row>
+                    <Button onClick={() => {window.location.href ="/purchase-history"}}>Purchase History</Button>
+                </Row>
+            </Container>)
 }
 
 export default Settings
