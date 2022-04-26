@@ -2,7 +2,7 @@
     font-family: RobotoRegular;
 }
 
-.log-out-button{
+.log-out-button {
     margin-left: auto;
     margin-right: auto;
     margin-top: 5vh;
@@ -14,19 +14,25 @@
     font-size: 1.5vh;
 }
 
-.button-title{
+.button-title {
     vertical-align: middle;
 }
 
-.settings-a{
+.settings-a {
     border: 0.2rem solid transparent;
     text-decoration: none;
     border-radius: 0.5rem;
     max-width: 10rem;
 }
 
-.settings-a:hover{
+.settings-a:hover {
     background-color: transparent;
     border: 0.2rem solid rgb(173, 216, 230);
     border-radius: 0.5rem;
+}
+
+.Button {
+    margin-left: 150px;
+    margin-right: 150px;
+    padding: 20px;
 }
