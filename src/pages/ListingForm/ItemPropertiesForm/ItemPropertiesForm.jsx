@@ -4,7 +4,7 @@ import './ItemPropertiesForm.css';
 
 import { BookPropertiesForm, ClothingPropertiesForm, ElectronicsPropertiesForm, FurniturePropertiesForm, SportsGearPropertiesForm } from './Forms';
 
-const ItemPropertiesForm = ({ onCategoryChange, register } ) => {
+const ItemPropertiesForm = ({ handleCategoryChange, register } ) => {
 
     const [propertiesForm,setPropertiesForm] = useState(<></>); 
 
@@ -21,7 +21,7 @@ const ItemPropertiesForm = ({ onCategoryChange, register } ) => {
             setPropertiesForm(<SportsGearPropertiesForm register={register} />)
         }
 
-        onCategoryChange(category);
+        handleCategoryChange(category);
     };
 
     return (

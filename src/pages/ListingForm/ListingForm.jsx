@@ -1,45 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import ButtonGroup  from 'react-bootstrap/ButtonGroup';
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
-import ToggleButton from 'react-bootstrap/ToggleButton';
-import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
+import { Card, Nav, Button, Form, ButtonGroup, Stack, ButtonToolbar }  from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { Timestamp } from 'firebase/firestore';
 import { v4 as uuidv4 } from 'uuid';
 
-
 import { createListing } from './../../services/firebase/listings';
-// import './ListingForm.css';
 
 import { useFirebaseAuth } from '../../hooks/useFirebaseAuth';
 import { LoadingScreen } from '../../components';
-import SingleListingForm from './SingleListingForm';
-import BulkListingForm from './BulkListingForm';
-
-
 
 const ListingForm = () => {
-
+    
     const { id, address } = useFirebaseAuth();
     const [form, setForm] = useState(<LoadingScreen />);
-    const { register, handleSubmit, reset } = useForm();
-    const [radioValue, setRadioValue] = useState(true);
+    const [listingType, setListingType] = useState("");
+    const [category, setCategory] = useState("");
+    const [listingInfo, setListingInfo] = useState({});
+    const [variations, setVariations] = useState([]);
+    const { register, handleSubmit } = useForm();
+    const [formIterator, setFormIterator] = useState(0);
 
-    const handlers = { handleCategoryChange, submitListing, register, handleSubmit }
-
-    useEffect(() => {
-        if (id) {
-            setForm(<SingleListingForm { ...handlers }/>);
-        }
-    }, [id]);
-
-    useEffect(() => {
-        (radioValue === 1) ? setForm(<SingleListingForm { ...handlers }/>) : setForm(<BulkListingForm { ...handlers }/>);
-    }, [radioValue]);
-
+    
 
     const submitListing = ({ listingData, itemData }) => {
-  
+
         let listing = {
             listingId: uuidv4(),
             seller: id,
@@ -56,34 +40,42 @@ const ListingForm = () => {
         
         createListing(listing);
         
+    };
+
+    const submit = ({ listingType, category }) => {
+        window.location.href = `/${listingType}/${category}`;
     }
 
-    const [category, setCategory] = useState("");
-
-    const handleCategoryChange = (category) => {
-        setCategory(category);
-    }
-
-    const handleChange = (r) => {
-        setRadioValue(r[1]);
-        reset({});
-    }
 
     return (
         <>
-            <ButtonToolbar className="w-50 mx-auto">
-                <ToggleButtonGroup  type="checkbox" value={radioValue} onChange={handleChange} className="mb-3 ms-5 mt-5">
-                    <ToggleButton id="tbg-btn-1" value={1}>
-                        Single Listing
-                    </ToggleButton>
-                    <ToggleButton id="tbg-btn-2" value={2}>
-                        Bulk Listing
-                    </ToggleButton>
-                </ToggleButtonGroup>
-            </ButtonToolbar>
-            {form}
+            <Form className='w-50 mx-auto border' onSubmit={handleSubmit(submit)}>     
+                <Form.Group className="mb-3 mx-5 mt-3" controlId='listingTypeControl'>
+                    <Form.Label>Choose Listing Type</Form.Label>
+                    <Form.Select { ...register("listingType", {
+                        required: "Must not be empty"
+                    }) }>
+                        <option value="">Listing Types...</option>
+                        <option value="single-listing">Single Listing</option>
+                        <option value="bulk-listing">Bulk Listing</option>
+                    </Form.Select>
+                </Form.Group>
+                <Form.Group className="mb-3 mx-5 mt-3" controlId="categories">
+                    <Form.Label>Categories</Form.Label>
+                    <Form.Select {...register("category")}>
+                        <option>Choose category</option>
+                        <option value="books">Book</option>
+                        <option value="clothing">Clothing</option>
+                        <option value="furniture">Furniture</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="sports-gear">Sports Gear</option>
+                    </Form.Select>
+                </Form.Group>   
+                <Button type="submit">Continue</Button>
+            </Form> 
         </>
     );
+    
 }
 
 export default ListingForm;

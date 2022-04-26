@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
-import { createTextInput } from "./util";
+import Button from 'react-bootstrap/Button';
+import { Stack, ButtonGroup } from 'react-bootstrap';
+import VarianceFormControl from './VarianceFormControl';
 
 export const BookPropertiesForm = ({ register }) => {
+    
+    const [varianceFormGroups, setVarianceFormGroups] = useState();
     
 
     return (
@@ -29,6 +33,9 @@ export const BookPropertiesForm = ({ register }) => {
                     <option value='poor'>Poor</option>
                 </Form.Select>
             </Form.Group>
+            
+            
+            
         </>
         
     );
