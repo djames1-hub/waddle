@@ -6,11 +6,15 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 
 import "./ItemView.css";
-import { addItemToCart, getListing } from "../../services/firebase/listings";
+import {
+  addItemToCart,
+  addItemToWishlist,
+  getListing,
+} from "../../services/firebase/listings";
 import Comments from "../../components/Comments/Comments";
 
 export const ItemView = () => {
-  const { uid, cart } = useFirebaseAuth();
+  const { uid, cart, wishlist } = useFirebaseAuth();
 
   const [title, setTitle] = useState("");
   const [itemName, setItemName] = useState("");
@@ -43,6 +47,10 @@ export const ItemView = () => {
     const error = await addItemToCart(cart, uid, id);
   };
 
+  const handleAddItemToWishlist = async () => {
+    const error = await addItemToWishlist(wishlist, uid, id);
+  };
+
   return (
     <div>
       <Card className="w-30">
@@ -60,6 +68,9 @@ export const ItemView = () => {
                   <ListGroup.Item>
                     Price: {formatter.format(price)} <br />
                     <Button onClick={handleAddItemToCart}>Add to Cart</Button>
+                    <Button onClick={handleAddItemToWishlist}>
+                      Add to Wishlist
+                    </Button>
                   </ListGroup.Item>
                   <ListGroup.Item>{description}</ListGroup.Item>
                   {Object.entries(properties).map((entry) => (
