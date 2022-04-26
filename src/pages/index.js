@@ -5,6 +5,7 @@ import Search  from './Search';
 import Settings from './Settings';
 import Wishlist from './WishList';
 import ItemView from './ItemView';
+import PurchaseHistory from './PurchaseHistory/PurchaseHistory';
 
 export {
     SignIn,
@@ -14,5 +15,6 @@ export {
     Search,
     Settings,
     Wishlist,
-    ItemView
+    ItemView,
+    PurchaseHistory
 }

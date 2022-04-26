@@ -13,3 +13,20 @@
     font-weight: bold;
     font-size: 1.5vh;
 }
+
+.button-title{
+    vertical-align: middle;
+}
+
+.settings-a{
+    border: 0.2rem solid transparent;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    max-width: 10rem;
+}
+
+.settings-a:hover{
+    background-color: transparent;
+    border: 0.2rem solid rgb(173, 216, 230);
+    border-radius: 0.5rem;
+}

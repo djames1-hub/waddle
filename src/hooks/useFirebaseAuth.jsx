@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { FirebaseAuthContext } from "../contexts";
 
-
 const useFirebaseAuth = () => {
     const context = useContext(FirebaseAuthContext);
     if (context === undefined) {
