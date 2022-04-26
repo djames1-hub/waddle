@@ -42,7 +42,7 @@ const Settings = () => {
       </Row>
       <br />
       <Row>
-        <button onClick={signOutUser}>Sign Out</button>
+        <Button onClick={signOutUser}>Sign Out</Button>
       </Row>
     </Container>
   );
