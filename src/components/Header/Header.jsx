@@ -22,7 +22,7 @@ const Header = () => {
           <Nav className="me-auto">
             <Nav.Link href={user.id ? "/new-listing" : "/login"}>Sell</Nav.Link>
             <Nav.Link href={user.id ? "/cart" : "/login"}>Cart</Nav.Link>
-            <Nav.Link href={user.id ? "/wish-list" : "/login"}>
+            <Nav.Link href={user.id ? "/wishlist" : "/login"}>
               Wishlist
             </Nav.Link>
             <Nav.Link href={user.id ? "/account" : "/sign-up"}>
