@@ -30,7 +30,6 @@ function Home() {
                     if (i >= items.length) {
                         break;
                     }
-
                     let col = (
                         <Col key={i} >
                             <a href={`/view-item/${items[i].listingId}`}>
