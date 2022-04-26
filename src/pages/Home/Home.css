@@ -2,32 +2,16 @@
     font-family: RobotoRegular;
 }
 
-
-.previews-container {
+.home-header {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 1%;
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    max-width: 70%;
-    background-color: lightblue;
-    font-size: medium;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    text-align: center;
+    margin-top: 20px;
+    font-size: xx-large;
+    letter-spacing: 0.5px;
 }
 
-.home-container{
-    margin-top: 0;
-    width: 100%;
-    block-size: fit-content;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-    background-color: lightblue;
-    border-radius: 2px;
-    font-size: medium;
-    font-family: RobotoRegular;
-}
-
-.category-buttons{
+.category-buttons {
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -35,7 +19,7 @@
     align-content: center;
 }
 
-button.category-title{
+button.category-title {
     margin-top: 0.5vh;
     margin-bottom: 0.5vh;
     height: 100%;
@@ -48,7 +32,7 @@ button.category-title{
     border-radius: 1vh;
 }
 
-button.category-title:hover{
+button.category-title:hover {
     border: 0.35vh solid black;
     border-radius: 1vh;
 }

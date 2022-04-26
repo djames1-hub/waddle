@@ -64,7 +64,9 @@ function Home() {
 
   return (
     <>
-      <br />
+      <Container className="home-header"> Welcome to waddle</Container>
+      <hr />
+
       {previewComps}
     </>
   );
