@@ -1,4 +1,12 @@
-import { createListing, getAllListings, getListing, getListings} from './listings';
+import { createListing, getAllListings, getListing, getListings } from './listings';
 import addItemToCart from "./addItemtoCart";
+import addItemToWishlist from "./addItemtoWishlist";
 
-export { createListing, getAllListings, getListing, getListings, addItemToCart };
+export {
+    addItemToWishlist,
+    createListing,
+    getAllListings,
+    getListing,
+    getListings,
+    addItemToCart,
+};
