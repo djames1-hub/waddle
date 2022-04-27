@@ -14,6 +14,7 @@ const createListing = (listing) => {
                         listing.photo = [downloadURL];
                         try {
                             await setDoc(doc(collection(db, "listings"), listing.listingId), listing);
+                            window.location.href = "/";
                         } catch(error) {
                             reject(error);
                         }          
@@ -113,4 +114,4 @@ const getNextPage = async (maxItemsPerPage, lastItem) => {
     }
 } 
 
-export {createListing, getListings, getListing, getAllListings, paginateItems, getNextPage}
+export {createListing, getListings, getListing, getAllListings, paginateItems, getNextPage, getListingsByCategory}

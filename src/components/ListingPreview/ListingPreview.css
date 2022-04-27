@@ -1,0 +1,10 @@
+.Image-img {
+    height: auto;
+    max-height: 175px;
+    width: auto;
+    max-width: 175px;
+  }
+
+  .custom {
+    width: 200px !important;
+  }

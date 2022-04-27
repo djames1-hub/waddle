@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "./Home.css";
+import { useParams } from "react-router-dom";
+import "./SearchCategory.css";
 
-import { paginateItems } from "../../services/firebase/listings/listings";
+import { getListingsByCategory } from "../../services/firebase/listings/listings";
 import { Container } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
@@ -9,16 +10,34 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import ListingPreview from "../../components/ListingPreview/ListingPreview";
 
-function Home() {
+function SearchCategory(props) {
   //Hook to get items
   const [previewComps, setPreviewComps] = useState(<div></div>);
 
-  const MAX_ITEMS_PER_PAGE = 20;
   const MAX_COLUMNS = 4;
+
+  const { category } = useParams();
+  console.log(category);
+
+  const formatTitle = (cat) => {
+      let temp = cat;
+      if(cat.includes("-")){
+        const words = cat.split("-");
+        let i = 0;
+        while(i < words.length){
+            words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+            i += 1;
+        }
+        temp = words.join(" ");
+        return temp;
+      }else{
+          return cat.charAt(0).toUpperCase() + cat.slice(1);
+      }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
-      const items = await paginateItems(MAX_ITEMS_PER_PAGE);
+      const items = await getListingsByCategory(category);
       console.log(items);
       let rows = [];
       let cols = [];
@@ -30,7 +49,6 @@ function Home() {
           if (i >= items.length) {
             break;
           }
-
           let col = (
             <ListingPreview item={items[i]} key={i}/>
           );
@@ -48,11 +66,11 @@ function Home() {
 
   return (
     <>
-      <Container className="home-header"> Welcome to waddle</Container>
+      <Container className="home-header">{formatTitle(category)}</Container>
       <hr />
       {previewComps}
     </>
   );
 }
 
-export default Home;
+export default SearchCategory;

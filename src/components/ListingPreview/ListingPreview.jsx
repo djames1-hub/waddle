@@ -1,5 +1,6 @@
 import React from "react";
 import {Card, Row, Button, Col} from "react-bootstrap";
+import "./ListingPreview.css"
 
 const ListingPreview = ({ item }) =>{
 
@@ -12,23 +13,22 @@ const ListingPreview = ({ item }) =>{
     return (
         <Card>
             <Card.Header>
-                <Row>
                     <Col>
                         <Card.Title>{item.listingTitle}</Card.Title>
                         <Card.Subtitle>{formatter.format(item.price + item.shippingCost)}</Card.Subtitle>
                     </Col>
-                </Row>
             </Card.Header>
             <Card.Body>
-                <Row>
+                <Row md={3}>
                     <Col>
-                        <Card.Img src={item.photo[0]} />
+                        <Card.Img src={item.photo[0]} className="Image-img"/>
                     </Col>
-                    <Col >
+                    <Col>
                         <Card.Text >{item.description}</Card.Text>
                     </Col>
                     <Col md={2} >
-                        <Button onClick={() => {window.location.href = `/view-item/${item.listingId}`}}>View Item</Button>
+                        <Button style={{marginTop : '0.3rem'}} onClick={() => {window.location.href = `/view-item/${item.listingId}`}} className="btn-primary custom">View Item</Button>
+                        <Button style={{marginTop : '0.3rem'}} className="btn-primary custom">Add to WishList</Button>
                     </Col>
                 </Row>
             </Card.Body>

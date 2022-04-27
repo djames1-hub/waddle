@@ -5,7 +5,6 @@ import { FormNavbar } from './../../components/Form';
 import Form from 'react-bootstrap/Form';
 import { Timestamp } from 'firebase/firestore';
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
-import ListingInfoForm from '../../components/Form/ListingInfoForm';
 import { useForm } from 'react-hook-form';
 import { createListing } from '../../services/firebase/listings';
 import { useFirebaseAuth } from '../../hooks';
@@ -16,28 +15,32 @@ const SingleListing = () => {
     const { id, address } = useFirebaseAuth();
     const { category } = useParams();
     const { register, handleSubmit } = useForm();
-   
-
-    const bookFormGroups = [
-        {
-            label: "Author",
-            type: "text",
-            placeholder: "Enter author's name ...",
-            controlId: "authorControl",
-            value: "author"
-        },
-        {
-            label: "ISBN",
-            type: "text",
-            placeholder: "Enter ISBN ...",
-            controlId: "isbnControl",
-            value: "isbn"
-        }
-    ];
 
     const formGroups = {
-        "books": bookFormGroups,
-        "clothing": [],
+        "books": [
+            {
+                label: "Author",
+                type: "text",
+                placeholder: "Enter author's name ...",
+                controlId: "authorControl",
+                value: "author"
+            },
+            {
+                label: "ISBN",
+                type: "text",
+                placeholder: "Enter ISBN ...",
+                controlId: "isbnControl",
+                value: "isbn"
+            }
+        ],
+        "clothing": [
+            {
+                label: "Clothing's color",
+                type: "color",
+                controlId: "colorControl",
+                value: "color"
+            }
+        ],
         "furniture": [
             {
                 label: "Length",
@@ -182,8 +185,6 @@ const SingleListing = () => {
         ]
     }
 
-  
-
     const tabs = [[
         { label: "Vital Info", active: true },
        ]
@@ -198,12 +199,13 @@ const SingleListing = () => {
             seller: id,
             buyer: "",
             dateBought: new Timestamp.fromDate(new Date()),
-            quantity: 1,
+            quantity: parseInt(listingData.quantity),
             isPurchased: false,
             shippingCost: 0.0,
-            item: { itemId: uuidv4(), itemName: itemData.itemName, props: itemData.props },
+            item: { ...itemData },
             shippingFrom: {...address },
             shippingTo: {},
+            deliveryType: '',
             category,
             ...listingData
         };

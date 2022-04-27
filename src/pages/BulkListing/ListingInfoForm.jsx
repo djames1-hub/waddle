@@ -9,16 +9,16 @@ const ListingInfoForm = ({ register, formGroups }) => {
         <Stack>
             <Form.Group className="mb-3" controlId="listingTitle">
                 <Form.Label>Listing title</Form.Label>
-                <Form.Control type="text" placeholder="Enter listing title" {...register("listingData.listingTitle")} />
+                <Form.Control type="text" placeholder="Enter listing title ..." {...register("listingData.listingTitle")} />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="price">
+            <Form.Group className="mb-3" controlId="priceControl">
                 <Form.Label>Price</Form.Label>
-                <Form.Control type="number" placeholder="Enter price" {...register("listingData.price")} />
+                <Form.Control type="number" placeholder="Enter price ..." {...register("listingData.price")} />
             </Form.Group>
             {formGroups.map(({ label, type, controlId, placeholder, value }) => (
                 <Form.Group key={label + placeholder + value} className="mb-3" controlId={controlId}>
                     <Form.Label>{label}</Form.Label>
-                    <Form.Control type={type} placeholder={placeholder} {...register(`listingData.${value}`)} />
+                    <Form.Control type={type} placeholder={placeholder} {...register(`itemData.${value}`)} />
                 </Form.Group>
             ))}
             <Form.Group className="mb-3" controlId="description">

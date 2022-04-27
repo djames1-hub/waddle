@@ -1,20 +1,31 @@
 import React, { useEffect, useState } from "react";
+import { Stack, Card, Col} from 'react-bootstrap';
 import { useFirebaseAuth } from "../../hooks/";
 import getListings from "./../../services/firebase/listings/getListings";
+import ListingPreview from './../../components/ListingPreview'
 
 const Wishlist = () => {
-  const [wishlistItems, setWishlistItems] = useState([]);
-  const { wishlist } = useFirebaseAuth();
+  const [ wishlistItems, setWishlistItems] = useState([]);
+  const { wishList } = useFirebaseAuth();
 
   useEffect(() => {
     const fetchListings = async () => {
-      const listings = await getListings(wishlist);
-      setWishlistItems(listings);
+      console.log(wishList);
+      if (wishList !== undefined) {
+        const listings = await getListings(wishList);
+        setWishlistItems(listings);
+      }
     };
     return fetchListings;
-  }, []);
+  }, [wishList]);
 
-  return { wishlistItems };
+  return (
+    <Stack className='w-75 mt-5 mx-auto align-items-start' gap={3} direction='horizontal'>
+           <Col sm={7}>
+           {wishlistItems.map(item => <ListingPreview key={item.toString()} item={item} />)}
+           </Col>
+       </Stack>    
+  );
 };
 
 export default Wishlist;

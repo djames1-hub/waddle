@@ -5,7 +5,7 @@ import { FormNavbar } from './../../components/Form';
 import Form from 'react-bootstrap/Form';
 import { Timestamp } from 'firebase/firestore';
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
-import ListingInfoForm from '../../components/Form/ListingInfoForm';
+import ListingInfoForm from './ListingInfoForm';
 import VariationsForm from './VariationsForm';
 import { useForm } from 'react-hook-form';
 import { createListing } from '../../services/firebase/listings';
@@ -15,25 +15,23 @@ const BulkListing = () => {
 
     const { id, address } = useFirebaseAuth();
 
-    const bookFormGroups = [
-        {
-            label: "Author",
-            type: "text",
-            placeholder: "Enter author's name ...",
-            controlId: "authorControl",
-            value: "author"
-        },
-        {
-            label: "ISBN",
-            type: "text",
-            placeholder: "Enter ISBN ...",
-            controlId: "isbnControl",
-            value: "isbn"
-        }
-    ];
-
     const formGroups = {
-        "books": bookFormGroups,
+        "books": [
+            {
+                label: "Author",
+                type: "text",
+                placeholder: "Enter author's name ...",
+                controlId: "authorControl",
+                value: "author"
+            },
+            {
+                label: "ISBN",
+                type: "text",
+                placeholder: "Enter ISBN ...",
+                controlId: "isbnControl",
+                value: "isbn"
+            }
+        ],
         "clothing": [],
         "furniture": [
             {
@@ -82,20 +80,13 @@ const BulkListing = () => {
     const [form, setForm] = useState(<ListingInfoForm register={register} formGroups={formGroups[category]} />);
     const [formIterator, setFormIterator] = useState(0);
     const [isSubmit, setIsSubmit] = useState(false);
-
+    const [isFirstForm, setIsFirstForm] = useState(true);
     
+    const nextForm = () => setFormIterator(formIterator + 1);
     
-
-    const submitForm = (data) => {
-        console.log(data);
-    }
-
-
-    const nextForm = () => {
-        setFormIterator(formIterator + 1);
-    }
 
     const lastForm = () => setFormIterator(formIterator - 1);
+   
 
     const variationOptions = {
         "books": [
@@ -124,6 +115,15 @@ const BulkListing = () => {
                     "Medium": "m",
                     "Large": "l",
                     "Extra Large": "xl"
+                }
+            },
+            {
+                key: "color",
+                label: "Clothing's color",
+                controlId: "colorControl",
+                isColor: true,
+                options: {
+                    "color": "color"
                 }
             },
             {
@@ -222,22 +222,34 @@ const BulkListing = () => {
         } else {
             setIsSubmit(false);
         }
+
+        if (formIterator === 0) {
+            setIsFirstForm(true);
+        } else {
+            setIsFirstForm(false);
+        }
     }, [formIterator]);
 
     const submitListing = ({ listingData, itemData }) => {
 
+        const { price } = listingData; 
+        const { variations } = itemData;
+        const quantity =  variations.reduce((pre, cur) => { return pre + parseInt(cur.quantity) }, 0);
+    
         let listing = {
             listingId: uuidv4(),
             seller: id,
             buyer: "",
             dateBought: new Timestamp.fromDate(new Date()),
-            quantity: 1,
+            quantity,
             isPurchased: false,
             shippingCost: 0.0,
-            item: { itemId: uuidv4(), itemName: itemData.itemName, props: itemData.props },
+            item: { ...itemData },
             shippingFrom: {...address },
             shippingTo: {},
+            deliveryType: '',
             category,
+            price: parseInt(price),
             ...listingData
         };
         
@@ -249,11 +261,11 @@ const BulkListing = () => {
     return (
         <>
         <FormNavbar tabs={tabs[formIterator]} />
-        <Form className="w-50 mx-auto border rounded-3 p-5" onSubmit={handleSubmit(submitForm)}>
+        <Form className="w-50 mx-auto border rounded-3 p-5" onSubmit={handleSubmit(submitListing)}>
             {form}
             <ButtonToolbar className='d-flex justify-content-end'>
                 <ButtonGroup>
-                    <Button onClick={lastForm}>Back</Button>
+                    {isFirstForm ? <></> : <Button onClick={lastForm}>Back</Button> }
                     {!isSubmit ? <Button onClick={nextForm}>Continue</Button> : <Button type='submit'>Submit</Button>} 
                 </ButtonGroup>
             </ButtonToolbar>

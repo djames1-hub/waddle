@@ -3,10 +3,12 @@ import Home from './Home';
 import ListingForm from './ListingForm';
 import Search from './Search';
 import Wishlist from './WishList';
-import ItemView from './ItemView';
 import BulkListing  from './BulkListing';
 import PurchaseHistory from './PurchaseHistory/PurchaseHistory';
-import Account from './Account'
+import Account from './Account';
+import Listing from './Listing';
+import SingleListing from './SingleListing'
+import SearchCategory from './SearchByCategory';
 
 export {
     SignIn,
@@ -15,8 +17,10 @@ export {
     ListingForm,
     Search,
     Wishlist,
-    ItemView,
+    Listing,
     BulkListing,
     PurchaseHistory,
-    Account
+    Account,
+    SingleListing,
+    SearchCategory
 }
