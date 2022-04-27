@@ -6,6 +6,7 @@ import { Home, Wishlist, ListingForm, SignUp, SignIn, Search, ItemView, BulkList
 import './App.css';
 import { FirebaseAuthProvider } from './contexts';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import SingleListing from "./pages/SingleListing";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                         <Route path="/cart" element={<Cart />} />
                         <Route path="/new-listing" element={<ListingForm />} />
                         <Route path="/bulk-listing/:category" element={<BulkListing />} />
+                        <Route path="/single-listing/:category" element={<SingleListing />} />
                         <Route path="/not-found" element={ <NotFound />} />
                         <Route path="/sign-up" element={ <SignUp />} />
                         <Route path="/login" element={ <SignIn />} />

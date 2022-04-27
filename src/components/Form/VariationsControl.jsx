@@ -5,7 +5,7 @@ import Stack from 'react-bootstrap/Stack';
 
 const VariationsControl = ({ variationOptions, register, index }) => {
     return  (
-        <Stack direction='horizontal' className='align-items-end border rounded-3 p-3 mb-2'>
+        <Stack direction='horizontal' className='align-items-end border-bottom border-2 p-3 mb-2'>
             {variationOptions.map(({ label, controlId, selectLabel, options, key }) => (
                 
                     <Form.Group key={controlId + label} className="me-4" controlId={controlId}>
@@ -22,7 +22,7 @@ const VariationsControl = ({ variationOptions, register, index }) => {
                 <Form.Label>Quantity</Form.Label>
                 <Form.Control type="number" {...register(`variations.${index}.quantity`)}></Form.Control>
             </Form.Group>
-                <CloseButton />
+                
             </Stack>
     );
 }

@@ -6,14 +6,17 @@ import Form from 'react-bootstrap/Form';
 import { Timestamp } from 'firebase/firestore';
 import { Button, ButtonGroup, ButtonToolbar } from 'react-bootstrap';
 import ListingInfoForm from '../../components/Form/ListingInfoForm';
-import VariationsForm from './VariationsForm';
 import { useForm } from 'react-hook-form';
 import { createListing } from '../../services/firebase/listings';
 import { useFirebaseAuth } from '../../hooks';
+import ItemInfoForm from './ItemInfoForm';
 
-const BulkListing = () => {
+const SingleListing = () => {
 
     const { id, address } = useFirebaseAuth();
+    const { category } = useParams();
+    const { register, handleSubmit } = useForm();
+   
 
     const bookFormGroups = [
         {
@@ -77,27 +80,10 @@ const BulkListing = () => {
             }
         ]
     }
-    const { category } = useParams();
-    const { register, handleSubmit } = useForm();
-    const [form, setForm] = useState(<ListingInfoForm register={register} formGroups={formGroups[category]} />);
-    const [formIterator, setFormIterator] = useState(0);
-    const [isSubmit, setIsSubmit] = useState(false);
-
-    
-    
-
-    const submitForm = (data) => {
-        console.log(data);
-    }
+   
 
 
-    const nextForm = () => {
-        setFormIterator(formIterator + 1);
-    }
-
-    const lastForm = () => setFormIterator(formIterator - 1);
-
-    const variationOptions = {
+    const itemOptions = {
         "books": [
             {
                 key: "condition",
@@ -196,34 +182,14 @@ const BulkListing = () => {
         ]
     }
 
-    const forms = [
-        <ListingInfoForm register={register} formGroups={formGroups[category]} />,
-        <VariationsForm register={register} variationOptions={variationOptions[category]}/>
-    ]
+  
 
     const tabs = [[
-        { label: "Crucial Info", active: true },
-        { label: "Variations", active: false },
-       ],
-        [
-            { label: "Crucial Info", active: false },
-            { label: "Variations", active: true },
-        ]
+        { label: "Vital Info", active: true },
+       ]
     ];
 
     
-
-    useEffect(() => {
-        setForm(forms[formIterator])
-    }, [formIterator]);
-
-    useEffect(() => {
-        if (formIterator === forms.length - 1) {
-            setIsSubmit(true); 
-        } else {
-            setIsSubmit(false);
-        }
-    }, [formIterator]);
 
     const submitListing = ({ listingData, itemData }) => {
 
@@ -249,13 +215,12 @@ const BulkListing = () => {
 
     return (
         <>
-        <FormNavbar tabs={tabs[formIterator]} />
-        <Form className="w-50 mx-auto border rounded-3 p-5" onSubmit={handleSubmit(submitForm)}>
-            {form}
+        <FormNavbar tabs={tabs[0]} />
+        <Form className="w-50 mx-auto border rounded-3 p-5" onSubmit={handleSubmit(submitListing)}>
+        <ItemInfoForm register={register} formGroups={formGroups[category]} itemOptions={itemOptions[category]} />
             <ButtonToolbar className='d-flex justify-content-end'>
                 <ButtonGroup>
-                    <Button onClick={lastForm}>Back</Button>
-                    {!isSubmit ? <Button onClick={nextForm}>Continue</Button> : <Button type='submit'>Submit</Button>} 
+                   <Button type='submit'>Submit</Button>
                 </ButtonGroup>
             </ButtonToolbar>
         </Form>
@@ -263,4 +228,4 @@ const BulkListing = () => {
     );
 };
 
-export default BulkListing;
+export default SingleListing;

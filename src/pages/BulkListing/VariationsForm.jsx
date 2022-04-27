@@ -15,11 +15,13 @@ const VariationsForm = ({ variationOptions, register }) => {
     }, 1);
 
     const MAX_VARIATIONS = (permutations < 5) ? permutations : 5;
+
+    
     
     const handleAddVariation = () => {
         if (variations.length < MAX_VARIATIONS) {
             const variation = (
-            <VariationsControl key={variations.length} variationOptions={variationOptions} register={register} index={variations.length} />
+            <VariationsControl key={variations.length} variationOptions={variationOptions} register={register} index={variations.length}/>
             );
             setVariations([variation, ...variations]);
         }
