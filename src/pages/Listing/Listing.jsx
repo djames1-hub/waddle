@@ -15,7 +15,7 @@ import Comments from "../../components/Comments/Comments";
 import { useForm } from "react-hook-form";
 
 const Listing= () => {
-  const { id: uid, cart, wishlist } = useFirebaseAuth();
+  const { id: uid, cart, wishList } = useFirebaseAuth();
   const { register, handleSubmit } = useForm();
 
   const [title, setTitle] = useState("");
@@ -233,7 +233,7 @@ const Listing= () => {
   };
 
   const handleAddItemToWishlist = async () => {
-    const error = await addItemToWishlist(wishlist, uid, id);
+    const error = await addItemToWishlist(wishList, uid, id);
   };
 
   return (

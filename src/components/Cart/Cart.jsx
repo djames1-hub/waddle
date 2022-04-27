@@ -13,7 +13,7 @@ const Cart = () => {
     
     useEffect(() => {
         const fetchListings = async () => {
-            if (cart) {
+            if (cart !== undefined) {
                 const listings = await getListings(cart);
                 setCartItems(listings);
             }
@@ -25,6 +25,7 @@ const Cart = () => {
         await sendNotification(notifications, id, "Item has been sucessfully purchased! It's on its way.");
         Promise.all(cartItems.map(item => sendNotification(notifications, item.seller, "Item has been sold!"))); 
     }
+    
     const formatter = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "usd",

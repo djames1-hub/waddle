@@ -66,7 +66,7 @@ const Header = () => {
           <Nav >
             <Stack direction="horizontal">
             <NavDropdown title="Categories" id="category-nav-dropdown" className="border border-end-0 rounded-3 rounded-start ">
-              <NavDropdown.Item onClick={() => {window.location.href = "/search/category/book"}}>Books</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => {window.location.href = "/search/category/books"}}>Books</NavDropdown.Item>
               <NavDropdown.Item onClick={() => {window.location.href = "/search/category/clothing"}}>Clothing</NavDropdown.Item>
               <NavDropdown.Item onClick={() => {window.location.href = "/search/category/furniture"}}>Furniture</NavDropdown.Item>
               <NavDropdown.Item onClick={() => {window.location.href = "/search/category/electronics"}}>Electronics</NavDropdown.Item>
