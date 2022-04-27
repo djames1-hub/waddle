@@ -33,18 +33,26 @@ function Home() {
 
           let col = (
             <Col key={i}>
-              <a href={`/view-item/${items[i].listingId}`}>
-                <Image
-                  src={items[i].photo[0]}
-                  className="h-100 w-100"
-                  thumbnail
-                  rounded
-                />
-              </a>
-              <div className="item-details">
-                <div className="item-name-detail">{items[i].item.itemName}</div>
-                <div className="item-price-detail"> ${items[i].price}.00</div>
-              </div>
+              <Card>
+                <a href={`/view-item/${items[i].listingId}`}>
+                  <Card.Img
+                    src={items[i].photo[0]}
+                    className="set-img-height"
+                    thumbnail
+                    rounded
+                  />
+                </a>
+
+                <Card.Title>
+                  {" "}
+                  <div className="item-name-detail">
+                    {items[i].item.itemName}
+                  </div>
+                </Card.Title>
+                <Card.Text>
+                  <div className="item-price-detail"> ${items[i].price}.00</div>
+                </Card.Text>
+              </Card>
             </Col>
           );
           cols.push(col);

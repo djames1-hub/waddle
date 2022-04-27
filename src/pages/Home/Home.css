@@ -56,3 +56,7 @@ button.category-title:hover {
     border-color: lightgrey;
     border-width: 0.5px;
 }
+
+.set-img-height {
+    height: 275px;
+}
