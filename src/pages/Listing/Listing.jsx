@@ -274,9 +274,11 @@ const Listing= () => {
           </Row>
         </Container>
       </Card>
-      <Comments></Comments>
     </div>
   );
 };
+
+//      <Comments></Comments>
+
 
 export default Listing;
