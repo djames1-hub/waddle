@@ -6,6 +6,7 @@ import { useFirebaseAuth } from "../../hooks";
 import PurchasePreview from "./PurchasePreview";
 import {getListing} from "../../services/firebase/listings/listings";
 import "./PurchaseHistory.css"
+import { Container } from "react-bootstrap";
 
 const PurchaseHistory = () =>{
 
@@ -26,7 +27,7 @@ const PurchaseHistory = () =>{
         console.log(user.purchaseHistory);
         const fetchData = async () => {
             let items = [];
-            if(user.purchaseHistory !== undefined){
+            if(user.purchaseHistory !== undefined && user.purchaseHistory.length !== 0){
                 for(let item of user.purchaseHistory){
                     let tempItem = await getListing(item);
                     items = [...items, tempItem];
@@ -35,6 +36,8 @@ const PurchaseHistory = () =>{
                     <PurchasePreview purchase={purchase} />
                 ));
                 setPreviewComps(purchaseElements);
+            }else{
+                setPreviewComps(<Container className="home-header"> You currently have no purchases</Container>)
             }
         }
         return fetchData
@@ -42,6 +45,7 @@ const PurchaseHistory = () =>{
 
 
     return <div>
+        <Container className="home-header"> Purchase History</Container>
         {previewComps}
     </div>;
 }

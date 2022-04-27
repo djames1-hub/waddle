@@ -67,7 +67,7 @@ const Header = () => {
             <Form.Group controlId="searchbar">
               <Form.Control type="search"></Form.Control>
             </Form.Group>
-            <Button>L</Button>
+            <Button>Search</Button>
           </Form>
           <Nav>
             <NavDropdown title="Categories" id="category-nav-dropdown">

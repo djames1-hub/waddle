@@ -7,6 +7,7 @@ import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
+import ListingPreview from "../../components/ListingPreview/ListingPreview";
 
 function Home() {
   //Hook to get items
@@ -31,35 +32,13 @@ function Home() {
           }
 
           let col = (
-            <Col key={i}>
-              <Card>
-                <a href={`/view-item/${items[i].listingId}`}>
-                  <Card.Img
-                    src={items[i].photo[0]}
-                    className="set-img-height"
-                    thumbnail
-                    rounded
-                  />
-                </a>
-
-                <Card.Title>
-                  {" "}
-                  <div className="item-name-detail">
-                    {items[i].item.itemName}
-                  </div>
-                </Card.Title>
-                <Card.Text>
-                  <div className="item-price-detail"> ${items[i].price}.00</div>
-                </Card.Text>
-              </Card>
-            </Col>
+            <ListingPreview item={items[i]} key={i}/>
           );
           cols.push(col);
           i++;
         }
         rows.push(<Row key={i}>{cols.map((c) => c)}</Row>);
       }
-
       setPreviewComps(
         <Container className="w-50 ">{rows.map((r) => r)}</Container>
       );
@@ -67,16 +46,10 @@ function Home() {
     return fetchData;
   }, []);
 
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "usd",
-  });
-
   return (
     <>
       <Container className="home-header"> Welcome to waddle</Container>
       <hr />
-
       {previewComps}
     </>
   );
