@@ -61,8 +61,7 @@ const Listing= () => {
             </Col>
             <Col>
               <Card.Body>
-                <Card.Title>{title}</Card.Title>
-                <Card.Text>{itemName}</Card.Text>
+                <Card.Title>{itemName}</Card.Title>
 
                 <ListGroup className="list-group-flush">
                   <ListGroup.Item>
