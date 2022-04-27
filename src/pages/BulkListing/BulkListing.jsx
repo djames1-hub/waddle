@@ -195,7 +195,6 @@ const BulkListing = () => {
             }
         ]
     }
-
     const forms = [
         <ListingInfoForm register={register} formGroups={formGroups[category]} />,
         <VariationsForm register={register} variationOptions={variationOptions[category]}/>
