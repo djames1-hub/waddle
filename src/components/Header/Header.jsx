@@ -66,11 +66,11 @@ const Header = () => {
           <Nav >
             <Stack direction="horizontal">
             <NavDropdown title="Categories" id="category-nav-dropdown" className="border border-end-0 rounded-3 rounded-start ">
-              <NavDropdown.Item onClick={() => {window.location.href = "/search/category/Book"}}>Books</NavDropdown.Item>
-              <NavDropdown.Item onClick={() => {window.location.href = "/search/category/Clothing"}}>Clothing</NavDropdown.Item>
-              <NavDropdown.Item onClick={() => {window.location.href = "/search/category/Furniture"}}>Furniture</NavDropdown.Item>
-              <NavDropdown.Item onClick={() => {window.location.href = "/search/category/Electronics"}}>Electronics</NavDropdown.Item>
-              <NavDropdown.Item onClick={() => {window.location.href = "/search/category/SportsGear"}}>Sports Gear</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => {window.location.href = "/search/category/book"}}>Books</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => {window.location.href = "/search/category/clothing"}}>Clothing</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => {window.location.href = "/search/category/furniture"}}>Furniture</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => {window.location.href = "/search/category/electronics"}}>Electronics</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => {window.location.href = "/search/category/sports-gear"}}>Sports Gear</NavDropdown.Item>
             </NavDropdown>
             <Form className="d-flex justify-content-end">
               <Form.Group controlId="searchbar">

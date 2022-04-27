@@ -14,11 +14,26 @@ function SearchCategory(props) {
   //Hook to get items
   const [previewComps, setPreviewComps] = useState(<div></div>);
 
-  const MAX_ITEMS_PER_PAGE = 20;
   const MAX_COLUMNS = 4;
 
   const { category } = useParams();
   console.log(category);
+
+  const formatTitle = (cat) => {
+      let temp = cat;
+      if(cat.includes("-")){
+        const words = cat.split("-");
+        let i = 0;
+        while(i < words.length){
+            words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+            i += 1;
+        }
+        temp = words.join(" ");
+        return temp;
+      }else{
+          return cat.charAt(0).toUpperCase() + cat.slice(1);
+      }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +49,6 @@ function SearchCategory(props) {
           if (i >= items.length) {
             break;
           }
-
           let col = (
             <ListingPreview item={items[i]} key={i}/>
           );
@@ -52,7 +66,7 @@ function SearchCategory(props) {
 
   return (
     <>
-      <Container className="home-header"> Welcome to waddle</Container>
+      <Container className="home-header">{formatTitle(category)}</Container>
       <hr />
       {previewComps}
     </>
