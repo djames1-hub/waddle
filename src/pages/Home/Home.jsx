@@ -17,7 +17,6 @@ function Home() {
   useEffect(() => {
     const fetchData = async () => {
       const items = await paginateItems(MAX_ITEMS_PER_PAGE);
-
       console.log(items);
       let rows = [];
       let cols = [];

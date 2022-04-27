@@ -1,16 +1,53 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Header.css";
+import { markAllRead } from "../../services/firebase/users/notifications";
 
 import { Container, Row, Col } from "react-bootstrap";
 import { useFirebaseAuth } from "../../hooks/useFirebaseAuth";
+import { signOutUser } from "../../services/firebase/users";
 
 const Header = () => {
+
+  const [notificationElements, setNotificationElements] = useState(<div></div>);
+  const [hasUnread, setHasUnread] = useState(false);
+
   const user = useFirebaseAuth();
+
+  const { notifications } = useFirebaseAuth();
+
+  //called repetedly
+  useEffect(() => {
+        console.log(user.purchaseHistory);
+        const fetchData = async () => {
+            let items = [];
+            if(notifications !== undefined && notifications.length !== 0){
+                for(let item of notifications){
+                    if(item.isRead === false){
+                      setHasUnread(true);
+                    }
+                    items = [...items, item];
+                }
+                let NotificationItems = items.map((notif) => (
+                  <NavDropdown.ItemText className={notif.isRead == false ? "unread" : "read"} >{notif.message}</NavDropdown.ItemText>
+                ));
+                setNotificationElements(NotificationItems);
+            }{
+              setNotificationElements(<NavDropdown.ItemText>You have no notifications.</NavDropdown.ItemText>)
+            }
+        }
+        return fetchData
+    },[notifications])
+
+    const markAllNotifsRead = () => {
+      if(notifications !== undefined && notifications.length !== 0){
+          markAllRead(user.uid)
+      }
+    }
 
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -47,12 +84,15 @@ const Header = () => {
           </Nav>
             {user.firstName ? 
             <NavDropdown title={user.firstName ? `Welcome, ${user.firstName}` : "Sign In"}>
-              <NavDropdown.Item>Purchase History</NavDropdown.Item>
-              <NavDropdown.Item>View User Details</NavDropdown.Item>
-              <NavDropdown.Item>Send Feedback</NavDropdown.Item>
-              <NavDropdown.Item>Sign Out</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => {window.location.href = "/purchase-history"}}>Purchase History</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => {signOutUser()}}>Sign Out</NavDropdown.Item>
             </NavDropdown>
             : <Nav.Link href="/login">Login</Nav.Link>
+            }
+            {user.firstName ? 
+              <NavDropdown title="Notifications" style={hasUnread ? {border : '0.2rem solid red'} : {border: '0.2rem solid transparent'}} onClick={() => {markAllNotifsRead()}}>
+                {notificationElements}
+              </NavDropdown> : <></>
             }
         </Navbar.Collapse>
       </Container>
