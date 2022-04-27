@@ -114,4 +114,4 @@ const getNextPage = async (maxItemsPerPage, lastItem) => {
     }
 } 
 
-export {createListing, getListings, getListing, getAllListings, paginateItems, getNextPage}
+export {createListing, getListings, getListing, getAllListings, paginateItems, getNextPage, getListingsByCategory}

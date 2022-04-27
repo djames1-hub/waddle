@@ -8,6 +8,7 @@ import PurchaseHistory from './PurchaseHistory/PurchaseHistory';
 import Account from './Account';
 import Listing from './Listing';
 import SingleListing from './SingleListing'
+import SearchCategory from './SearchByCategory';
 
 export {
     SignIn,
@@ -20,5 +21,6 @@ export {
     BulkListing,
     PurchaseHistory,
     Account,
-    SingleListing
+    SingleListing,
+    SearchCategory
 }

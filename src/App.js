@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { Cart, NotFound, Header } from './components';
-import { Home, Wishlist, ListingForm, SignUp, SignIn, Search, Listing, BulkListing, PurchaseHistory, SingleListing } from './pages';
+import { Home, Wishlist, ListingForm, SignUp, SignIn, Search, Listing, BulkListing, PurchaseHistory, SingleListing, SearchCategory } from './pages';
 import './App.css';
 import { FirebaseAuthProvider } from './contexts';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,6 +26,7 @@ function App() {
                         <Route path="/login" element={ <SignIn />} />
                         <Route path="/view-item/:id" element={ <Listing />} />
                         <Route path="/search/*" element={ <Search />} />
+                        <Route path="/search/category/:category" element={ <SearchCategory />} />
                         <Route path="/purchase-history" element={ <PurchaseHistory /> } />
                         <Route path="/*" element={ <NotFound />} />
                     </Routes>

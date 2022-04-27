@@ -1,0 +1,60 @@
+* {
+    font-family: RobotoRegular;
+}
+
+.home-header {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 20px;
+    font-size: xx-large;
+    letter-spacing: 0.5px;
+}
+
+.category-buttons {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+button.category-title {
+    margin-top: 0.5vh;
+    margin-bottom: 0.5vh;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border-color: transparent;
+    font-size: medium;
+    background-color: transparent;
+    border: 0.35vh solid transparent;
+    border-radius: 1vh;
+}
+
+button.category-title:hover {
+    border: 0.35vh solid black;
+    border-radius: 1vh;
+}
+
+.image-size {
+    height: 3rem;
+}
+
+.item-name-detail {
+    font-weight: 400;
+    font-size: large;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.item-price-detail {
+    font-size: large;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+.set-img-height {
+    height: 275px;
+}
