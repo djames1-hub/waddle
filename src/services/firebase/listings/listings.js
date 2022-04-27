@@ -14,6 +14,7 @@ const createListing = (listing) => {
                         listing.photo = [downloadURL];
                         try {
                             await setDoc(doc(collection(db, "listings"), listing.listingId), listing);
+                            window.location.href = "/";
                         } catch(error) {
                             reject(error);
                         }          

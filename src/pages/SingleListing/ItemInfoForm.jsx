@@ -8,7 +8,7 @@ const ItemInfoForm = ({ itemOptions, formGroups, register }) => {
                 <Form.Label>Listing title</Form.Label>
                 <Form.Control type="text" placeholder="Enter listing title" {...register("listingData.listingTitle")} />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="price">
+            <Form.Group className="mb-3" controlId="priceControl">
                 <Form.Label>Price</Form.Label>
                 <Form.Control type="number" placeholder="Enter price" {...register("listingData.price")} />
             </Form.Group>

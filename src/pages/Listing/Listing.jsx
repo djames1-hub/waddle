@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useFirebaseAuth } from "../../hooks";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 
@@ -22,6 +22,7 @@ const Listing= () => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [properties, setProperties] = useState({});
+  const [variations, setVariations] = useState([]); 
 
   const { id } = useParams();
   useEffect(() => {
@@ -32,10 +33,19 @@ const Listing= () => {
       setDescription(listing.description);
       setImage(listing.photo[0]);
       setPrice(listing.price);
-      setItemName(listing.item.itemName);
-      setProperties(listing.item.props);
+      setItemName(listing.listingTitle);
+
+      const entries = Object.entries(listing.item).filter(([key, val]) => key !== "variations");
+      const props = Object.fromEntries(entries);
+
+      setProperties(props);
+      
+      if (listing.item.variations) {
+        setVariations(listing.item.variations);
+      } 
+
     };
-    fetchData();
+    return fetchData;
   }, []);
 
   const formatter = new Intl.NumberFormat("en-US", {
@@ -72,6 +82,11 @@ const Listing= () => {
                     </Button>
                   </ListGroup.Item>
                   <ListGroup.Item>{description}</ListGroup.Item>
+                  <ListGroup.Item>
+                    <Form>
+                     
+                    </Form>
+                  </ListGroup.Item>
                   {Object.entries(properties).map((entry) => (
                     <ListGroup.Item
                       key={entry.toString()}

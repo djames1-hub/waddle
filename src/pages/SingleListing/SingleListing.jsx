@@ -199,12 +199,13 @@ const SingleListing = () => {
             seller: id,
             buyer: "",
             dateBought: new Timestamp.fromDate(new Date()),
-            quantity: 1,
+            quantity: parseInt(listingData.quantity),
             isPurchased: false,
             shippingCost: 0.0,
-            item: { itemId: uuidv4(), ...itemData },
+            item: { ...itemData },
             shippingFrom: {...address },
             shippingTo: {},
+            deliveryType: '',
             category,
             ...listingData
         };

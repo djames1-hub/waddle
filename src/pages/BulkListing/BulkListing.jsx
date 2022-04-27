@@ -232,18 +232,24 @@ const BulkListing = () => {
 
     const submitListing = ({ listingData, itemData }) => {
 
+        const { price } = listingData; 
+        const { variations } = itemData;
+        const quantity =  variations.reduce((pre, cur) => { return pre + parseInt(cur.quantity) }, 0);
+    
         let listing = {
             listingId: uuidv4(),
             seller: id,
             buyer: "",
             dateBought: new Timestamp.fromDate(new Date()),
-            quantity: 1,
+            quantity,
             isPurchased: false,
             shippingCost: 0.0,
-            item: { itemId: uuidv4(), ...itemData },
+            item: { ...itemData },
             shippingFrom: {...address },
             shippingTo: {},
+            deliveryType: '',
             category,
+            price: parseInt(price),
             ...listingData
         };
         

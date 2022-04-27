@@ -11,13 +11,13 @@ const VariationsControl = ({ variationOptions, register, index }) => {
                    < >
                     { !isColor ? <Form.Group key={controlId + label + options.toString()} className="me-4" controlId={controlId}>
                         <Form.Label>{label}</Form.Label>
-                        <Form.Select {...register(`itemData.variations.${index}.${key}`)}>
+                        <Form.Select {...register(`itemData.variations.${index}.${key}`, { required: true })}>
                             <option value="">{selectLabel}</option>
                             {Object.entries(options).map(([key, value]) => (
                                 <option key={key + value + index} value={value}>{key}</option>
                             ))}
                         </Form.Select>
-                    </Form.Group> : <Form.Group key={controlId + label} className="me-4" {...register(`itemData.variations.${index}.${key}`)} controlId={controlId}>
+                    </Form.Group> : <Form.Group key={controlId + label} className="me-4" {...register(`itemData.variations.${index}.${key}`, { required: true })} controlId={controlId}>
                         <Form.Label>Choose color</Form.Label>
                         <Form.Control type="color"></Form.Control>
                     </Form.Group> }
@@ -25,7 +25,7 @@ const VariationsControl = ({ variationOptions, register, index }) => {
             ))}
             <Form.Group className="me-4" controlId='quantityControl' >
                 <Form.Label>Quantity</Form.Label>
-                <Form.Control type="number" {...register(`itemData.variations.${index}.quantity`)}></Form.Control>
+                <Form.Control type="number" {...register(`itemData.variations.${index}.quantity`, { required: true })}></Form.Control>
             </Form.Group>
                 
             </Stack>
