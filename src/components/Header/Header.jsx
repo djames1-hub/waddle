@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./Header.css";
 
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Stack } from "react-bootstrap";
 import { useFirebaseAuth } from "../../hooks/useFirebaseAuth";
 
 const Header = () => {
@@ -26,21 +26,24 @@ const Header = () => {
               Wishlist
             </Nav.Link>
           </Nav>
-          <Form className="d-flex justify-content-end">
-            <Form.Group controlId="searchbar">
-              <Form.Control type="search"></Form.Control>
-            </Form.Group>
-            <Button>L</Button>
-          </Form>
-          <Nav>
-            <NavDropdown title="Categories" id="category-nav-dropdown">
+          <Nav >
+            <Stack direction="horizontal">
+            <NavDropdown title="Categories" id="category-nav-dropdown" className="border border-end-0 rounded-3 rounded-start ">
               <NavDropdown.Item>Books</NavDropdown.Item>
               <NavDropdown.Item>Clothing</NavDropdown.Item>
               <NavDropdown.Item>Furniture</NavDropdown.Item>
               <NavDropdown.Item>Electronics</NavDropdown.Item>
               <NavDropdown.Item>Sports Gear</NavDropdown.Item>
             </NavDropdown>
+            <Form className="d-flex justify-content-end">
+              <Form.Group controlId="searchbar">
+                <Form.Control type="search" className="border-start-0 border-end-0"></Form.Control>
+              </Form.Group>
+              <Button className="border-start-0 rounded-end">Search</Button>
+            </Form>
+            </Stack>
           </Nav>
+          
             {user.firstName ? 
             <NavDropdown title={user.firstName ? `Welcome, ${user.firstName}` : "Sign In"}>
               <NavDropdown.Item>Purchase History</NavDropdown.Item>
