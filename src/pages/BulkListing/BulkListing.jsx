@@ -203,10 +203,7 @@ const BulkListing = () => {
         "electronics": electronicsOptions,
         "sports-gear": sportsGearOptions
     }
-
-
     
-
     const forms = [
         <ListingInfoForm register={register} formGroups={formGroups[category]} />,
         <VariationsForm register={register} variationOptions={variationOptions[category]}/>,
@@ -226,19 +223,15 @@ const BulkListing = () => {
     useEffect(() => {
         console.log(formIterator);
         setForm(forms[formIterator])
-        
-        
     }, [formIterator]);
 
     useEffect(() => {
         if (formIterator === forms.length - 1) {
             setIsSubmit(true); 
-          
         }
     }, [formIterator]);
 
     return (
-    
         <>
         <FormNavbar tabs={tabs} />
         <Form className="w-50 mx-auto border rounded-3 p-5" onSubmit={handleSubmit(submitForm)}>

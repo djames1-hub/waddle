@@ -1,4 +1,4 @@
-import { doc, collection, getDoc, getDocs, setDoc, query, orderBy,startAt, endAt, Timestamp, startAfter, limit } from "firebase/firestore";
+import { doc, collection, getDoc, getDocs, setDoc, query, orderBy,startAt, endAt, Timestamp, startAfter, limit, where } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -61,6 +61,26 @@ const getListings = async (qStr) => {
     }
 }
 
+const getListingsByCategory = async (category) => {
+    try {
+        const q = query(collection(db, "listings"),
+        where("category", "==", category),
+        orderBy('listingTitle')
+        );
+
+        const querySnapshot = await getDocs(q);
+
+        let listings = [];
+        querySnapshot.forEach(doc => {
+            listings.push(doc.data());
+        });         
+        
+        return listings;
+    } catch (error) {
+        return error;
+    }
+}
+
 
 const getAllListings = async () => {
     
@@ -69,8 +89,7 @@ const getAllListings = async () => {
     listingSnap.forEach(doc => {
         listings.push(doc.data());
     });
-    return listings;
-      
+    return listings;   
 }
 
 const paginateItems = async (maxItemsPerPage) => {
