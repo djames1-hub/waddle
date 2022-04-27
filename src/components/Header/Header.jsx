@@ -62,10 +62,6 @@ const Header = () => {
             <Nav.Link href={user.id ? "/wishlist" : "/login"}>
               Wishlist
             </Nav.Link>
-            <Nav.Link href={user.id ? "/account" : "/sign-up"}>
-              Account
-            </Nav.Link>
-            <Nav.Link href="/settings">Settings</Nav.Link>
           </Nav>
           <Form className="d-flex justify-content-end">
             <Form.Group controlId="searchbar">

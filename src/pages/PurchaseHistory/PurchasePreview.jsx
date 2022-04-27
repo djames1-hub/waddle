@@ -25,37 +25,39 @@ const PurchasePreview = (props) =>{
         return address.houseNumber + " " + address.street + apartment + ", " + address.town + ", " + address.state + ", " + address.country;
     }
 
-    return <Card style={{ height: '18rem', width: '70rem', marginLeft: 'auto', marginRight: 'auto', marginTop: '2rem' }}>
-        <Card.Header>
-            <Row>
-                <Col>
-                    <Card.Title style={{textAlign: 'center'}}>{props.purchase.listingTitle}</Card.Title>
-                    <Card.Subtitle style={{textAlign: 'center'}}>{formatter.format(props.purchase.price + props.purchase.shippingCost)}</Card.Subtitle>
-                </Col>
-                <Col>
-                    <Card.Title style={{textAlign: 'center'}} >Purchased On</Card.Title>
-                    <Card.Subtitle style={{textAlign: 'center'}} >{displayDate(props.product.dateBought)}</Card.Subtitle>
-                </Col>
-                <Col>
-                    <Card.Title style={{textAlign: 'center'}}>Sent To</Card.Title>
-                    <Card.Subtitle style={{textAlign: 'center'}} >{displayAddress(props.purchase.shippingTo)}</Card.Subtitle>
-                </Col>
-            </Row>
-        </Card.Header>
-        <Card.Body>
-            <Row>
-                <Col>
-                    <Card.Img style={{ height: '10rem', width: 'auto' }} src={props.purchase.photo[0]} />
-                </Col>
-                <Col >
-                    <Card.Text >{props.description}</Card.Text>
-                </Col>
-                <Col md={2} >
-                    <Button onClick={() => {window.location.href = "/view-item/" + props.purchase.listingId}}>View Item</Button>
-                </Col>
-            </Row>
-        </Card.Body>
-    </Card>
+    return (
+        <Card style={{ height: '18rem', width: '70rem', marginLeft: 'auto', marginRight: 'auto', marginTop: '2rem' }}>
+            <Card.Header>
+                <Row>
+                    <Col>
+                        <Card.Title style={{textAlign: 'center'}}>{props.purchase.listingTitle}</Card.Title>
+                        <Card.Subtitle style={{textAlign: 'center'}}>{formatter.format(props.purchase.price + props.purchase.shippingCost)}</Card.Subtitle>
+                    </Col>
+                    <Col>
+                        <Card.Title style={{textAlign: 'center'}} >Purchased On</Card.Title>
+                        <Card.Subtitle style={{textAlign: 'center'}} >{displayDate(props.product.dateBought)}</Card.Subtitle>
+                    </Col>
+                    <Col>
+                        <Card.Title style={{textAlign: 'center'}}>Sent To</Card.Title>
+                        <Card.Subtitle style={{textAlign: 'center'}} >{displayAddress(props.purchase.shippingTo)}</Card.Subtitle>
+                    </Col>
+                </Row>
+            </Card.Header>
+            <Card.Body>
+                <Row>
+                    <Col>
+                        <Card.Img style={{ height: '10rem', width: 'auto' }} src={props.purchase.photo[0]} />
+                    </Col>
+                    <Col >
+                        <Card.Text >{props.description}</Card.Text>
+                    </Col>
+                    <Col md={2} >
+                        <Button onClick={() => {window.location.href = "/view-item/" + props.purchase.listingId}}>View Item</Button>
+                    </Col>
+                </Row>
+            </Card.Body>
+        </Card>
+    );
 }
 
 export default PurchasePreview;

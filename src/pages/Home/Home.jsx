@@ -6,6 +6,7 @@ import { Container } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 
 function Home() {
   //Hook to get items
@@ -31,16 +32,26 @@ function Home() {
 
           let col = (
             <Col key={i}>
-              <a href={`/view-item/${items[i].listingId}`}>
-                <Image
-                  src={items[i].photo[0]}
-                  className="h-100 w-100"
-                  thumbnail
-                  rounded
-                />
-              </a>
+              <Card>
+                <a href={`/view-item/${items[i].listingId}`}>
+                  <Card.Img
+                    src={items[i].photo[0]}
+                    className="set-img-height"
+                    thumbnail
+                    rounded
+                  />
+                </a>
 
-              <div>{items[i].item.itemName}</div>
+                <Card.Title>
+                  {" "}
+                  <div className="item-name-detail">
+                    {items[i].item.itemName}
+                  </div>
+                </Card.Title>
+                <Card.Text>
+                  <div className="item-price-detail"> ${items[i].price}.00</div>
+                </Card.Text>
+              </Card>
             </Col>
           );
           cols.push(col);
