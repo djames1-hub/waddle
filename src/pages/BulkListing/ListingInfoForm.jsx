@@ -18,7 +18,7 @@ const ListingInfoForm = ({ register, formGroups }) => {
             {formGroups.map(({ label, type, controlId, placeholder, value }) => (
                 <Form.Group key={label + placeholder + value} className="mb-3" controlId={controlId}>
                     <Form.Label>{label}</Form.Label>
-                    <Form.Control type={type} placeholder={placeholder} {...register(`listingData.${value}`)} />
+                    <Form.Control type={type} placeholder={placeholder} {...register(`itemData.${value}`)} />
                 </Form.Group>
             ))}
             <Form.Group className="mb-3" controlId="description">
