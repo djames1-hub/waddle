@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useFirebaseAuth } from "./../../hooks";
+import { useFirebaseAuth } from "../../hooks";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 
-import "./ItemView.css";
+import "./Listing.css";
 import {
   addItemToCart,
   addItemToWishlist,
@@ -13,7 +13,7 @@ import {
 } from "../../services/firebase/listings";
 import Comments from "../../components/Comments/Comments";
 
-export const ItemView = () => {
+const Listing= () => {
   const { id: uid, cart, wishlist } = useFirebaseAuth();
 
   const [title, setTitle] = useState("");
@@ -88,3 +88,5 @@ export const ItemView = () => {
     </div>
   );
 };
+
+export default Listing;
