@@ -40,3 +40,21 @@ button.category-title:hover {
 .image-size {
     height: 3rem;
 }
+
+.item-name-detail {
+    font-weight: 400;
+    font-size: large;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.item-price-detail {
+    font-size: large;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+.set-img-height {
+    height: 275px;
+}
