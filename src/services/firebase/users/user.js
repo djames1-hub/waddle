@@ -1,4 +1,4 @@
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
 import { signOut, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 
 import { auth, db } from "./../firebase-config";
@@ -73,6 +73,13 @@ const getCurrentUser = async() => {
     })
 }
 
+const emptyCart = async (uid) => {
+    const userRef = doc(db, "users", uid);
+    await updateDoc(userRef, {
+        cart: []
+    });
+}
+
 /**
  * Signs user in with entered email and password
  * @param {email}
@@ -104,4 +111,4 @@ const signOutUser = () => {
     });
 }
 
-export { signIn, createUser, getCurrentUser, signOutUser };
+export { signIn, createUser, getCurrentUser, signOutUser, emptyCart };

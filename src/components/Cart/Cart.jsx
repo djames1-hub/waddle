@@ -5,6 +5,7 @@ import getListings from "./../../services/firebase/listings/getListings";
 import "./Cart.css";
 import {Card, Row, Button, Col, Stack} from "react-bootstrap";
 import { sendNotification } from '../../services/firebase/users/notifications';
+import { emptyCart } from '../../services/firebase/users/user';
 
 const Cart = () => {
 
@@ -23,7 +24,8 @@ const Cart = () => {
 
     const checkout = async () => {
         await sendNotification(notifications, id, "Item has been sucessfully purchased! It's on its way.");
-        Promise.all(cartItems.map(item => await sendNotification(notifications, item.seller, "Item has been sold!"))); 
+        /*Promise.all(cartItems.map(item => await sendNotification(notifications, item.seller, "Item has been sold!"))); */
+        emptyCart(id);
     }
     
     const formatter = new Intl.NumberFormat("en-US", {

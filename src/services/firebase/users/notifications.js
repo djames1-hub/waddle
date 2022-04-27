@@ -1,4 +1,4 @@
-import { updateDoc, doc, setDoc, Timestamp } from "firebase/firestore";
+import { updateDoc, doc, setDoc, Timestamp, getDoc } from "firebase/firestore";
 import { db } from "./../firebase-config";
 
 class Notification{
@@ -27,10 +27,10 @@ const sendNotification = async (notifications, uid, message) => {
 };
 
 const getNotifications = async (uid) => {
-    const userRef = doc(db, "users", uid);
-
     try {
-        
+        const userRef = doc(db, "users", uid);
+        const docSnap = await getDoc(userRef);
+        return docSnap.data().notifications;
     } catch (error) {
         return error;
     }
@@ -63,4 +63,4 @@ const markAllRead = async (notifications, uid) => {
     });
 }
 
-export { markAllRead, sendNotification, Notification };
+export { markAllRead, sendNotification, getNotifications ,Notification };

@@ -11,7 +11,7 @@ const Wishlist = () => {
   useEffect(() => {
     const fetchListings = async () => {
       console.log(wishList);
-      if (wishList !== undefined) {
+      if (wishList !== undefined && wishList.length !== 0) {
         const listings = await getListings(wishList);
         setWishlistItems(listings);
       }
