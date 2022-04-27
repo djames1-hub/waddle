@@ -1,4 +1,4 @@
-import { updateDoc, doc, setDoc, Timestamp } from "firebase/firestore";
+import { updateDoc, doc, setDoc, Timestamp, getDoc } from "firebase/firestore";
 import { db } from "./../firebase-config";
 
 class Notification{
@@ -30,7 +30,7 @@ const getNotifications = async (uid) => {
     const userRef = doc(db, "users", uid);
 
     try {
-        
+    
     } catch (error) {
         return error;
     }
