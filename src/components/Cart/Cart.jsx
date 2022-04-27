@@ -28,7 +28,12 @@ const Cart = () => {
                 </Col>
             </Row>
             <Row>
-                <Button className='btn-success' href="/">Proceed to Checkout</Button>
+                <Col>
+                    <h2>Your Total is $200.00</h2>
+                </Col>
+                <Col>
+                    <Button className='btn-primary'>Proceed to Checkout</Button>
+                </Col>
             </Row>
         </Card>
     );
