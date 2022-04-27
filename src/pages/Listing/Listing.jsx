@@ -23,8 +23,11 @@ const Listing= () => {
   const [price, setPrice] = useState(0);
   const [properties, setProperties] = useState({});
   const [variations, setVariations] = useState([]); 
+  const [formGroups, setFormGroups] = useState(<></>);
 
   const { id } = useParams();
+
+  
   useEffect(() => {
     const fetchData = async () => {
       console.log(id);
@@ -39,7 +42,7 @@ const Listing= () => {
       const props = Object.fromEntries(entries);
 
       setProperties(props);
-      
+     
       if (listing.item.variations) {
         setVariations(listing.item.variations);
       } 
@@ -47,6 +50,60 @@ const Listing= () => {
     };
     return fetchData;
   }, []);
+
+  const handleFormControl = ([name, options]) => {
+    if (name === 'quantity') {
+      return (
+        <Form.Control type="number" />
+      )
+    } else if (name === 'color') {
+      return options.map(option => {
+        return <Form.Control type="color" value={option} />
+      })
+    } else {
+      return (
+        <Form.Select>
+        {options.map(option => <option value={option}>{option}</option>)}
+      </Form.Select>
+      );
+    }
+  }
+
+  useEffect(() => {
+    if (variations.length > 0) {
+      let sets = [];
+
+      const keys = Object.keys(variations[0]);
+      keys.sort();
+      keys.forEach((key) => {
+          let s = new Set();
+          console.log(key);
+          variations.forEach(v => {
+            s.add(v[key]);
+          });
+          sets.push(s);
+      });
+
+      let entries = [];
+      
+      for (let i = 0; i < keys.length; i++) {
+        entries.push([ keys[i], [ ...sets[i] ] ])
+      }
+
+      const groups = entries.map(e => {
+        return (
+          <Form.Group>
+            <Form.Label>{e[0]}</Form.Label>
+            {handleFormControl(e)}
+          </Form.Group>
+        );
+      });
+    
+      setFormGroups(groups);
+    }
+
+  
+  }, [variations]);
 
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -84,7 +141,7 @@ const Listing= () => {
                   <ListGroup.Item>{description}</ListGroup.Item>
                   <ListGroup.Item>
                     <Form>
-                     
+                      {formGroups}
                     </Form>
                   </ListGroup.Item>
                   {Object.entries(properties).map((entry) => (
