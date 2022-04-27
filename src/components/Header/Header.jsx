@@ -70,7 +70,7 @@ const Header = () => {
               <NavDropdown.Item onClick={() => {window.location.href = "/search/category/clothing"}}>Clothing</NavDropdown.Item>
               <NavDropdown.Item onClick={() => {window.location.href = "/search/category/furniture"}}>Furniture</NavDropdown.Item>
               <NavDropdown.Item onClick={() => {window.location.href = "/search/category/electronics"}}>Electronics</NavDropdown.Item>
-              <NavDropdown.Item onClick={() => {window.location.href = "/search/category/sportsGear"}}>Sports Gear</NavDropdown.Item>
+              <NavDropdown.Item onClick={() => {window.location.href = "/search/category/sports-gear"}}>Sports Gear</NavDropdown.Item>
             </NavDropdown>
             <Form className="d-flex justify-content-end">
               <Form.Group controlId="searchbar">
