@@ -2,10 +2,11 @@ import { updateDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "./../firebase-config";
 
 class Notification{
-    constructor(message, time, uid){
+    constructor(message, time, uid, isRead){
         this.message = message;
         this.time = time;
         this.uid = uid;
+        this.isRead = isRead;
     }
 }
 
@@ -25,11 +26,12 @@ const notificationConverter = {
         return {
             message: notification.message,
             time: notification.time,
+            isRead: notification.isRead
         };
     },
     fromFirestore: (snapshot, options) => {
         const data = snapshot.data(options);
-        return new Notification(data.message, data.time, data.uid);
+        return new Notification(data.message, data.time, data.uid, data.isRead);
     }
 }
 

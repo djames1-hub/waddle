@@ -86,7 +86,7 @@ const Header = () => {
             : <Nav.Link href="/login">Login</Nav.Link>
             }
             {user.firstName ? 
-              <NavDropdown title="Notifications" style={hasUnread ? {border : '0.2rem solid red'} : {border: '0.2rem solid transparent'}} onClick={() => {markAllNotifsRead()}}>
+              <NavDropdown title="Notifications" style={hasUnread ? {border : '0.15rem solid red'} : {border: '0.15rem solid  transparent'}} onClick={() => {markAllNotifsRead()}}>
                 {notificationElements}
               </NavDropdown> : <></>
             }
