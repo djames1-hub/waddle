@@ -50,3 +50,9 @@ button.category-title:hover {
 .item-price-detail {
     font-size: large;
 }
+
+.item-details {
+    border-style: solid;
+    border-color: lightgrey;
+    border-width: 0.5px;
+}
