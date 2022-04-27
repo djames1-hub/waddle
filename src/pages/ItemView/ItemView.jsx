@@ -14,7 +14,7 @@ import {
 import Comments from "../../components/Comments/Comments";
 
 export const ItemView = () => {
-  const { uid, cart, wishlist } = useFirebaseAuth();
+  const { id: uid, cart, wishlist } = useFirebaseAuth();
 
   const [title, setTitle] = useState("");
   const [itemName, setItemName] = useState("");
