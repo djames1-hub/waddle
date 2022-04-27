@@ -1,5 +1,6 @@
 import React from "react";
 import {Card, Row, Button, Col} from "react-bootstrap";
+import "./ListingPreview.css"
 
 const ListingPreview = ({ item }) =>{
 
@@ -20,15 +21,17 @@ const ListingPreview = ({ item }) =>{
                 </Row>
             </Card.Header>
             <Card.Body>
-                <Row>
+                <Row className="d-flex justify-content-start">
                     <Col>
-                        <Card.Img src={item.photo[0]} />
+                        <Card.Img src={item.photo[0]} className="Image-img"/>
                     </Col>
-                    <Col >
+                    <Col>
                         <Card.Text >{item.description}</Card.Text>
                     </Col>
                     <Col md={2} >
-                        <Button onClick={() => {window.location.href = `/view-item/${item.listingId}`}}>View Item</Button>
+                        <Button onClick={() => {window.location.href = `/view-item/${item.listingId}`}} className="btn-primary custom">View Item</Button>
+                        <Button className="btn-primary custom">Remove From Cart</Button>
+                        <Button className="btn-primary custom">Add to WishList</Button>
                     </Col>
                 </Row>
             </Card.Body>
