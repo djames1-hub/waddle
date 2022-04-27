@@ -11,7 +11,7 @@ const ListingPreview = ({ item }) =>{
     });
 
     return (
-        <Card style={{marginTop : '2rem'}}>
+        <Card>
             <Card.Header>
                     <Col>
                         <Card.Title>{item.listingTitle}</Card.Title>
