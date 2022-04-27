@@ -28,9 +28,13 @@ const sendNotification = async (notifications, uid, message) => {
 
 const getNotifications = async (uid) => {
     try {
+<<<<<<< HEAD
         const userRef = doc(db, "users", uid);
         const docSnap = await getDoc(userRef);
         return docSnap.data().notifications;
+=======
+    
+>>>>>>> c8fd404e2385ed1bd6ca444e03256aa09bae5c13
     } catch (error) {
         return error;
     }

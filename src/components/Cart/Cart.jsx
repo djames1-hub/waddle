@@ -24,8 +24,12 @@ const Cart = () => {
 
     const checkout = async () => {
         await sendNotification(notifications, id, "Item has been sucessfully purchased! It's on its way.");
+<<<<<<< HEAD
         /*Promise.all(cartItems.map(item => await sendNotification(notifications, item.seller, "Item has been sold!"))); */
         emptyCart(id);
+=======
+        Promise.all(cartItems.map(async (item) => await sendNotification(notifications, item.seller, "Item has been sold!"))); 
+>>>>>>> c8fd404e2385ed1bd6ca444e03256aa09bae5c13
     }
     
     const formatter = new Intl.NumberFormat("en-US", {
