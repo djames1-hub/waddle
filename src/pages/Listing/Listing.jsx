@@ -12,11 +12,14 @@ import {
   getListing,
 } from "../../services/firebase/listings";
 import Comments from "../../components/Comments/Comments";
+import { useForm } from "react-hook-form";
 
 const Listing= () => {
   const { id: uid, cart, wishlist } = useFirebaseAuth();
+  const { register, handleSubmit } = useForm();
 
   const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
   const [itemName, setItemName] = useState("");
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
@@ -30,14 +33,13 @@ const Listing= () => {
   
   useEffect(() => {
     const fetchData = async () => {
-      console.log(id);
       let listing = await getListing(id);
       setTitle(listing.listingTitle);
       setDescription(listing.description);
       setImage(listing.photo[0]);
       setPrice(listing.price);
       setItemName(listing.listingTitle);
-
+      setCategory(listing.category);
       const entries = Object.entries(listing.item).filter(([key, val]) => key !== "variations");
       const props = Object.fromEntries(entries);
 
@@ -51,19 +53,135 @@ const Listing= () => {
     return fetchData;
   }, []);
 
+  const variationOptions = {
+    "books": [
+        {
+            key: "condition",
+            label: "Book's Condition",
+            controlId: "conditionControl",
+            selectLabel: "Choose book condition",
+            options: {
+                "As new": "new",
+                "Fine": "fine",
+                "Fair": "fair",
+                "Poor": "poor"
+            }
+        }
+    ],
+    "clothing": [
+        {
+            key: "size",
+            label: "Clothing's size",
+            controlId: "sizeControl",
+            selectLabel: "Choose size",
+            options: {
+                "xs": "Extra Small",
+                "s": "Small",
+                "m": "Medium",
+                "l": "Large",
+                "xl": "Extra Large"
+            }
+        },
+        {
+            key: "color",
+            label: "Clothing's color",
+            controlId: "colorControl",
+            isColor: true,
+            options: {
+                "color": "color"
+            }
+        },
+        {
+            key: "condition",
+            label: "Clothing's condition",
+            controlId: "conditionControl",
+            selectLabel: "Choose condition",
+            options: {
+                "nwt": "New With Tags (NWT)",
+                "euc": "Excellent Used Condition",
+                "guc" : "Good Used Condition",
+                "vuc": "Very Used Condition",
+                "pre-owned": "Pre-owned" 
+            }
+        }
+    ],
+    "furniture": [
+        {
+            key: "condition",
+            label: "Furniture's Conditon",
+            controlId: "conditionControl",
+            selectLabel: "Choose condition",
+            options: {
+                "New Condition": "new",
+                "Used Condition": "used"
+            }
+        }
+    ],
+    "electronics": [
+        {
+            key: "condition",
+            label: "Electronic's Condition",
+            controlId: "conditionControl",
+            selectLabel: "Choose condition",
+            options: {
+                "New": "new",
+                "Open box": "open-box",
+                "Used": "used",
+                "Not Working": "nw"
+            }
+        }
+    ],
+    "sports-gear": [
+        {
+            key: "size",
+            label: "Sport Gear's size",
+            controlId: "sizeControl",
+            selectLabel: "Choose size",
+            options: {
+                "xs":"Extra Small",
+                 "s":"Small",
+                "m":"Medium",
+                "l":"Large",
+                "xl":"Extra Large"
+            }
+        },
+        {
+            key: "condition",
+            label: "Sport Gear's condition",
+            controlId: "conditionControl",
+            selectLabel: "Choose condition",
+            options: {
+                "New With Tags (NWT)": "nwt",
+                "Excellent Used Condition": "euc",
+                "Good Used Condition": "guc",
+                "Very Used Condition": "vuc",
+                "Pre-owned": "pre-owned"
+            }
+        }
+    ]
+}
+
   const handleFormControl = ([name, options]) => {
     if (name === 'quantity') {
       return (
-        <Form.Control type="number" />
+        <Form.Control type="number" {...register("quantity")}/>
       )
     } else if (name === 'color') {
       return options.map(option => {
-        return <Form.Control type="color" value={option} />
+        return <Form.Control type="color" value={option} {...register("color")}/>
       })
     } else {
+
+      let opts = variationOptions[category];
+      let v = opts.filter(f => f.key === name);
       return (
-        <Form.Select>
-        {options.map(option => <option value={option}>{option}</option>)}
+        <Form.Select {...register(name)}>
+          <option value="">{v[0]["selectLabel"]}</option>
+        {options.map(option => {
+          
+          console.log(v);
+          return <option key={option} value={option}>{v[0]["options"][option]}</option>
+        })}
       </Form.Select>
       );
     }
@@ -126,7 +244,7 @@ const Listing= () => {
             <Col>
               <Card.Img variant="bottom" src={image} />
             </Col>
-            <Col>
+            <Col><Form onSubmit={handleSubmit}>
               <Card.Body>
                 <Card.Title>{itemName}</Card.Title>
 
@@ -140,9 +258,9 @@ const Listing= () => {
                   </ListGroup.Item>
                   <ListGroup.Item>{description}</ListGroup.Item>
                   <ListGroup.Item>
-                    <Form>
+                    
                       {formGroups}
-                    </Form>
+                   
                   </ListGroup.Item>
                   {Object.entries(properties).map((entry) => (
                     <ListGroup.Item
@@ -151,6 +269,7 @@ const Listing= () => {
                   ))}
                 </ListGroup>
               </Card.Body>
+              </Form>
             </Col>
           </Row>
         </Container>
