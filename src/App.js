@@ -2,18 +2,16 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { Cart, NotFound, Header } from './components';
-import { Home, Wishlist, ListingForm, SignUp, SignIn, Search, Listing, BulkListing, PurchaseHistory } from './pages';
+import { Home, Wishlist, ListingForm, SignUp, SignIn, Search, Listing, BulkListing, PurchaseHistory, SingleListing } from './pages';
 import './App.css';
 import { FirebaseAuthProvider } from './contexts';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SingleListing from "./pages/SingleListing";
 
 function App() {
     return (
         <div className="App">
             <FirebaseAuthProvider>
                 <Header />
-                {/* ROUTING */}
                 <div>
                 <Router>
                     <Routes>

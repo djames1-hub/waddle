@@ -31,6 +31,7 @@ const createUser = (firstName, lastName, email, password) => {
                     purchaseHistory: [],
                     wishList: [],
                     creditCards: [],
+                    notifications: [],
                     address: {
                         street: "",
                         city: "",
@@ -83,7 +84,7 @@ const signIn = (email, password) => {
         signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
             //Signed in
             const user = userCredential.user;
-            window.location = "http://localhost:3000/home";
+            window.location.href = "/";
             resolve("");
         }).catch((error) => {
             const errorMessage = error.message;

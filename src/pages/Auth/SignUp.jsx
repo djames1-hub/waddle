@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useForm } from "react-hook-form";
 import { createUser } from "./../../services/firebase/users";
+import { FormText, Col, Row } from "react-bootstrap";
 
 const SignUp = () => {
   const { register, handleSubmit } = useForm();
@@ -53,16 +54,12 @@ const SignUp = () => {
           {...register("password")}
         />
       </Form.Group>
-      <Button type="submit" className="mx-5">
-        Submit
-      </Button>
-      <Button
-        onClick={() => {
-          window.location.href = "/login";
-        }}
-      >
-        Login
-      </Button>
+      <Form.Group>
+        <Col md={2}>
+          <Button type="submit" style={{marginTop:'1rem', width:'7rem', outline:'0.15rem solid blue'}} className="mx-5">Submit</Button>
+          <Button type="submit" style={{marginTop:'1rem', width:'7rem', backgroundColor: 'white', color:'black' ,outline:'0.15rem solid blue'}} className="mx-5" onClick={() => {window.location.href = "/login";}}>Login</Button>
+        </Col>
+      </Form.Group>
     </Form>
   );
 };
