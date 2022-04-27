@@ -40,3 +40,13 @@ button.category-title:hover {
 .image-size {
     height: 3rem;
 }
+
+.item-name-detail {
+    font-weight: 400;
+    font-size: large;
+    font-weight: bold;
+}
+
+.item-price-detail {
+    font-size: large;
+}
