@@ -14,7 +14,9 @@ const Wishlist = () => {
         return fetchListings;
     }, []);
 
-    return < > { wishlistItems.map((items) => true) } < />;
+    return (
+        { wishlistItems }
+    );
 };
 
 export default Wishlist;
