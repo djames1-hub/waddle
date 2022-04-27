@@ -2,11 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { Cart, NotFound, Header } from './components';
-<<<<<<< HEAD
 import { Home, Wishlist, Settings, ListingForm, SignUp, SignIn, Search, ItemView, BulkListing, PurchaseHistory } from './pages';
-=======
-import { Home, Wishlist, ListingForm, SignUp, SignIn, Search, ItemView, BulkListing } from './pages';
->>>>>>> 0da0208041dd2b030bfee8aad1fea9e9c2e51f52
 import './App.css';
 import { FirebaseAuthProvider } from './contexts';
 import 'bootstrap/dist/css/bootstrap.min.css';
