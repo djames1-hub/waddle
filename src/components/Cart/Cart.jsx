@@ -22,11 +22,7 @@ const Cart = () => {
         return fetchListings;
     }, [cart]);
 
-    const checkout = async () => {
-        await sendNotification(notifications, id, "Item has been sucessfully purchased! It's on its way.");
-        /*Promise.all(cartItems.map(item => await sendNotification(notifications, item.seller, "Item has been sold!"))); */
-        emptyCart(id);
-    }
+    const checkout = async () => window.location.href = '/checkout'
     
     const formatter = new Intl.NumberFormat("en-US", {
         style: "currency",
@@ -46,7 +42,7 @@ const Cart = () => {
                     </Card.Header>
                     <Card.Body>
                         <Card.Text>Total: {formatter.format(cartItems.reduce((pre, cur) => pre + cur.price, 0))}</Card.Text>
-                        <Button onClick={checkout}>Checkout</Button>
+                        <Button onClick={checkout}>Proceed to Checkout</Button>
                     </Card.Body>
                 </Card>
            </Col>

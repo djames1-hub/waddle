@@ -9,6 +9,7 @@ import Account from './Account';
 import Listing from './Listing';
 import SingleListing from './SingleListing'
 import SearchCategory from './SearchByCategory';
+import Checkout from './Checkout';
 
 export {
     SignIn,
@@ -22,5 +23,6 @@ export {
     PurchaseHistory,
     Account,
     SingleListing,
-    SearchCategory
+    SearchCategory,
+    Checkout
 }
