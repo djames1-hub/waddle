@@ -9,9 +9,13 @@ const useFirebaseAuth = () => {
 
     useEffect(() => {
         const fetchUser = async () => {
-            onAuthStateChanged(auth, async ({ uid, phoneNumber }) => {
-                const userData = await getCurrentUser(uid);
-                setUser({ ...userData, id: uid, phoneNumber });
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    const { uid, phoneNumber } = user;
+                    const userData = await getCurrentUser(uid);
+                    setUser({ ...userData, id: uid, phoneNumber });
+                }
+                
             });
         }
 
