@@ -41,7 +41,7 @@ const Cart = () => {
                         
                     </Card.Header>
                     <Card.Body>
-                        <Card.Text>Total: {formatter.format(cartItems.reduce((pre, cur) => pre + cur.price, 0))}</Card.Text>
+                        <Card.Text>Total: {formatter.format(cartItems.reduce((pre, cur) => pre + parseFloat(cur.price), 0))}</Card.Text>
                         <Button onClick={checkout}>Proceed to Checkout</Button>
                     </Card.Body>
                 </Card>

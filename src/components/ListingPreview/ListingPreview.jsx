@@ -15,7 +15,7 @@ const ListingPreview = ({ item }) =>{
             <Card.Header>
                     <Col>
                         <Card.Title>{item.listingTitle}</Card.Title>
-                        <Card.Subtitle>{formatter.format(item.price + item.shippingCost)}</Card.Subtitle>
+                        <Card.Subtitle>{formatter.format(parseFloat(item.price) + item.shippingCost)}</Card.Subtitle>
                     </Col>
             </Card.Header>
             <Card.Body>
