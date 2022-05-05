@@ -8,6 +8,7 @@ import ListingPreview from "../../components/ListingPreview/ListingPreview";
 import { emptyCart } from "../../services/firebase/users/user";
 import { sendNotification } from "../../services/firebase/users/notifications";
 import { getUser } from "../../services/firebase/users";
+import { addItemsToPurchaseHistory } from "../../services/firebase/listings";
 
 
 const Checkout = () => {
@@ -24,7 +25,7 @@ const Checkout = () => {
 
     const { street, city, state, zipCode, country } = shippingAddress;
 
-    const { address, cart, id, email, firstName } = useFirebaseAuth(); 
+    const { address, cart, id, email, firstName, purchaseHistory } = useFirebaseAuth(); 
 
     useEffect(() => {
         if (address) {
@@ -50,13 +51,20 @@ const Checkout = () => {
     });
 
     const handleCheckout = async () => {
-        sendNotification(email, "buyer", firstName);
-        cartItems.forEach(async item => {
-            const { email, firstName } = await getUser(item.seller);
-            sendNotification(email, "seller", firstName);
-        });
-        emptyCart(id);
-        window.location.href = `/confirmation/${id}`;
+        if (cartItems.length > 0) {
+            sendNotification(email, "buyer", firstName);
+            cartItems.forEach(async item => {
+                const { email, firstName } = await getUser(item.seller);
+                sendNotification(email, "seller", firstName);
+            });
+            const response = await addItemsToPurchaseHistory(purchaseHistory, id, cartItems.map(({ listingId }) => listingId));
+
+            if (response.error) {
+                console.log(response.error);
+            }
+            emptyCart(id);
+            window.location.href = `/confirmation/${response.purchaseId}`;
+        }
     }
 
     return(

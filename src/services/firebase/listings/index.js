@@ -1,6 +1,8 @@
 import { createListing, getAllListings, getListing, getListings } from './listings';
 import addItemToCart from "./addItemtoCart";
 import addItemToWishlist from "./addItemtoWishlist";
+import addItemsToPurchaseHistory from './addItemsToPurchaseHistory';
+
 
 export {
     addItemToWishlist,
@@ -9,4 +11,5 @@ export {
     getListing,
     getListings,
     addItemToCart,
+    addItemsToPurchaseHistory
 };
