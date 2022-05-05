@@ -56,7 +56,7 @@ const Checkout = () => {
             sendNotification(email, "seller", firstName);
         });
         emptyCart(id);
-        window.location.href = '/confirmation';
+        window.location.href = `/confirmation/${id}`;
     }
 
     return(

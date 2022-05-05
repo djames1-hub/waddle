@@ -12,7 +12,6 @@ const sendNotification = (email, buyerOrSeller, name) => {
 
     let templateParams = {
         name,
-        notes: 'Check this out!',
         email  
     };
 

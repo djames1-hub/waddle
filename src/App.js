@@ -27,7 +27,7 @@ function App() {
                         <Route path="/search/category/:category" element={ <SearchCategory />} />
                         <Route path="/purchase-history" element={ <PurchaseHistory /> } />
                         <Route path="/checkout" element={ <Checkout /> } />
-                        <Route path="/confirmation" element={ <Confirmation />} />
+                        <Route path="/confirmation/:id" element={ <Confirmation />} />
                         <Route path="/*" element={ <NotFound />} />
                     </Routes>
                 </Router>
