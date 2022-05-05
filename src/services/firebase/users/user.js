@@ -38,7 +38,8 @@ const createUser = (firstName, lastName, email, password) => {
                         zipCode: "",
                         apartmentNumber: 0,
                         country: "",
-                        houseNumber: 0
+                        houseNumber: 0,
+                        state: ""
                     }
                 })
                 resolve("");
