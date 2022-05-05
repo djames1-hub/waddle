@@ -10,6 +10,8 @@ import Listing from './Listing';
 import SingleListing from './SingleListing'
 import SearchCategory from './SearchByCategory';
 import Checkout from './Checkout';
+import Confirmation from './Confirmation';
+
 
 export {
     SignIn,
@@ -24,5 +26,6 @@ export {
     Account,
     SingleListing,
     SearchCategory,
-    Checkout
+    Checkout,
+    Confirmation
 }

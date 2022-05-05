@@ -56,7 +56,7 @@ const getCurrentUser = async() => {
     return new Promise((resolve, reject) => {
         onAuthStateChanged(auth, async(user) => {
             if (user) {
-                //TODO: Get user data from firestore and create user object
+        
                 const userRef = doc(db, "users", user.uid)
                 const docSnap = await getDoc(userRef);
                 if (docSnap.exists) {
@@ -71,6 +71,21 @@ const getCurrentUser = async() => {
             }
         })
     })
+}
+
+const getUser = async (userId) => {
+    try {
+        const userRef = doc(db, "users", userId)
+        const docSnap = await getDoc(userRef);
+        if (docSnap.exists) {
+            return docSnap.data();
+        } else {
+            throw new Error('User does not exist!');
+        }
+
+    } catch (error) {
+        throw error;
+    }
 }
 
 const emptyCart = async (uid) => {
@@ -111,4 +126,4 @@ const signOutUser = () => {
     });
 }
 
-export { signIn, createUser, getCurrentUser, signOutUser, emptyCart };
+export { signIn, createUser, getCurrentUser, signOutUser, emptyCart, getUser };

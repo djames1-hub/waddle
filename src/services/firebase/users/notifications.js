@@ -1,26 +1,27 @@
-import { createTransport } from 'nodemailer';
+import emailjs from "emailjs-com";
 
-export const sendNotification = ({ email, credentials, notificationMessage }) => {
-    const waddleEmail = '';
-    let transporter = createTransport({
-        service: 'gmail',
-        auth: {
-            user: process.env.EMAIL,
-            pass: process.env.PASSWORD
-        }
-    });
+const sendNotification = (email, buyerOrSeller, name) => {
 
-    const message = {
-        from: waddleEmail,
-        to: email,
-        subject: notificationMessage.subject,
-        text: notificationMessage.message,
-        html: notificationMessage.html
+    let templateID = "";
+
+    if (buyerOrSeller == "buyer"){
+        templateID = "template_bx3nn0m";
+    }else{
+        templateID = "template_5q54cat";
     }
 
-    transporter.sendMail(message, (err, info) => {
-        if (err) {
-            console.log(err);
-        }
-    });
+    let templateParams = {
+        name,
+        notes: 'Check this out!',
+        email  
+    };
+
+    emailjs.send("service_oyeauuf", templateID, templateParams, 'd2bcyfNd8twKk4AfL')
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      })
 }
+
+export {sendNotification};

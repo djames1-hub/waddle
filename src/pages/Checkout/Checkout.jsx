@@ -6,6 +6,9 @@ import { useFirebaseAuth } from "./../../hooks";
 import getListings from "../../services/firebase/listings/getListings";
 import ListingPreview from "../../components/ListingPreview/ListingPreview";
 import { emptyCart } from "../../services/firebase/users/user";
+import { sendNotification } from "../../services/firebase/users/notifications";
+import { getUser } from "../../services/firebase/users";
+
 
 const Checkout = () => {
 
@@ -21,7 +24,7 @@ const Checkout = () => {
 
     const { street, city, state, zipCode, country } = shippingAddress;
 
-    const { address, cart, id } = useFirebaseAuth(); 
+    const { address, cart, id, email, firstName } = useFirebaseAuth(); 
 
     useEffect(() => {
         if (address) {
@@ -29,9 +32,11 @@ const Checkout = () => {
         }     
     }, [address]);
     useEffect(() => {
+        
         const fetchCartItems = async () => {
             if (cart !== undefined && cart.length > 0) {
                 const listings = await getListings(cart);
+                console.log(listings);
                 setCartItems(listings);
                 setSubTotal(listings.reduce((pre, cur) => pre + parseFloat(cur.price), 0));
             }
@@ -44,8 +49,14 @@ const Checkout = () => {
         currency: "usd",
     });
 
-    const handleCheckout = () => {
-        emptyCart(id)
+    const handleCheckout = async () => {
+        sendNotification(email, "buyer", firstName);
+        cartItems.forEach(async item => {
+            const { email, firstName } = await getUser(item.seller);
+            sendNotification(email, "seller", firstName);
+        });
+        emptyCart(id);
+        window.location.href = '/confirmation';
     }
 
     return(
@@ -72,7 +83,7 @@ const Checkout = () => {
                                 </Stack>
                             </Stack>
                             <Stack>
-                                <Col sm={10}>{cartItems.map(item => <ListingPreview key={item.toString()} item={item} />)}
+                                <Col sm={10}>{cartItems.map(item => <ListingPreview key={item.listingId} item={item} />)}
                                 </Col>
                             </Stack>
                         </Stack>
