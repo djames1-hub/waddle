@@ -10,13 +10,13 @@ const Wishlist = () => {
 
   useEffect(() => {
     const fetchListings = async () => {
-      console.log(wishList);
+      console.log('Wishlist', wishList);
       if (wishList !== undefined && wishList.length !== 0) {
         const listings = await getListings(wishList);
         setWishlistItems(listings);
       }
     };
-    return fetchListings;
+    fetchListings();
   }, [wishList]);
 
   return (

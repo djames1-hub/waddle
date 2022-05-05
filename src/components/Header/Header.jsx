@@ -13,6 +13,7 @@ import { signOutUser } from "../../services/firebase/users";
 const Header = () => {
 
   const user = useFirebaseAuth();
+  console.log(user);
 
   const searchByCategory = (category) => window.location.href = `/search/category/${category}`;
 

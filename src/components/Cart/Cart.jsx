@@ -14,12 +14,12 @@ const Cart = () => {
     
     useEffect(() => {
         const fetchListings = async () => {
-            if (cart !== undefined) {
+            if (cart !== undefined && cart.length > 0) {
                 const listings = await getListings(cart);
                 setCartItems(listings);
             }
         };
-        return fetchListings;
+        fetchListings();
     }, [cart]);
 
     const checkout = async () => window.location.href = '/checkout'
